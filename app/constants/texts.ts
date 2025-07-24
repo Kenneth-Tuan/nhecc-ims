@@ -10,6 +10,7 @@ export const TEXTS = {
     about: "關於教會",
     services: "教會事工",
     ministry: "門徒牧養",
+    warehouse: "倉儲管理",
     contact: "聯絡我們",
     features: "功能介紹",
   },
@@ -58,6 +59,11 @@ export const TEXTS = {
         title: "媒體管理平台",
         description:
           "主日信息、烈火禱告會影音內容管理，支援線上觀看與內容分享功能",
+      },
+      warehouse: {
+        title: "倉儲管理系統",
+        description:
+          "物件資訊紀錄與管理，包含資產總覽、庫存追蹤、設備維護記錄等完整倉儲管理功能",
       },
     },
   },

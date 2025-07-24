@@ -41,6 +41,12 @@
               {{ TEXTS.nav.about }}
             </NuxtLink>
             <NuxtLink
+              to="/warehouse"
+              class="text-morandi-blue-700 dark:text-morandi-blue-300 hover:text-church-primary-600 dark:hover:text-church-primary-400 transition-colors"
+            >
+              {{ TEXTS.nav.warehouse }}
+            </NuxtLink>
+            <NuxtLink
               to="/contact"
               class="text-morandi-blue-700 dark:text-morandi-blue-300 hover:text-church-primary-600 dark:hover:text-church-primary-400 transition-colors"
             >
@@ -98,6 +104,13 @@
               @click="isMenuOpen = false"
             >
               {{ TEXTS.nav.about }}
+            </NuxtLink>
+            <NuxtLink
+              to="/warehouse"
+              class="block px-3 py-2 text-morandi-blue-700 dark:text-morandi-blue-300 hover:text-church-primary-600 dark:hover:text-church-primary-400 transition-colors"
+              @click="isMenuOpen = false"
+            >
+              {{ TEXTS.nav.warehouse }}
             </NuxtLink>
             <NuxtLink
               to="/contact"
