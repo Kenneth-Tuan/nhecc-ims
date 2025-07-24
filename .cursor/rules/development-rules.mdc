@@ -1,0 +1,98 @@
+---
+description: for cursor development
+globs:
+alwaysApply: true
+---
+
+# Cursor Development Rules for NHECC-IMS Project
+
+These rules guide code generation and development in Cursor, based on the project's dependencies and best practices. Follow them to ensure consistency, modularity, and alignment with frontend engineering standards (e.g., Composition API, atomic design, performance optimizations).
+
+## General Guidelines
+
+- Use TypeScript for all code, with strict typing enabled in tsconfig.json.
+- Prefer named exports over default exports to improve tree-shaking and modularity.
+- Apply functional programming principles, avoiding mutable state where possible.
+- Enforce ESLint + Prettier with Airbnb style guide via @nuxt/eslint; run linting before commits.
+- Document complex logic with JSDoc comments, including types and examples.
+- Implement code splitting and lazy loading for routes and large components to optimize performance.
+- For enums, store in `enums/` directory (e.g., enums/warehouse-status.ts); for classes/interfaces/models, use `models/` (e.g., models/inventory-item.ts), organized by feature.
+- Abstract business logic into composables/ using Composition API with <script setup> to keep components declarative.
+- Ensure all Vue components use Composition API with <script setup> syntax; avoid Options API.
+- Follow semantic versioning for all custom modules and components.
+
+## UI Components and Styling
+
+- Use @nuxt/ui for UI components (e.g., buttons, modals, tables) to maintain consistency and accessibility.
+- Style with UnoCSS (@unocss/nuxt) for utility-first CSS; avoid inline styles unless necessary, prefer presets for themes.
+- For animations, use @formkit/auto-animate to add smooth transitions to components, ensuring performance on mobile.
+- Optimize images with @nuxt/image, including lazy loading, responsive formats, and WebP support.
+
+## State Management
+
+- Use Pinia (@pinia/nuxt) for state management; create stores in stores/ directory (e.g., stores/warehouse.ts).
+- Persist state across reloads using pinia-plugin-persistedstate; configure selectively to avoid unnecessary storage.
+- Keep stores modular and feature-specific; use actions for async operations and getters for computed state.
+
+## Testing
+
+- Use @nuxt/test-utils for unit and component testing, integrated with Vitest.
+- Write tests for components, composables, and stores; aim for high coverage on business logic.
+- Include integration tests for API flows and end-to-end tests for critical user journeys.
+
+## Internationalization (i18n)
+
+- Use @nuxtjs/i18n for multi-language support; define translations in locales/ directory.
+- Handle routing and content localization accordingly, using locale-specific paths.
+
+## Form Handling and Validation
+
+- Use @vee-validate/nuxt for form validation; integrate with Zod for schema definitions if needed.
+- Build forms with @nuxt/ui components for consistency; handle async validation for API checks.
+
+## Content and Markdown
+
+- Manage content with @nuxt/content; store Markdown files in content/ directory.
+- Enhance Markdown rendering with @nuxtjs/mdc for component integration and syntax highlighting.
+
+## Other Utilities
+
+- Manage cookies with @dargmuesli/nuxt-cookie-control for consent and compliance; configure categories for analytics/tracking.
+- Load third-party scripts via @nuxt/scripts with performance optimizations (e.g., lazy loading on user interaction).
+- Generate QR codes using nuxt-qrcode where needed (e.g., for inventory items in warehouse management).
+- Use uuid for generating unique identifiers in models or data entries.
+- Manage document head (meta, titles) with @unhead/vue, ensuring SEO best practices.
+
+## Security
+
+- Implement authentication and authorization using secure practices; validate all user inputs to prevent injections.
+- Use HTTPS for all communications and secure cookies with @dargmuesli/nuxt-cookie-control.
+- Regularly update dependencies to patch vulnerabilities; use tools like npm audit.
+
+## Error Handling and Logging
+
+- Centralize error handling in composables (e.g., useErrorHandler.ts) for consistent user feedback.
+- Log errors to console in development and to a service (e.g., Sentry) in production.
+- Provide user-friendly error messages, avoiding exposure of sensitive information.
+
+## API Integration
+
+- Use useFetch or composables for API calls; abstract into services in composables/ (e.g., useApi.ts).
+- Handle API errors gracefully with retries and fallbacks.
+- Define API contracts using interfaces in models/ for type safety.
+
+## Performance and Optimization
+
+- Apply code splitting for routes and large components using dynamic imports.
+- Use virtual list rendering for large datasets (integrate with @nuxt/ui if possible).
+- Monitor Core Web Vitals; optimize images and scripts as per dependencies; aim for Lighthouse scores >90.
+- Implement caching strategies for frequently accessed data in Pinia stores.
+
+## Documentation and Architecture
+
+- Follow atomic design for components in components/ (atoms/, molecules/, etc.).
+- Use modular routing with Vue Router; define routes in pages/.
+- Document architectural decisions in docs/ (e.g., ADRs in docs/adrs/, diagrams with tools like Draw.io).
+- For enums/classes/interfaces: Always check if a type is needed; create in enums/ or models/ with proper exports and JSDoc.
+- Abstract reusable logic (e.g., API calls, computations) to composables/ to keep components clean.
+- Maintain a CHANGELOG.md for releases and updates.
