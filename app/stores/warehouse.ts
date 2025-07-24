@@ -6,6 +6,7 @@ import type {
   PaginationParams,
 } from "~/models/asset";
 import { AssetStatus } from "~/models/asset";
+import { AssetApiService } from "~/services/assetApi";
 
 interface WarehouseState {
   /** 資產列表 */
@@ -158,17 +159,66 @@ export const useWarehouseStore = defineStore("warehouse", {
     async loadAssets() {
       this.isLoading = true;
       try {
-        // 模擬 API 呼叫，實際使用時替換為真實的 API
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        const result = await AssetApiService.getAssets({
+          searchParams: this.searchParams,
+          pagination: this.pagination,
+          sortField: this.sortOption.field,
+          sortDirection: this.sortOption.direction,
+        });
 
-        // 模擬資料
-        this.assets = generateMockAssets();
-        this.totalCount = this.assets.length;
+        this.assets = result.documents;
+        this.totalCount = result.total;
       } catch (error) {
         console.error("載入資產資料失敗:", error);
         throw error;
       } finally {
         this.isLoading = false;
+      }
+    },
+
+    /**
+     * 建立新資產
+     */
+    async createAsset(assetData: Omit<Asset, "id">) {
+      try {
+        const newAsset = await AssetApiService.createAsset(assetData);
+        this.assets.unshift(newAsset);
+        this.totalCount++;
+        return newAsset;
+      } catch (error) {
+        console.error("建立資產失敗:", error);
+        throw error;
+      }
+    },
+
+    /**
+     * 更新資產
+     */
+    async updateAsset(id: string, assetData: Partial<Asset>) {
+      try {
+        const updatedAsset = await AssetApiService.updateAsset(id, assetData);
+        const index = this.assets.findIndex((asset) => asset.id === id);
+        if (index !== -1) {
+          this.assets[index] = updatedAsset;
+        }
+        return updatedAsset;
+      } catch (error) {
+        console.error("更新資產失敗:", error);
+        throw error;
+      }
+    },
+
+    /**
+     * 刪除資產
+     */
+    async deleteAsset(id: string) {
+      try {
+        await AssetApiService.deleteAsset(id);
+        this.assets = this.assets.filter((asset) => asset.id !== id);
+        this.totalCount--;
+      } catch (error) {
+        console.error("刪除資產失敗:", error);
+        throw error;
       }
     },
 
@@ -207,7 +257,7 @@ export const useWarehouseStore = defineStore("warehouse", {
 /**
  * 生成模擬資產資料
  */
-function generateMockAssets(): Asset[] {
+function _generateMockAssets(): Asset[] {
   const mockAssets: Asset[] = [];
   const locations = ["倉庫A", "倉庫B", "辦公室", "教室1", "教室2", "廚房"];
   const suppliers = ["供應商A", "供應商B", "供應商C", "廠商D"];
@@ -243,7 +293,7 @@ function generateMockAssets(): Asset[] {
       ] as AssetStatus,
       tags:
         Math.random() > 0.5
-          ? [tagOptions[Math.floor(Math.random() * tagOptions.length)]]
+          ? [tagOptions[Math.floor(Math.random() * tagOptions.length)]!]
           : [],
       quantity: Math.floor(Math.random() * 10) + 1,
     };

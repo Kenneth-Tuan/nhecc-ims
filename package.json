@@ -23,6 +23,8 @@
     "@unhead/vue": "^2.0.3",
     "@vee-validate/nuxt": "4.15.1",
     "appwrite": "^18.2.0",
+    "better-sqlite3": "^12.2.0",
+    "dotenv": "^17.2.0",
     "eslint": "^9.0.0",
     "nuxt": "^4.0.1",
     "nuxt-qrcode": "0.4.6",
