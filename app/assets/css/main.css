@@ -1,0 +1,55 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  
+  --breakpoint-3xl: 1920px;
+  
+  /* 莫蘭迪藍色系調色盤 */
+  --color-morandi-blue-50: #f7f8fb;
+  --color-morandi-blue-100: #ebeef5;
+  --color-morandi-blue-200: #d3daea;
+  --color-morandi-blue-300: #adbbd4;
+  --color-morandi-blue-400: #8095ba;
+  --color-morandi-blue-500: #6b7b9d;
+  --color-morandi-blue-600: #5a6785;
+  --color-morandi-blue-700: #4a546d;
+  --color-morandi-blue-800: #404759;
+  --color-morandi-blue-900: #373c4b;
+  --color-morandi-blue-950: #262933;
+
+  /* 教會品牌色系 */
+  --color-church-primary-50: #f0f7ff;
+  --color-church-primary-100: #e0effe;
+  --color-church-primary-200: #bae2ff;
+  --color-church-primary-300: #7cceff;
+  --color-church-primary-400: #36b6ff;
+  --color-church-primary-500: #0c9ff1;
+  --color-church-primary-600: #0081ce;
+  --color-church-primary-700: #0066a7;
+  --color-church-primary-800: #025589;
+  --color-church-primary-900: #084771;
+  --color-church-primary-950: #062c4b;
+}
+
+:root {
+  --ui-primary: var(--color-morandi-blue-600);
+  --ui-radius: 0.75rem;
+  
+  /* 背景色調整為溫和的莫蘭迪色 */
+  --ui-bg: #fbfcfd;
+  --ui-bg-muted: var(--color-morandi-blue-50);
+  --ui-text: var(--color-morandi-blue-800);
+  --ui-text-muted: var(--color-morandi-blue-600);
+  --ui-border: var(--color-morandi-blue-200);
+}
+
+.dark {
+  --ui-primary: var(--color-morandi-blue-400);
+  --ui-bg: var(--color-morandi-blue-950);
+  --ui-bg-muted: var(--color-morandi-blue-900);
+  --ui-text: var(--color-morandi-blue-100);
+  --ui-text-muted: var(--color-morandi-blue-300);
+  --ui-border: var(--color-morandi-blue-800);
+} 

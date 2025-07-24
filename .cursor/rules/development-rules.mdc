@@ -1,9 +1,3 @@
----
-description: for cursor development
-globs:
-alwaysApply: true
----
-
 # Cursor Development Rules for NHECC-IMS Project
 
 These rules guide code generation and development in Cursor, based on the project's dependencies and best practices. Follow them to ensure consistency, modularity, and alignment with frontend engineering standards (e.g., Composition API, atomic design, performance optimizations).
@@ -21,12 +15,37 @@ These rules guide code generation and development in Cursor, based on the projec
 - Ensure all Vue components use Composition API with <script setup> syntax; avoid Options API.
 - Follow semantic versioning for all custom modules and components.
 
+## Vue 3 Composition API Best Practices
+
+- **AVOID watch() when computed() can be used**: Prefer computed properties over watchers for reactive data transformations. Use watch() only for side effects (API calls, DOM manipulation, external library integration).
+  - ✅ Good: `const fullName = computed(() => firstName.value + ' ' + lastName.value)`
+  - ❌ Avoid: `watch([firstName, lastName], () => { fullName.value = firstName.value + ' ' + lastName.value })`
+- **Use watchEffect() sparingly**: Only for complex side effects that need to track multiple reactive dependencies automatically.
+- **Prefer computed over methods for reactive calculations**: Computed properties are cached and only re-evaluate when dependencies change.
+- **Keep watchers focused on side effects**: Use watch() for external APIs, localStorage, DOM operations, or third-party library interactions.
+
 ## UI Components and Styling
 
 - Use @nuxt/ui for UI components (e.g., buttons, modals, tables) to maintain consistency and accessibility.
-- Style with UnoCSS (@unocss/nuxt) for utility-first CSS; avoid inline styles unless necessary, prefer presets for themes.
+- Style with Tailwind CSS v4 for utility-first CSS; avoid inline styles unless necessary, prefer CSS theme variables for customization.
+- **Responsive Design (RWD)**: Implement responsive design for three primary screen sizes:
+  - **Desktop**: >1440px (use `xl:` prefix for Tailwind classes)
+  - **Tablet**: 1440px ~ 768px (use `md:` prefix for Tailwind classes)
+  - **Mobile**: 768px ~ 360px (use `sm:` prefix for Tailwind classes, default mobile-first)
+- **Tailwind CSS v4 Only**: In all .vue files, use standard Tailwind CSS utility classes in className attributes. Do not write CSS/SCSS in `<style>` blocks unless absolutely necessary for complex animations or third-party integrations.
+- **Important**: This project uses Tailwind CSS v4 with @nuxt/ui, NOT UnoCSS. Use standard Tailwind class names like:
+  - ✅ Correct: `class="flex items-center"`
+  - ✅ Correct: `class="text-blue-600 bg-white"`
+  - ✅ Correct: `class="sm:text-lg md:flex lg:grid-cols-3"`
+  - ✅ Correct: `class="hover:bg-gray-50 dark:text-white"`
 - For animations, use @formkit/auto-animate to add smooth transitions to components, ensuring performance on mobile.
 - Optimize images with @nuxt/image, including lazy loading, responsive formats, and WebP support.
+
+## SSR and Hydration
+
+- **Use ClientOnly for client-specific features**: Wrap theme toggles, localStorage-dependent components, or browser-only functionality in `<ClientOnly>` to prevent hydration mismatches.
+- **Provide fallback content**: Always include `<template #fallback>` for ClientOnly components to ensure good UX during hydration.
+- **Avoid reactive state that differs between server and client**: Ensure initial state is consistent between SSR and client-side hydration.
 
 ## State Management
 
@@ -92,6 +111,11 @@ These rules guide code generation and development in Cursor, based on the projec
 
 - Follow atomic design for components in components/ (atoms/, molecules/, etc.).
 - Use modular routing with Vue Router; define routes in pages/.
+- Document architectural decisions in docs/ (e.g., ADRs in docs/adrs/, diagrams with tools like Draw.io).
+- For enums/classes/interfaces: Always check if a type is needed; create in enums/ or models/ with proper exports and JSDoc.
+- Abstract reusable logic (e.g., API calls, computations) to composables/ to keep components clean.
+- Maintain a CHANGELOG.md for releases and updates.
+
 - Document architectural decisions in docs/ (e.g., ADRs in docs/adrs/, diagrams with tools like Draw.io).
 - For enums/classes/interfaces: Always check if a type is needed; create in enums/ or models/ with proper exports and JSDoc.
 - Abstract reusable logic (e.g., API calls, computations) to composables/ to keep components clean.
