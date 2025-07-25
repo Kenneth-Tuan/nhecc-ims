@@ -11,6 +11,7 @@
         size="lg"
         color="primary"
         variant="solid"
+        @click="openCreateModal"
       >
         新增資產
       </UButton>
@@ -61,7 +62,7 @@
           />
           <USelectMenu
             v-model="selectedTags"
-            :options="tagOptions"
+            :options="filterTagOptions"
             multiple
             placeholder="選擇標籤"
             searchable
@@ -72,7 +73,7 @@
 
     <!-- 資產統計卡片 -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-      <UCard>
+      <UCard class="cursor-pointer hover:shadow-md transition-shadow">
         <div class="flex items-center justify-between">
           <div>
             <p class="text-sm text-gray-600">總資產數</p>
@@ -81,7 +82,7 @@
           <UIcon name="i-heroicons-archive-box" class="w-8 h-8 text-blue-500" />
         </div>
       </UCard>
-      <UCard>
+      <UCard class="cursor-pointer hover:shadow-md transition-shadow">
         <div class="flex items-center justify-between">
           <div>
             <p class="text-sm text-gray-600">正常使用</p>
@@ -93,7 +94,7 @@
           />
         </div>
       </UCard>
-      <UCard>
+      <UCard class="cursor-pointer hover:shadow-md transition-shadow">
         <div class="flex items-center justify-between">
           <div>
             <p class="text-sm text-gray-600">維修中</p>
@@ -107,7 +108,7 @@
           />
         </div>
       </UCard>
-      <UCard>
+      <UCard class="cursor-pointer hover:shadow-md transition-shadow">
         <div class="flex items-center justify-between">
           <div>
             <p class="text-sm text-gray-600">已損壞</p>
@@ -150,8 +151,8 @@
               <th
                 v-for="column in tableColumns"
                 :key="column.key"
-                class="text-left py-3 px-4 font-medium text-gray-900 cursor-pointer hover:bg-gray-50"
-                @click="handleSort(column.key)"
+                class="text-left py-3 px-4 font-medium text-gray-900 cursor-pointer hover:bg-gray-50 transition-colors"
+                @click="handleSort(column.key as keyof Asset)"
               >
                 <div class="flex items-center gap-2">
                   {{ column.label }}
@@ -175,7 +176,7 @@
             <tr
               v-for="asset in displayedAssets"
               :key="asset.id"
-              class="border-b border-gray-100 hover:bg-gray-50"
+              class="border-b border-gray-100 hover:bg-gray-50 transition-colors"
             >
               <td class="py-3 px-4">
                 <div class="font-medium text-gray-900">{{ asset.name }}</div>
@@ -226,21 +227,21 @@
                     icon="i-heroicons-eye"
                     size="sm"
                     variant="ghost"
-                    color="gray"
+                    color="neutral"
                     @click="viewAsset(asset)"
                   />
                   <UButton
                     icon="i-heroicons-pencil"
                     size="sm"
                     variant="ghost"
-                    color="gray"
+                    color="neutral"
                     @click="editAsset(asset)"
                   />
                   <UButton
                     icon="i-heroicons-trash"
                     size="sm"
                     variant="ghost"
-                    color="red"
+                    color="error"
                     @click="deleteAsset(asset)"
                   />
                 </div>
@@ -266,28 +267,270 @@
             v-model="currentPage"
             :page-count="pageSize"
             :total="filteredTotal"
-            :ui="{
-              wrapper: 'flex items-center gap-1',
-              rounded: '!rounded-md',
-              default: {
-                size: 'sm',
-              },
-            }"
           />
         </div>
       </template>
     </UCard>
+
+    <!-- 資產表單 Modal -->
+    <UModal v-model:open="showAssetModal" class="max-w-4xl">
+      <template #content>
+        <UCard>
+          <template #header>
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold">
+                {{ isEditing ? "編輯資產" : "新增資產" }}
+              </h3>
+              <UButton
+                icon="i-heroicons-x-mark"
+                color="neutral"
+                variant="ghost"
+                size="sm"
+                @click="closeModal"
+              />
+            </div>
+          </template>
+
+          <form @submit.prevent="handleSubmit" class="space-y-4">
+            <!-- 第一行：資產名稱、序號、狀態 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  資產名稱 <span class="text-red-500">*</span>
+                </label>
+                <UInput
+                  v-model="form.name"
+                  placeholder="請輸入資產名稱"
+                  :maxlength="AssetColumnMaxWidth.name"
+                  :error="errors.name"
+                />
+                <p v-if="errors.name" class="mt-1 text-sm text-red-600">
+                  {{ errors.name }}
+                </p>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  序號 <span class="text-red-500">*</span>
+                </label>
+                <UInput
+                  v-model="form.serialNumber"
+                  placeholder="請輸入序號"
+                  :maxlength="AssetColumnMaxWidth.serialNumber"
+                  :error="errors.serialNumber"
+                />
+                <p v-if="errors.serialNumber" class="mt-1 text-sm text-red-600">
+                  {{ errors.serialNumber }}
+                </p>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  狀態 <span class="text-red-500">*</span>
+                </label>
+                <USelectMenu
+                  v-model="form.status"
+                  :items="formStatusOptions"
+                  placeholder="請選擇狀態"
+                  :error="errors.status"
+                  value-key="value"
+                />
+                <p v-if="errors.status" class="mt-1 text-sm text-red-600">
+                  {{ errors.status }}
+                </p>
+              </div>
+            </div>
+
+            <!-- 第二行：數量、位置、供應商 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  數量
+                </label>
+                <UInput
+                  v-model.number="form.quantity"
+                  type="number"
+                  min="1"
+                  placeholder="請輸入數量"
+                  :error="errors.quantity"
+                />
+                <p v-if="errors.quantity" class="mt-1 text-sm text-red-600">
+                  {{ errors.quantity }}
+                </p>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  位置
+                </label>
+                <UInput
+                  v-model="form.location"
+                  placeholder="請輸入位置"
+                  :maxlength="AssetColumnMaxWidth.location"
+                  :error="errors.location"
+                />
+                <p v-if="errors.location" class="mt-1 text-sm text-red-600">
+                  {{ errors.location }}
+                </p>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  供應商
+                </label>
+                <UInput
+                  v-model="form.supplier"
+                  placeholder="請輸入供應商"
+                  :maxlength="AssetColumnMaxWidth.supplier"
+                  :error="errors.supplier"
+                />
+                <p v-if="errors.supplier" class="mt-1 text-sm text-red-600">
+                  {{ errors.supplier }}
+                </p>
+              </div>
+            </div>
+
+            <!-- 第三行：購買價格、購買日期、保固到期日 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  購買價格
+                </label>
+                <UInput
+                  v-model.number="form.purchasePrice"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  placeholder="請輸入購買價格"
+                  :error="errors.purchasePrice"
+                />
+                <p
+                  v-if="errors.purchasePrice"
+                  class="mt-1 text-sm text-red-600"
+                >
+                  {{ errors.purchasePrice }}
+                </p>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  購買日期
+                </label>
+                <UInput
+                  v-model="form.purchaseDate"
+                  type="date"
+                  :error="errors.purchaseDate"
+                />
+                <p v-if="errors.purchaseDate" class="mt-1 text-sm text-red-600">
+                  {{ errors.purchaseDate }}
+                </p>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  保固到期日
+                </label>
+                <UInput
+                  v-model="form.warrantyExpiry"
+                  type="date"
+                  :error="errors.warrantyExpiry"
+                />
+                <p
+                  v-if="errors.warrantyExpiry"
+                  class="mt-1 text-sm text-red-600"
+                >
+                  {{ errors.warrantyExpiry }}
+                </p>
+              </div>
+            </div>
+
+            <!-- 第四行：最後檢查日期、標籤 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  最後檢查日期
+                </label>
+                <UInput
+                  v-model="form.lastInspectionDate"
+                  type="date"
+                  :error="errors.lastInspectionDate"
+                />
+                <p
+                  v-if="errors.lastInspectionDate"
+                  class="mt-1 text-sm text-red-600"
+                >
+                  {{ errors.lastInspectionDate }}
+                </p>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  標籤
+                </label>
+                <UInputMenu
+                  v-model="form.tags"
+                  :items="availableTagOptions"
+                  multiple
+                  placeholder="請選擇或輸入標籤"
+                  :error="errors.tags"
+                  @keydown="handleTagKeydown"
+                  @input="handleTagInput"
+                />
+                <p v-if="errors.tags" class="mt-1 text-sm text-red-600">
+                  {{ errors.tags }}
+                </p>
+                <p class="mt-1 text-sm text-gray-500">
+                  可選擇預設標籤或自行輸入新標籤，按 Tab 或 Enter 新增自定義標籤
+                </p>
+              </div>
+            </div>
+
+            <!-- 第五行：備註 (全寬) -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                備註
+              </label>
+              <UTextarea
+                v-model="form.note"
+                placeholder="請輸入備註"
+                :maxlength="AssetColumnMaxWidth.note"
+                :error="errors.note"
+                :rows="3"
+              />
+              <p v-if="errors.note" class="mt-1 text-sm text-red-600">
+                {{ errors.note }}
+              </p>
+            </div>
+          </form>
+
+          <template #footer>
+            <div class="flex justify-end gap-3">
+              <UButton
+                variant="outline"
+                @click="closeModal"
+                :disabled="isSubmitting"
+              >
+                取消
+              </UButton>
+              <UButton
+                color="primary"
+                @click="handleSubmit"
+                :loading="isSubmitting"
+                :disabled="isSubmitting"
+              >
+                {{ isSubmitting ? "處理中..." : isEditing ? "更新" : "建立" }}
+              </UButton>
+            </div>
+          </template>
+        </UCard>
+      </template>
+    </UModal>
   </div>
 </template>
 
 <script setup lang="ts">
 import type { Asset } from "~/models/asset";
-import { AssetStatus } from "~/models/asset";
-
-// 設定頁面標題
-useHead({
-  title: "資產總覽 - 倉儲管理系統",
-});
+import { AssetStatus, AssetColumnMaxWidth } from "~/models/asset";
 
 // Store
 const warehouseStore = useWarehouseStore();
@@ -302,6 +545,44 @@ const currentPage = ref(1);
 const pageSize = ref(20);
 const sortField = ref<keyof Asset>("name");
 const sortDirection = ref<"asc" | "desc">("asc");
+
+// Modal 相關
+const showAssetModal = ref(false);
+const selectedAsset = ref<Asset | null>(null);
+const isSubmitting = ref(false);
+
+// 表單資料
+const form = ref({
+  name: "",
+  serialNumber: "",
+  status: AssetStatus.ACTIVE as AssetStatus,
+  quantity: 1,
+  location: "",
+  supplier: "",
+  purchasePrice: undefined as number | undefined,
+  purchaseDate: "",
+  warrantyExpiry: "",
+  lastInspectionDate: "",
+  note: "",
+  tags: [] as string[],
+});
+
+// 表單錯誤
+const errors = ref<Record<string, string>>({});
+
+// 標籤選項
+const tagOptions = ["電子設備", "教學用品", "辦公用品", "維修工具"];
+const customTags = ref<string[]>([]);
+const currentTagInput = ref("");
+
+// 表單狀態選項
+const formStatusOptions = [
+  { label: "正常使用", value: AssetStatus.ACTIVE },
+  { label: "停用", value: AssetStatus.INACTIVE },
+  { label: "維修中", value: AssetStatus.MAINTENANCE },
+  { label: "已損壞", value: AssetStatus.DAMAGED },
+  { label: "已報廢", value: AssetStatus.DISPOSED },
+];
 
 // 表格欄位定義
 const tableColumns = [
@@ -351,8 +632,8 @@ const supplierOptions = computed(() => [
   })),
 ]);
 
-// 標籤選項
-const tagOptions = computed(() =>
+// 標籤選項 (用於篩選)
+const filterTagOptions = computed(() =>
   warehouseStore.allTags.map((tag) => ({
     label: tag,
     value: tag,
@@ -441,20 +722,22 @@ function handleSort(field: keyof Asset) {
   }
 }
 
-function getStatusColor(status: AssetStatus): string {
+function getStatusColor(
+  status: AssetStatus
+): "success" | "neutral" | "warning" | "error" {
   switch (status) {
     case AssetStatus.ACTIVE:
-      return "green";
+      return "success";
     case AssetStatus.INACTIVE:
-      return "gray";
+      return "neutral";
     case AssetStatus.MAINTENANCE:
-      return "yellow";
+      return "warning";
     case AssetStatus.DAMAGED:
-      return "red";
+      return "error";
     case AssetStatus.DISPOSED:
-      return "red";
+      return "error";
     default:
-      return "gray";
+      return "neutral";
   }
 }
 
@@ -492,13 +775,228 @@ function viewAsset(asset: Asset) {
 }
 
 function editAsset(asset: Asset) {
-  // 編輯資產
-  console.log("編輯資產:", asset);
+  selectedAsset.value = asset;
+  loadAssetData(asset);
+  showAssetModal.value = true;
 }
 
 function deleteAsset(asset: Asset) {
   // 刪除資產
   console.log("刪除資產:", asset);
+}
+
+// 計算屬性
+const isEditing = computed(() => !!selectedAsset.value);
+
+// 可用的標籤選項（包含預設和自定義標籤）
+const availableTagOptions = computed(() => {
+  // 從 warehouse store 中獲取所有資產的標籤
+  const warehouseTags = warehouseStore.allTags;
+
+  // 如果有 warehouse 標籤，使用 warehouse 標籤 + 自定義標籤
+  if (warehouseTags.length > 0) {
+    const allTags = [...warehouseTags, ...customTags.value];
+    // 去重並排序
+    return [...new Set(allTags)].sort();
+  }
+
+  // 如果沒有 warehouse 標籤，使用預設標籤 + 自定義標籤
+  const allTags = [...tagOptions, ...customTags.value];
+  return [...new Set(allTags)].sort();
+});
+
+// 表單驗證
+function validateForm(): boolean {
+  errors.value = {};
+
+  if (!form.value.name.trim()) {
+    errors.value.name = "資產名稱為必填欄位";
+  } else if (form.value.name.length > AssetColumnMaxWidth.name) {
+    errors.value.name = `資產名稱不能超過 ${AssetColumnMaxWidth.name} 個字元`;
+  }
+
+  if (!form.value.serialNumber.trim()) {
+    errors.value.serialNumber = "序號為必填欄位";
+  } else if (
+    form.value.serialNumber.length > AssetColumnMaxWidth.serialNumber
+  ) {
+    errors.value.serialNumber = `序號不能超過 ${AssetColumnMaxWidth.serialNumber} 個字元`;
+  }
+
+  if (!form.value.status) {
+    errors.value.status = "狀態為必填欄位";
+  }
+
+  if (form.value.quantity < 1) {
+    errors.value.quantity = "數量必須大於 0";
+  }
+
+  if (
+    form.value.location &&
+    form.value.location.length > AssetColumnMaxWidth.location
+  ) {
+    errors.value.location = `位置不能超過 ${AssetColumnMaxWidth.location} 個字元`;
+  }
+
+  if (
+    form.value.supplier &&
+    form.value.supplier.length > AssetColumnMaxWidth.supplier
+  ) {
+    errors.value.supplier = `供應商不能超過 ${AssetColumnMaxWidth.supplier} 個字元`;
+  }
+
+  if (form.value.note && form.value.note.length > AssetColumnMaxWidth.note) {
+    errors.value.note = `備註不能超過 ${AssetColumnMaxWidth.note} 個字元`;
+  }
+
+  return Object.keys(errors.value).length === 0;
+}
+
+// 重置表單
+function resetForm() {
+  form.value = {
+    name: "",
+    serialNumber: "",
+    status: AssetStatus.ACTIVE,
+    quantity: 1,
+    location: "",
+    supplier: "",
+    purchasePrice: undefined,
+    purchaseDate: "",
+    warrantyExpiry: "",
+    lastInspectionDate: "",
+    note: "",
+    tags: [],
+  };
+  errors.value = {};
+}
+
+// 載入資產數據到表單
+function loadAssetData(asset: Asset) {
+  form.value.name = asset.name;
+  form.value.serialNumber = asset.serialNumber;
+  form.value.status = asset.status;
+  form.value.quantity = asset.quantity;
+  form.value.location = asset.location || "";
+  form.value.supplier = asset.supplier || "";
+  form.value.purchasePrice = asset.purchasePrice;
+  form.value.purchaseDate = asset.purchaseDate
+    ? asset.purchaseDate.toISOString().split("T")[0]
+    : "";
+  form.value.warrantyExpiry = asset.warrantyExpiry
+    ? asset.warrantyExpiry.toISOString().split("T")[0]
+    : "";
+  form.value.lastInspectionDate = asset.lastInspectionDate
+    ? asset.lastInspectionDate.toISOString().split("T")[0]
+    : "";
+  form.value.note = asset.note || "";
+  form.value.tags = asset.tags || [];
+}
+
+// 表單提交
+async function handleSubmit() {
+  if (!validateForm()) {
+    return;
+  }
+
+  isSubmitting.value = true;
+
+  try {
+    const assetData = {
+      name: form.value.name.trim(),
+      serialNumber: form.value.serialNumber.trim(),
+      status: form.value.status,
+      quantity: form.value.quantity,
+      location: form.value.location.trim() || undefined,
+      supplier: form.value.supplier.trim() || undefined,
+      purchasePrice: form.value.purchasePrice,
+      purchaseDate: form.value.purchaseDate
+        ? new Date(form.value.purchaseDate)
+        : undefined,
+      warrantyExpiry: form.value.warrantyExpiry
+        ? new Date(form.value.warrantyExpiry)
+        : undefined,
+      lastInspectionDate: form.value.lastInspectionDate
+        ? new Date(form.value.lastInspectionDate)
+        : undefined,
+      note: form.value.note.trim() || undefined,
+      tags: form.value.tags.length > 0 ? form.value.tags : undefined,
+    };
+
+    if (selectedAsset.value) {
+      // 編輯模式
+      await warehouseStore.updateAsset(selectedAsset.value.id, assetData);
+    } else {
+      // 新增模式
+      await warehouseStore.createAsset(assetData as Omit<Asset, "id">);
+    }
+
+    // 重新載入資料
+    await warehouseStore.loadAssets();
+
+    // 關閉 Modal
+    closeModal();
+
+    // 顯示成功訊息
+    const message = selectedAsset.value ? "資產更新成功" : "資產建立成功";
+    console.log(message);
+  } catch (error) {
+    console.error("操作失敗:", error);
+  } finally {
+    isSubmitting.value = false;
+  }
+}
+
+// 處理標籤輸入
+function handleTagInput(event: Event) {
+  const target = event.target as HTMLInputElement;
+  currentTagInput.value = target.value;
+}
+
+// 處理標籤鍵盤事件
+function handleTagKeydown(event: KeyboardEvent) {
+  if (event.key === "Tab" || event.key === "Enter") {
+    // event.preventDefault();
+
+    const input = event.target as HTMLInputElement;
+    const newTag = input.value.trim();
+
+    // 檢查是否已存在於 warehouse 標籤、預設標籤或自定義標籤中
+    const warehouseTags = warehouseStore.allTags;
+    const isExistingTag =
+      warehouseTags.includes(newTag) ||
+      tagOptions.includes(newTag) ||
+      customTags.value.includes(newTag);
+
+    if (newTag && !isExistingTag) {
+      // 新增自定義標籤
+      customTags.value.push(newTag);
+
+      // 如果標籤不在當前選中的標籤中，則添加
+      if (!form.value.tags.includes(newTag)) {
+        form.value.tags.push(newTag);
+      }
+
+      // 清空輸入框
+      input.value = "";
+      currentTagInput.value = "";
+    }
+  }
+}
+
+// 關閉 Modal
+function closeModal() {
+  showAssetModal.value = false;
+  nextTick(() => {
+    resetForm();
+  });
+}
+
+// Modal 相關方法
+function openCreateModal() {
+  selectedAsset.value = null;
+  resetForm();
+  showAssetModal.value = true;
 }
 
 // 載入資料

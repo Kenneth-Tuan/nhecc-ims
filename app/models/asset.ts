@@ -76,3 +76,18 @@ export interface PaginationParams {
   /** 每頁筆數 */
   pageSize: number;
 }
+
+export const AssetColumnMaxWidth = {
+  name: 20,
+  note: 999,
+  purchaseDate: 10,
+  location: 50,
+  supplier: 35,
+  purchasePrice: 11,
+  warrantyExpiry: 10,
+  serialNumber: 15,
+  lastInspectionDate: 10,
+  status: 10,
+  tags: 99,
+  quantity: 4,
+};
