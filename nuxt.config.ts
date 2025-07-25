@@ -1,11 +1,18 @@
-import { resolve } from 'path'
+import { resolve } from "path";
 
 function pathResolve(dir: string) {
-  return resolve(__dirname, dir)
+  return resolve(__dirname, dir);
 }
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  app: {
+    head: {
+      title: "NHECC - IMS | 基督教內湖行道會 - 整合管理系統",
+      meta: [{ name: "description", content: "基督教內湖行道會 整合管理系統" }],
+      link: [{ rel: "icon", type: "image/png", href: "/NHECC_ICON-01.png" }],
+    },
+  },
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
 
@@ -27,6 +34,6 @@ export default defineNuxtConfig({
   css: ["~/assets/css/main.css"],
 
   vite: {
-    envDir: pathResolve('./env'),
+    envDir: pathResolve("./env"),
   },
 });

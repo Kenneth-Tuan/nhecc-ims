@@ -319,10 +319,4 @@
 
 <script setup lang="ts">
 import { TEXTS } from "~/constants/texts";
-
-// SEO Meta
-useHead({
-  title: TEXTS.hero.title + " - " + TEXTS.hero.subtitle,
-  meta: [{ name: "description", content: TEXTS.hero.description }],
-});
 </script>
