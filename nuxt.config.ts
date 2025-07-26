@@ -36,4 +36,13 @@ export default defineNuxtConfig({
   vite: {
     envDir: pathResolve("./env"),
   },
+
+  qrcode: {
+    options: {
+      variant: "pixelated",
+      radius: 1,
+      blackColor: "currentColor", // 'var(--ui-text-highlighted)' if you are using `@nuxt/ui` v3
+      whiteColor: "transparent", // 'var(--ui-bg)'
+    },
+  },
 });

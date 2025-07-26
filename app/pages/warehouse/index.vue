@@ -231,6 +231,13 @@
                     @click="viewAsset(asset)"
                   />
                   <UButton
+                    icon="i-heroicons-qr-code"
+                    size="sm"
+                    variant="ghost"
+                    color="primary"
+                    @click="generateQRCode(asset)"
+                  />
+                  <UButton
                     icon="i-heroicons-pencil"
                     size="sm"
                     variant="ghost"
@@ -560,9 +567,9 @@ const form = ref({
   location: "",
   supplier: "",
   purchasePrice: undefined as number | undefined,
-  purchaseDate: "",
-  warrantyExpiry: "",
-  lastInspectionDate: "",
+  purchaseDate: "" as string | undefined,
+  warrantyExpiry: "" as string | undefined,
+  lastInspectionDate: "" as string | undefined,
   note: "",
   tags: [] as string[],
 });
@@ -770,8 +777,13 @@ function formatDate(date: Date): string {
 }
 
 function viewAsset(asset: Asset) {
-  // 查看資產詳情
-  console.log("查看資產:", asset);
+  // 導航到資產詳情頁面
+  navigateTo(`/warehouse/item?id=${asset.id}`);
+}
+
+function generateQRCode(asset: Asset) {
+  // 導航到 QR Code 生成頁面
+  navigateTo(`/warehouse/qrcode?id=${asset.id}`);
 }
 
 function editAsset(asset: Asset) {
@@ -862,9 +874,9 @@ function resetForm() {
     location: "",
     supplier: "",
     purchasePrice: undefined,
-    purchaseDate: "",
-    warrantyExpiry: "",
-    lastInspectionDate: "",
+    purchaseDate: undefined,
+    warrantyExpiry: undefined,
+    lastInspectionDate: undefined,
     note: "",
     tags: [],
   };
@@ -882,13 +894,13 @@ function loadAssetData(asset: Asset) {
   form.value.purchasePrice = asset.purchasePrice;
   form.value.purchaseDate = asset.purchaseDate
     ? asset.purchaseDate.toISOString().split("T")[0]
-    : "";
+    : undefined;
   form.value.warrantyExpiry = asset.warrantyExpiry
     ? asset.warrantyExpiry.toISOString().split("T")[0]
-    : "";
+    : undefined;
   form.value.lastInspectionDate = asset.lastInspectionDate
     ? asset.lastInspectionDate.toISOString().split("T")[0]
-    : "";
+    : undefined;
   form.value.note = asset.note || "";
   form.value.tags = asset.tags || [];
 }
