@@ -55,7 +55,8 @@ export const useWarehouseStore = defineStore("warehouse", {
             asset.serialNumber.toLowerCase().includes(searchTerm) ||
             asset.note?.toLowerCase().includes(searchTerm) ||
             asset.location?.toLowerCase().includes(searchTerm) ||
-            asset.supplier?.toLowerCase().includes(searchTerm)
+            asset.supplier?.toLowerCase().includes(searchTerm) ||
+            asset.propertyManager?.toLowerCase().includes(searchTerm)
         );
       }
 
@@ -77,6 +78,14 @@ export const useWarehouseStore = defineStore("warehouse", {
       if (state.searchParams.supplier) {
         filtered = filtered.filter(
           (asset) => asset.supplier === state.searchParams.supplier
+        );
+      }
+
+      // 財產管理人篩選
+      if (state.searchParams.propertyManager) {
+        filtered = filtered.filter(
+          (asset) =>
+            asset.propertyManager === state.searchParams.propertyManager
         );
       }
 
@@ -149,6 +158,16 @@ export const useWarehouseStore = defineStore("warehouse", {
     allTags: (state): string[] => {
       const tags = state.assets.flatMap((asset) => asset.tags || []);
       return [...new Set(tags)].sort();
+    },
+
+    /**
+     * 唯一的財產管理人列表
+     */
+    uniquePropertyManagers: (state): string[] => {
+      const propertyManagers = state.assets
+        .map((asset) => asset.propertyManager)
+        .filter((manager): manager is string => Boolean(manager));
+      return [...new Set(propertyManagers)].sort();
     },
   },
 
@@ -261,6 +280,7 @@ function _generateMockAssets(): Asset[] {
   const mockAssets: Asset[] = [];
   const locations = ["倉庫A", "倉庫B", "辦公室", "教室1", "教室2", "廚房"];
   const suppliers = ["供應商A", "供應商B", "供應商C", "廠商D"];
+  const propertyManagers = ["李一民", "王小明", "張美玲", "陳志強", "林雅婷"];
   const tagOptions = ["電子設備", "傢俱", "教學用品", "辦公用品", "廚房設備"];
   const statuses = Object.values(AssetStatus);
 
@@ -276,6 +296,8 @@ function _generateMockAssets(): Asset[] {
       ),
       location: locations[Math.floor(Math.random() * locations.length)],
       supplier: suppliers[Math.floor(Math.random() * suppliers.length)],
+      propertyManager:
+        propertyManagers[Math.floor(Math.random() * propertyManagers.length)],
       purchasePrice: Math.floor(Math.random() * 50000) + 1000,
       warrantyExpiry: new Date(
         2024 + Math.floor(Math.random() * 3),

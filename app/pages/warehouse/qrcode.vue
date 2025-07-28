@@ -71,6 +71,18 @@
               <span class="text-gray-500">數量:</span>
               <span class="ml-2 text-gray-900">{{ asset.quantity }}</span>
             </div>
+            <div>
+              <span class="text-gray-500">財產管理人:</span>
+              <span class="ml-2 text-gray-900">{{
+                asset.propertyManager || "-"
+              }}</span>
+            </div>
+            <div>
+              <span class="text-gray-500">供應商:</span>
+              <span class="ml-2 text-gray-900">{{
+                asset.supplier || "-"
+              }}</span>
+            </div>
           </div>
         </div>
       </UCard>

@@ -113,6 +113,15 @@
 
             <div>
               <label class="block text-sm font-medium text-gray-500 mb-1"
+                >財產管理人</label
+              >
+              <p class="text-lg text-gray-900">
+                {{ asset.propertyManager || "-" }}
+              </p>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-500 mb-1"
                 >購買價格</label
               >
               <p class="text-lg text-gray-900">
