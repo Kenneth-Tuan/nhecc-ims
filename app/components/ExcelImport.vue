@@ -38,7 +38,10 @@
 
           <div class="space-y-4">
             <!-- 進度資訊 -->
-            <div v-if="importProgress.total > 0" class="space-y-2">
+            <div
+              v-if="importProgress.total > 0 && isProcessing"
+              class="space-y-2"
+            >
               <div class="flex justify-between text-sm">
                 <span>處理進度</span>
                 <span
@@ -122,6 +125,40 @@ import * as XLSX from "xlsx";
 import type { Asset } from "~/models/asset";
 import { AssetStatus } from "~/models/asset";
 import { parseDate } from "~/utils/dateHelper";
+
+// Excel 日期轉換函數
+function excelDateToJSDate(excelDate: number): Date | null {
+  if (!excelDate || typeof excelDate !== "number") return null;
+
+  // Excel 日期是從 1900 年 1 月 1 日開始的天數
+  // 但 Excel 錯誤地將 1900 年當作閏年，所以需要調整
+  const utcDays = Math.floor(excelDate - 25569);
+  const utcValue = utcDays * 86400;
+  const dateInfo = new Date(utcValue * 1000);
+
+  // 檢查是否為有效日期
+  if (isNaN(dateInfo.getTime())) return null;
+
+  return dateInfo;
+}
+
+// 日期字串轉換函數
+function parseExcelDate(value: unknown): Date | undefined {
+  if (!value) return undefined;
+
+  const strValue = value.toString().trim();
+  if (!strValue) return undefined;
+
+  // 如果是數字，當作 Excel 日期處理
+  const numValue = Number(strValue);
+  if (!isNaN(numValue) && numValue > 0) {
+    const excelDate = excelDateToJSDate(numValue);
+    return excelDate || undefined;
+  }
+
+  // 否則當作一般日期字串處理
+  return parseDate(strValue);
+}
 
 interface ImportError {
   row: number;
@@ -237,23 +274,44 @@ async function processExcelFile(file: File) {
       throw new Error("無法讀取工作表內容");
     }
 
+    console.log("test worksheet", worksheet);
+
     // 轉換為 JSON
     const jsonData = XLSX.utils.sheet_to_json(worksheet, {
       header: 1,
     }) as unknown[][];
 
+    console.log("test jsonData", jsonData);
+
     if (!jsonData || jsonData.length < 2) {
       throw new Error("Excel 檔案內容不足，至少需要標題行和一筆資料");
     }
 
-    // 解析標題行並建立欄位映射
-    const headers = jsonData[0] as string[];
-    const fieldMapping = createFieldMapping(headers);
+    // 尋找標題行（包含 "編號" 的行）
+    let headerRowIndex = -1;
+    for (let i = 0; i < jsonData.length; i++) {
+      const row = jsonData[i];
+      if (
+        row &&
+        Array.isArray(row) &&
+        row.some((cell) => cell?.toString().trim() === "編號")
+      ) {
+        headerRowIndex = i;
+        break;
+      }
+    }
 
+    if (headerRowIndex === -1) {
+      throw new Error("找不到標題行（應包含「編號」欄位）");
+    }
+
+    // 解析標題行並建立欄位映射
+    const headers = jsonData[headerRowIndex] as string[];
+    const fieldMapping = createFieldMapping(headers);
     importStatus.value = "正在解析資料...";
 
-    // 處理資料行
-    const dataRows = jsonData.slice(1);
+    // 處理資料行（排除標題行）
+    const dataRows = jsonData.slice(headerRowIndex + 1);
     importProgress.value.total = dataRows.length;
 
     for (let i = 0; i < dataRows.length; i++) {
@@ -264,7 +322,7 @@ async function processExcelFile(file: File) {
 
       const row = dataRows[i];
       if (!row) continue;
-      const rowNumber = i + 2; // Excel 行號從 1 開始，加上標題行
+      const rowNumber = headerRowIndex + 2 + i; // Excel 行號從 1 開始，加上標題行位置
 
       try {
         await processRow(row as unknown[], fieldMapping, rowNumber);
@@ -310,43 +368,28 @@ async function processExcelFile(file: File) {
       color: "error",
     });
   } finally {
+    // 確保進度條顯示 100% 後再停止處理
+    if (importProgress.value.total > 0) {
+      importProgress.value.processed = importProgress.value.total;
+    }
     isProcessing.value = false;
   }
 }
 
-function createFieldMapping(headers: string[]): Record<string, number> {
-  const mapping: Record<string, number> = {};
+// 根據圖片中的表頭結構，固定欄位映射
+const FIELD_MAPPING: Record<string, number> = {
+  serialNumber: 0, // 編號
+  name: 1, // 品項
+  purchaseDate: 2, // 採購日期
+  warrantyExpiry: 3, // 保固日期止
+  location: 4, // 放置地點
+  propertyManager: 5, // 財產管理人
+  note: 6, // 備註
+};
 
-  headers.forEach((header, index) => {
-    const normalizedHeader = header?.toString().trim();
-
-    // 根據您提供的圖片，建立欄位映射
-    switch (normalizedHeader) {
-      case "編號":
-        mapping.serialNumber = index;
-        break;
-      case "品項":
-        mapping.name = index;
-        break;
-      case "採購日期":
-        mapping.purchaseDate = index;
-        break;
-      case "保固日期止":
-        mapping.warrantyExpiry = index;
-        break;
-      case "放置地點":
-        mapping.location = index;
-        break;
-      case "財產管理人":
-        mapping.propertyManager = index;
-        break;
-      case "備註":
-        mapping.note = index;
-        break;
-    }
-  });
-
-  return mapping;
+function createFieldMapping(_headers: string[]): Record<string, number> {
+  // 直接返回固定的欄位映射
+  return FIELD_MAPPING;
 }
 
 async function processRow(
@@ -394,8 +437,10 @@ async function processRow(
     location: getFieldValue(row, fieldMapping.location),
     propertyManager: getFieldValue(row, fieldMapping.propertyManager),
     note: getFieldValue(row, fieldMapping.note),
-    purchaseDate: parseDate(getFieldValue(row, fieldMapping.purchaseDate)),
-    warrantyExpiry: parseDate(getFieldValue(row, fieldMapping.warrantyExpiry)),
+    purchaseDate: parseExcelDate(getFieldValue(row, fieldMapping.purchaseDate)),
+    warrantyExpiry: parseExcelDate(
+      getFieldValue(row, fieldMapping.warrantyExpiry)
+    ),
     // 其他欄位使用預設值
     supplier: undefined,
     purchasePrice: undefined,

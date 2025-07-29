@@ -571,6 +571,90 @@
         </UCard>
       </template>
     </UModal>
+
+    <!-- 刪除確認 Modal -->
+    <UModal v-model:open="showDeleteModal" class="max-w-md">
+      <template #content>
+        <UCard>
+          <template #header>
+            <div class="flex items-center gap-3">
+              <UIcon
+                name="i-heroicons-exclamation-triangle"
+                class="w-6 h-6 text-red-500"
+              />
+              <h3 class="text-lg font-semibold text-gray-900">確認刪除</h3>
+            </div>
+          </template>
+
+          <div class="space-y-4">
+            <p class="text-gray-700">
+              您確定要刪除以下資產嗎？此操作無法復原。
+            </p>
+            <div class="bg-gray-50 p-4 rounded-lg">
+              <div class="space-y-2">
+                <div class="flex justify-between">
+                  <span class="font-medium text-gray-700">資產名稱：</span>
+                  <span class="text-gray-900">{{ assetToDelete?.name }}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="font-medium text-gray-700">序號：</span>
+                  <span class="text-gray-900">{{
+                    assetToDelete?.serialNumber
+                  }}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="font-medium text-gray-700">狀態：</span>
+                  <UBadge
+                    :color="
+                      getStatusColor(
+                        assetToDelete?.status || AssetStatus.ACTIVE
+                      )
+                    "
+                    variant="subtle"
+                  >
+                    {{
+                      getStatusLabel(
+                        assetToDelete?.status || AssetStatus.ACTIVE
+                      )
+                    }}
+                  </UBadge>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <template #footer>
+            <div class="flex justify-end gap-3">
+              <UButton
+                variant="outline"
+                @click="closeDeleteModal"
+                :disabled="isDeleting"
+              >
+                取消
+              </UButton>
+              <UButton
+                color="error"
+                @click="confirmDelete"
+                :loading="isDeleting"
+                :disabled="isDeleting"
+              >
+                {{ isDeleting ? "刪除中..." : "確認刪除" }}
+              </UButton>
+            </div>
+          </template>
+        </UCard>
+      </template>
+    </UModal>
+
+    <!-- 隱藏的 QR Code 容器 -->
+    <div class="fixed -top-full -left-full opacity-0 pointer-events-none">
+      <div
+        ref="qrCodeContainer"
+        class="bg-white p-8 min-w-[400px] min-h-[400px] flex items-center justify-center"
+      >
+        <Qrcode :value="currentQRCodeUrl" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -578,6 +662,9 @@
 import type { Asset } from "~/models/asset";
 import { AssetStatus, AssetColumnMaxWidth } from "~/models/asset";
 import { formatDateInput, parseDateInput } from "~/utils/dateHelper";
+
+// QR Code composable
+const { downloadQRCode, generateQRCodeUrl } = useQRCode();
 
 // Store
 const warehouseStore = useWarehouseStore();
@@ -598,6 +685,15 @@ const sortDirection = ref<"asc" | "desc">("asc");
 const showAssetModal = ref(false);
 const selectedAsset = ref<Asset | null>(null);
 const isSubmitting = ref(false);
+
+// 刪除確認 Modal 相關
+const showDeleteModal = ref(false);
+const assetToDelete = ref<Asset | null>(null);
+const isDeleting = ref(false);
+
+// QR Code 相關
+const qrCodeContainer = ref<HTMLElement | null>(null);
+const currentQRCodeUrl = ref("");
 
 // 表單資料
 const form = ref({
@@ -837,8 +933,13 @@ function viewAsset(asset: Asset) {
 }
 
 function generateQRCode(asset: Asset) {
-  // 導航到 QR Code 生成頁面
-  navigateTo(`/warehouse/qrcode?id=${asset.id}`);
+  // 生成 QR Code URL 並下載
+  currentQRCodeUrl.value = generateQRCodeUrl(asset);
+
+  // 等待下一個 tick 確保 QR Code 已經渲染
+  nextTick(() => {
+    downloadQRCode(qrCodeContainer.value, asset);
+  });
 }
 
 function editAsset(asset: Asset) {
@@ -848,8 +949,8 @@ function editAsset(asset: Asset) {
 }
 
 function deleteAsset(asset: Asset) {
-  // 刪除資產
-  console.log("刪除資產:", asset);
+  assetToDelete.value = asset;
+  showDeleteModal.value = true;
 }
 
 // 計算屬性
@@ -1088,6 +1189,28 @@ function openCreateModal() {
   selectedAsset.value = null;
   resetForm();
   showAssetModal.value = true;
+}
+
+async function confirmDelete() {
+  if (!assetToDelete.value) return;
+
+  isDeleting.value = true;
+  try {
+    await warehouseStore.deleteAsset(assetToDelete.value.id);
+    await warehouseStore.loadAssets(); // 重新載入資料以更新列表
+    showDeleteModal.value = false;
+    assetToDelete.value = null;
+    console.log("資產刪除成功");
+  } catch (error) {
+    console.error("刪除失敗:", error);
+  } finally {
+    isDeleting.value = false;
+  }
+}
+
+function closeDeleteModal() {
+  showDeleteModal.value = false;
+  assetToDelete.value = null;
 }
 
 // 載入資料
