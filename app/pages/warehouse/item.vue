@@ -113,6 +113,15 @@
 
             <div>
               <label class="block text-sm font-medium text-gray-500 mb-1"
+                >財產管理人</label
+              >
+              <p class="text-lg text-gray-900">
+                {{ asset.propertyManager || "-" }}
+              </p>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-500 mb-1"
                 >購買價格</label
               >
               <p class="text-lg text-gray-900">
@@ -184,6 +193,79 @@
 
         <p class="text-gray-900 whitespace-pre-wrap">{{ asset.note }}</p>
       </UCard>
+
+      <!-- QR Code 顯示區域 -->
+      <UCard>
+        <template #header>
+          <h3 class="text-lg font-semibold">QR Code</h3>
+        </template>
+
+        <div class="flex flex-col items-center space-y-6">
+          <!-- QR Code 圖片 -->
+          <div class="bg-white p-4 shadow-sm w-64 h-64" ref="qrCodeContainer">
+            <Qrcode :value="qrCodeUrl" />
+          </div>
+
+          <!-- 下載按鈕 -->
+          <div class="flex items-center gap-3">
+            <UButton
+              icon="i-heroicons-arrow-down-tray"
+              color="primary"
+              @click="handleDownloadQRCode"
+            >
+              下載 QR Code
+            </UButton>
+            <UButton
+              icon="i-heroicons-printer"
+              variant="outline"
+              @click="handlePrintQRCode"
+            >
+              列印 QR Code
+            </UButton>
+          </div>
+
+          <!-- URL 資訊 -->
+          <div class="text-center">
+            <p class="text-sm text-gray-500 mb-2">
+              掃描此 QR Code 可查看完整資產詳情
+            </p>
+            <p class="text-xs text-gray-400 font-mono break-all">
+              {{ qrCodeUrl }}
+            </p>
+          </div>
+        </div>
+      </UCard>
+
+      <!-- 使用說明 -->
+      <UCard>
+        <template #header>
+          <h3 class="text-lg font-semibold">使用說明</h3>
+        </template>
+
+        <div class="space-y-3 text-sm text-gray-600">
+          <div class="flex items-start gap-3">
+            <UIcon
+              name="i-heroicons-information-circle"
+              class="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0"
+            />
+            <p>使用手機相機或 QR Code 掃描器掃描上方條碼</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <UIcon
+              name="i-heroicons-information-circle"
+              class="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0"
+            />
+            <p>掃描後將自動開啟資產詳情頁面</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <UIcon
+              name="i-heroicons-information-circle"
+              class="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0"
+            />
+            <p>可下載或列印 QR Code 貼在實體資產上</p>
+          </div>
+        </div>
+      </UCard>
     </div>
 
     <!-- 資產不存在 -->
@@ -216,9 +298,16 @@ const warehouseStore = useWarehouseStore();
 const asset = ref<Asset | null>(null);
 const isLoading = ref(false);
 const error = ref<string | null>(null);
+const qrCodeContainer = ref<HTMLElement | null>(null);
+
+// QR Code composable
+const { downloadQRCode, printQRCode, generateQRCodeUrl } = useQRCode();
 
 // 計算屬性
 const assetId = computed(() => route.query.id as string);
+
+// QR Code URL
+const qrCodeUrl = computed(() => generateQRCodeUrl(asset.value));
 
 // 載入資產資料
 async function loadAsset() {
@@ -262,6 +351,15 @@ async function loadAsset() {
 // 返回列表
 function goBack() {
   router.push("/warehouse");
+}
+
+// QR Code 相關方法
+function handleDownloadQRCode() {
+  downloadQRCode(qrCodeContainer.value, asset.value);
+}
+
+function handlePrintQRCode() {
+  printQRCode(qrCodeContainer.value, asset.value);
 }
 
 // 工具函數

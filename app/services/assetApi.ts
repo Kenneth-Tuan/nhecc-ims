@@ -34,6 +34,9 @@ export const AssetApiService = {
       if (params.searchParams?.search) {
         queries.push(Query.search("name", params.searchParams.search));
         queries.push(Query.search("serialNumber", params.searchParams.search));
+        queries.push(
+          Query.search("propertyManager", params.searchParams.search)
+        );
       }
 
       if (params.searchParams?.status) {
@@ -46,6 +49,12 @@ export const AssetApiService = {
 
       if (params.searchParams?.supplier) {
         queries.push(Query.equal("supplier", params.searchParams.supplier));
+      }
+
+      if (params.searchParams?.propertyManager) {
+        queries.push(
+          Query.equal("propertyManager", params.searchParams.propertyManager)
+        );
       }
 
       // 分頁
@@ -145,6 +154,7 @@ export const AssetApiService = {
         : undefined,
       location: doc.location as string | undefined,
       supplier: doc.supplier as string | undefined,
+      propertyManager: doc.propertyManager as string | undefined,
       purchasePrice: doc.purchasePrice as number | undefined,
       warrantyExpiry: doc.warrantyExpiry
         ? new Date(doc.warrantyExpiry as string)
@@ -169,6 +179,7 @@ export const AssetApiService = {
       purchaseDate: asset.purchaseDate?.toISOString(),
       location: asset.location,
       supplier: asset.supplier,
+      propertyManager: asset.propertyManager,
       purchasePrice: asset.purchasePrice,
       warrantyExpiry: asset.warrantyExpiry?.toISOString(),
       serialNumber: asset.serialNumber,

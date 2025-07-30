@@ -6,15 +6,18 @@
         <h1 class="text-3xl font-bold text-gray-900">資產總覽</h1>
         <p class="text-gray-600 mt-1">倉儲管理系統 - 資產資訊紀錄</p>
       </div>
-      <UButton
-        icon="i-heroicons-plus"
-        size="lg"
-        color="primary"
-        variant="solid"
-        @click="openCreateModal"
-      >
-        新增資產
-      </UButton>
+      <div class="flex items-center gap-3">
+        <ExcelImport />
+        <UButton
+          icon="i-heroicons-plus"
+          size="lg"
+          color="primary"
+          variant="solid"
+          @click="openCreateModal"
+        >
+          新增資產
+        </UButton>
+      </div>
     </div>
 
     <!-- 搜尋和篩選區域 -->
@@ -25,7 +28,7 @@
           <div class="flex-1">
             <UInput
               v-model="searchQuery"
-              placeholder="搜尋資產名稱、序號、位置、供應商..."
+              placeholder="搜尋資產名稱、序號、位置、供應商、財產管理人..."
               icon="i-heroicons-magnifying-glass"
               size="lg"
             />
@@ -41,7 +44,7 @@
         </div>
 
         <!-- 篩選器 -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
           <USelectMenu
             v-model="selectedStatus"
             :options="statusOptions"
@@ -58,6 +61,12 @@
             v-model="selectedSupplier"
             :options="supplierOptions"
             placeholder="選擇供應商"
+            searchable
+          />
+          <USelectMenu
+            v-model="selectedPropertyManager"
+            :options="propertyManagerOptions"
+            placeholder="選擇財產管理人"
             searchable
           />
           <USelectMenu
@@ -200,6 +209,11 @@
               <td class="py-3 px-4">
                 <span class="text-sm text-gray-900">{{
                   asset.supplier || "-"
+                }}</span>
+              </td>
+              <td class="py-3 px-4">
+                <span class="text-sm text-gray-900">{{
+                  asset.propertyManager || "-"
                 }}</span>
               </td>
               <td class="py-3 px-4">
@@ -397,6 +411,31 @@
               </div>
             </div>
 
+            <!-- 第二行延伸：財產管理人 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  財產管理人
+                </label>
+                <UInput
+                  v-model="form.propertyManager"
+                  placeholder="請輸入財產管理人"
+                  :maxlength="AssetColumnMaxWidth.propertyManager"
+                  :error="errors.propertyManager"
+                  @input="validatePropertyManager"
+                />
+                <p
+                  v-if="errors.propertyManager"
+                  class="mt-1 text-sm text-red-600"
+                >
+                  {{ errors.propertyManager }}
+                </p>
+                <p class="mt-1 text-sm text-gray-500">
+                  只允許輸入中文、英文和空格，最大長度 35 個字符
+                </p>
+              </div>
+            </div>
+
             <!-- 第三行：購買價格、購買日期、保固到期日 -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
@@ -532,12 +571,100 @@
         </UCard>
       </template>
     </UModal>
+
+    <!-- 刪除確認 Modal -->
+    <UModal v-model:open="showDeleteModal" class="max-w-md">
+      <template #content>
+        <UCard>
+          <template #header>
+            <div class="flex items-center gap-3">
+              <UIcon
+                name="i-heroicons-exclamation-triangle"
+                class="w-6 h-6 text-red-500"
+              />
+              <h3 class="text-lg font-semibold text-gray-900">確認刪除</h3>
+            </div>
+          </template>
+
+          <div class="space-y-4">
+            <p class="text-gray-700">
+              您確定要刪除以下資產嗎？此操作無法復原。
+            </p>
+            <div class="bg-gray-50 p-4 rounded-lg">
+              <div class="space-y-2">
+                <div class="flex justify-between">
+                  <span class="font-medium text-gray-700">資產名稱：</span>
+                  <span class="text-gray-900">{{ assetToDelete?.name }}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="font-medium text-gray-700">序號：</span>
+                  <span class="text-gray-900">{{
+                    assetToDelete?.serialNumber
+                  }}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="font-medium text-gray-700">狀態：</span>
+                  <UBadge
+                    :color="
+                      getStatusColor(
+                        assetToDelete?.status || AssetStatus.ACTIVE
+                      )
+                    "
+                    variant="subtle"
+                  >
+                    {{
+                      getStatusLabel(
+                        assetToDelete?.status || AssetStatus.ACTIVE
+                      )
+                    }}
+                  </UBadge>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <template #footer>
+            <div class="flex justify-end gap-3">
+              <UButton
+                variant="outline"
+                @click="closeDeleteModal"
+                :disabled="isDeleting"
+              >
+                取消
+              </UButton>
+              <UButton
+                color="error"
+                @click="confirmDelete"
+                :loading="isDeleting"
+                :disabled="isDeleting"
+              >
+                {{ isDeleting ? "刪除中..." : "確認刪除" }}
+              </UButton>
+            </div>
+          </template>
+        </UCard>
+      </template>
+    </UModal>
+
+    <!-- 隱藏的 QR Code 容器 -->
+    <div class="fixed -top-full -left-full opacity-0 pointer-events-none">
+      <div
+        ref="qrCodeContainer"
+        class="bg-white p-8 min-w-[400px] min-h-[400px] flex items-center justify-center"
+      >
+        <Qrcode :value="currentQRCodeUrl" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import type { Asset } from "~/models/asset";
 import { AssetStatus, AssetColumnMaxWidth } from "~/models/asset";
+import { formatDateInput, parseDateInput } from "~/utils/dateHelper";
+
+// QR Code composable
+const { downloadQRCode, generateQRCodeUrl } = useQRCode();
 
 // Store
 const warehouseStore = useWarehouseStore();
@@ -547,6 +674,7 @@ const searchQuery = ref("");
 const selectedStatus = ref<AssetStatus | null>(null);
 const selectedLocation = ref<string | null>(null);
 const selectedSupplier = ref<string | null>(null);
+const selectedPropertyManager = ref<string | null>(null);
 const selectedTags = ref<string[]>([]);
 const currentPage = ref(1);
 const pageSize = ref(20);
@@ -558,6 +686,15 @@ const showAssetModal = ref(false);
 const selectedAsset = ref<Asset | null>(null);
 const isSubmitting = ref(false);
 
+// 刪除確認 Modal 相關
+const showDeleteModal = ref(false);
+const assetToDelete = ref<Asset | null>(null);
+const isDeleting = ref(false);
+
+// QR Code 相關
+const qrCodeContainer = ref<HTMLElement | null>(null);
+const currentQRCodeUrl = ref("");
+
 // 表單資料
 const form = ref({
   name: "",
@@ -566,6 +703,7 @@ const form = ref({
   quantity: 1,
   location: "",
   supplier: "",
+  propertyManager: "",
   purchasePrice: undefined as number | undefined,
   purchaseDate: "" as string | undefined,
   warrantyExpiry: "" as string | undefined,
@@ -598,6 +736,7 @@ const tableColumns = [
   { key: "status", label: "狀態" },
   { key: "location", label: "位置" },
   { key: "supplier", label: "供應商" },
+  { key: "propertyManager", label: "財產管理人" },
   { key: "purchasePrice", label: "購買價格" },
   { key: "quantity", label: "數量" },
   { key: "purchaseDate", label: "購買日期" },
@@ -636,6 +775,15 @@ const supplierOptions = computed(() => [
   ...warehouseStore.uniqueSuppliers.map((supplier) => ({
     label: supplier,
     value: supplier,
+  })),
+]);
+
+// 財產管理人選項
+const propertyManagerOptions = computed(() => [
+  { label: "全部財產管理人", value: null },
+  ...warehouseStore.uniquePropertyManagers.map((manager) => ({
+    label: manager,
+    value: manager,
   })),
 ]);
 
@@ -683,6 +831,7 @@ watch(
     selectedStatus,
     selectedLocation,
     selectedSupplier,
+    selectedPropertyManager,
     selectedTags,
   ],
   () => {
@@ -691,6 +840,7 @@ watch(
       status: selectedStatus.value || undefined,
       location: selectedLocation.value || undefined,
       supplier: selectedSupplier.value || undefined,
+      propertyManager: selectedPropertyManager.value || undefined,
       tags: selectedTags.value.length > 0 ? selectedTags.value : undefined,
     });
   }
@@ -716,6 +866,7 @@ function resetFilters() {
   selectedStatus.value = null;
   selectedLocation.value = null;
   selectedSupplier.value = null;
+  selectedPropertyManager.value = null;
   selectedTags.value = [];
   warehouseStore.resetSearch();
 }
@@ -782,8 +933,13 @@ function viewAsset(asset: Asset) {
 }
 
 function generateQRCode(asset: Asset) {
-  // 導航到 QR Code 生成頁面
-  navigateTo(`/warehouse/qrcode?id=${asset.id}`);
+  // 生成 QR Code URL 並下載
+  currentQRCodeUrl.value = generateQRCodeUrl(asset);
+
+  // 等待下一個 tick 確保 QR Code 已經渲染
+  nextTick(() => {
+    downloadQRCode(qrCodeContainer.value, asset);
+  });
 }
 
 function editAsset(asset: Asset) {
@@ -793,8 +949,8 @@ function editAsset(asset: Asset) {
 }
 
 function deleteAsset(asset: Asset) {
-  // 刪除資產
-  console.log("刪除資產:", asset);
+  assetToDelete.value = asset;
+  showDeleteModal.value = true;
 }
 
 // 計算屬性
@@ -857,6 +1013,21 @@ function validateForm(): boolean {
     errors.value.supplier = `供應商不能超過 ${AssetColumnMaxWidth.supplier} 個字元`;
   }
 
+  if (
+    form.value.propertyManager &&
+    form.value.propertyManager.length > AssetColumnMaxWidth.propertyManager
+  ) {
+    errors.value.propertyManager = `財產管理人不能超過 ${AssetColumnMaxWidth.propertyManager} 個字元`;
+  }
+
+  // 財產管理人格式驗證
+  if (form.value.propertyManager && form.value.propertyManager.length > 0) {
+    const validPattern = /^[\u4e00-\u9fa5a-zA-Z\s]+$/;
+    if (!validPattern.test(form.value.propertyManager)) {
+      errors.value.propertyManager = "財產管理人只能包含中文、英文和空格";
+    }
+  }
+
   if (form.value.note && form.value.note.length > AssetColumnMaxWidth.note) {
     errors.value.note = `備註不能超過 ${AssetColumnMaxWidth.note} 個字元`;
   }
@@ -873,6 +1044,7 @@ function resetForm() {
     quantity: 1,
     location: "",
     supplier: "",
+    propertyManager: "",
     purchasePrice: undefined,
     purchaseDate: undefined,
     warrantyExpiry: undefined,
@@ -883,6 +1055,24 @@ function resetForm() {
   errors.value = {};
 }
 
+// 財產管理人驗證函數
+function validatePropertyManager() {
+  const value = form.value.propertyManager;
+  if (value && value.length > 0) {
+    // 檢查是否只包含中文、英文和空格
+    const validPattern = /^[\u4e00-\u9fa5a-zA-Z\s]+$/;
+    if (!validPattern.test(value)) {
+      errors.value.propertyManager = "財產管理人只能包含中文、英文和空格";
+    } else if (value.length > AssetColumnMaxWidth.propertyManager) {
+      errors.value.propertyManager = `財產管理人不能超過 ${AssetColumnMaxWidth.propertyManager} 個字符`;
+    } else {
+      delete errors.value.propertyManager;
+    }
+  } else {
+    delete errors.value.propertyManager;
+  }
+}
+
 // 載入資產數據到表單
 function loadAssetData(asset: Asset) {
   form.value.name = asset.name;
@@ -891,16 +1081,11 @@ function loadAssetData(asset: Asset) {
   form.value.quantity = asset.quantity;
   form.value.location = asset.location || "";
   form.value.supplier = asset.supplier || "";
+  form.value.propertyManager = asset.propertyManager || "";
   form.value.purchasePrice = asset.purchasePrice;
-  form.value.purchaseDate = asset.purchaseDate
-    ? asset.purchaseDate.toISOString().split("T")[0]
-    : undefined;
-  form.value.warrantyExpiry = asset.warrantyExpiry
-    ? asset.warrantyExpiry.toISOString().split("T")[0]
-    : undefined;
-  form.value.lastInspectionDate = asset.lastInspectionDate
-    ? asset.lastInspectionDate.toISOString().split("T")[0]
-    : undefined;
+  form.value.purchaseDate = formatDateInput(asset.purchaseDate);
+  form.value.warrantyExpiry = formatDateInput(asset.warrantyExpiry);
+  form.value.lastInspectionDate = formatDateInput(asset.lastInspectionDate);
   form.value.note = asset.note || "";
   form.value.tags = asset.tags || [];
 }
@@ -921,16 +1106,11 @@ async function handleSubmit() {
       quantity: form.value.quantity,
       location: form.value.location.trim() || undefined,
       supplier: form.value.supplier.trim() || undefined,
+      propertyManager: form.value.propertyManager.trim() || undefined,
       purchasePrice: form.value.purchasePrice,
-      purchaseDate: form.value.purchaseDate
-        ? new Date(form.value.purchaseDate)
-        : undefined,
-      warrantyExpiry: form.value.warrantyExpiry
-        ? new Date(form.value.warrantyExpiry)
-        : undefined,
-      lastInspectionDate: form.value.lastInspectionDate
-        ? new Date(form.value.lastInspectionDate)
-        : undefined,
+      purchaseDate: parseDateInput(form.value.purchaseDate),
+      warrantyExpiry: parseDateInput(form.value.warrantyExpiry),
+      lastInspectionDate: parseDateInput(form.value.lastInspectionDate),
       note: form.value.note.trim() || undefined,
       tags: form.value.tags.length > 0 ? form.value.tags : undefined,
     };
@@ -1009,6 +1189,28 @@ function openCreateModal() {
   selectedAsset.value = null;
   resetForm();
   showAssetModal.value = true;
+}
+
+async function confirmDelete() {
+  if (!assetToDelete.value) return;
+
+  isDeleting.value = true;
+  try {
+    await warehouseStore.deleteAsset(assetToDelete.value.id);
+    await warehouseStore.loadAssets(); // 重新載入資料以更新列表
+    showDeleteModal.value = false;
+    assetToDelete.value = null;
+    console.log("資產刪除成功");
+  } catch (error) {
+    console.error("刪除失敗:", error);
+  } finally {
+    isDeleting.value = false;
+  }
+}
+
+function closeDeleteModal() {
+  showDeleteModal.value = false;
+  assetToDelete.value = null;
 }
 
 // 載入資料

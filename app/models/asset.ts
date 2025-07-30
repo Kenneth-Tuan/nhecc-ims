@@ -25,6 +25,8 @@ export interface Asset {
   location?: string;
   /** 供應商 */
   supplier?: string;
+  /** 財產管理人 */
+  propertyManager?: string;
   /** 購買價格 */
   purchasePrice?: number;
   /** 保固到期日 */
@@ -53,6 +55,8 @@ export interface AssetSearchParams {
   location?: string;
   /** 供應商篩選 */
   supplier?: string;
+  /** 財產管理人篩選 */
+  propertyManager?: string;
   /** 標籤篩選 */
   tags?: string[];
 }
@@ -83,6 +87,7 @@ export const AssetColumnMaxWidth = {
   purchaseDate: 10,
   location: 50,
   supplier: 35,
+  propertyManager: 35,
   purchasePrice: 11,
   warrantyExpiry: 10,
   serialNumber: 15,

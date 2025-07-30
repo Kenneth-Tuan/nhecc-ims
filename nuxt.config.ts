@@ -41,8 +41,8 @@ export default defineNuxtConfig({
     options: {
       variant: "pixelated",
       radius: 1,
-      blackColor: "currentColor", // 'var(--ui-text-highlighted)' if you are using `@nuxt/ui` v3
-      whiteColor: "transparent", // 'var(--ui-bg)'
+      blackColor: "#000000", // 使用固定的黑色
+      whiteColor: "#ffffff", // 使用固定的白色
     },
   },
 });
