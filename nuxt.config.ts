@@ -1,48 +1,14 @@
-import { resolve } from "path";
-
-function pathResolve(dir: string) {
-  return resolve(__dirname, dir);
-}
+import tailwindcss from "@tailwindcss/vite"
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  app: {
-    head: {
-      title: "NHECC - IMS | 基督教內湖行道會 - 整合管理系統",
-      meta: [{ name: "description", content: "基督教內湖行道會 整合管理系統" }],
-      link: [{ rel: "icon", type: "image/png", href: "/NHECC_ICON-01.png" }],
-    },
-  },
-  compatibilityDate: "2025-07-15",
+  compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-
-  modules: [
-    "@nuxt/content",
-    "@nuxt/eslint",
-    "@nuxt/image",
-    "@nuxt/scripts",
-    "@nuxt/test-utils",
-    "@nuxt/ui",
-    "@pinia/nuxt",
-    "@nuxtjs/mdc",
-    "@dargmuesli/nuxt-cookie-control",
-    "nuxt-qrcode",
-    "@vee-validate/nuxt",
-    "@formkit/auto-animate",
-  ],
-
-  css: ["~/assets/css/main.css"],
-
+  css: ['./app/assets/css/main.css'],
+  modules: ['@nuxt/image', '@nuxt/ui', 'motion-v/nuxt'],
   vite: {
-    envDir: pathResolve("./env"),
+    plugins: [
+      tailwindcss(),
+    ],
   },
-
-  qrcode: {
-    options: {
-      variant: "pixelated",
-      radius: 1,
-      blackColor: "#000000", // 使用固定的黑色
-      whiteColor: "#ffffff", // 使用固定的白色
-    },
-  },
-});
+})
