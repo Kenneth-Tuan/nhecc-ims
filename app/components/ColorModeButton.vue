@@ -51,7 +51,7 @@ const startViewTransition = (event: MouseEvent) => {
       color="neutral"
       variant="ghost"
       size="sm"
-      class="rounded-full"
+      class="rounded-full cursor-pointer"
       @click="startViewTransition"
     />
     <template #fallback>

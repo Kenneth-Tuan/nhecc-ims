@@ -29,9 +29,16 @@ defineShortcuts({
       :items="links"
       variant="link"
       color="neutral"
-      class="bg-muted/80 backdrop-blur-sm rounded-full px-2 sm:px-4 border border-muted/50 shadow-lg shadow-neutral-950/5"
+      highlight
+      highlight-color="neutral"
+      content-orientation="vertical"
+      :class="[
+        'bg-muted/80 backdrop-blur-sm shadow-xl shadow-neutral-950/5',
+        'w-max rounded-full px-2 sm:px-4',
+        'data-[orientation=horizontal]:border-b border-default'
+      ]"
       :ui="{
-        link: 'px-2 py-1',
+        link: 'p-2',
         linkLeadingIcon: '',
       }"
     >

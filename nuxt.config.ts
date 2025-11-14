@@ -5,6 +5,9 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   css: ['./app/assets/css/main.css'],
+  ui: {
+    colorMode: true
+  },
   modules: ['@nuxt/image', '@nuxt/ui', 'motion-v/nuxt'],
   vite: {
     plugins: [

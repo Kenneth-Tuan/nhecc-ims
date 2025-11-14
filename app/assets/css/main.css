@@ -9,50 +9,494 @@
 
   --breakpoint-3xl: 1920px;
 
-  /* 莫蘭迪藍色系調色盤 */
-  --color-morandi-blue-50: #f7f8fb;
-  --color-morandi-blue-100: #ebeef5;
-  --color-morandi-blue-200: #d3daea;
-  --color-morandi-blue-300: #adbbd4;
-  --color-morandi-blue-400: #8095ba;
-  --color-morandi-blue-500: #6b7b9d;
-  --color-morandi-blue-600: #5a6785;
-  --color-morandi-blue-700: #4a546d;
-  --color-morandi-blue-800: #404759;
-  --color-morandi-blue-900: #373c4b;
-  --color-morandi-blue-950: #262933;
+  --color-red-50: oklch(0.971 0.013 17.38);
+  --color-red-100: oklch(0.936 0.032 17.717);
+  --color-red-200: oklch(0.885 0.062 18.334);
+  --color-red-300: oklch(0.808 0.114 19.571);
+  --color-red-400: oklch(0.704 0.191 22.216);
+  --color-red-500: oklch(0.637 0.237 25.331);
+  --color-red-600: oklch(0.577 0.245 27.325);
+  --color-red-700: oklch(0.505 0.213 27.518);
+  --color-red-800: oklch(0.444 0.177 26.899);
+  --color-red-900: oklch(0.396 0.141 25.723);
+  --color-red-950: oklch(0.258 0.092 26.042);
+  --color-orange-50: oklch(0.98 0.016 73.684);
+  --color-orange-100: oklch(0.954 0.038 75.164);
+  --color-orange-200: oklch(0.901 0.076 70.697);
+  --color-orange-300: oklch(0.837 0.128 66.29);
+  --color-orange-400: oklch(0.75 0.183 55.934);
+  --color-orange-500: oklch(0.705 0.213 47.604);
+  --color-orange-600: oklch(0.646 0.222 41.116);
+  --color-orange-700: oklch(0.553 0.195 38.402);
+  --color-orange-800: oklch(0.47 0.157 37.304);
+  --color-orange-900: oklch(0.408 0.123 38.172);
+  --color-orange-950: oklch(0.266 0.079 36.259);
+  --color-amber-50: oklch(0.987 0.022 95.277);
+  --color-amber-100: oklch(0.962 0.059 95.617);
+  --color-amber-200: oklch(0.924 0.12 95.746);
+  --color-amber-300: oklch(0.879 0.169 91.605);
+  --color-amber-400: oklch(0.828 0.189 84.429);
+  --color-amber-500: oklch(0.769 0.188 70.08);
+  --color-amber-600: oklch(0.666 0.179 58.318);
+  --color-amber-700: oklch(0.555 0.163 48.998);
+  --color-amber-800: oklch(0.473 0.137 46.201);
+  --color-amber-900: oklch(0.414 0.112 45.904);
+  --color-amber-950: oklch(0.279 0.077 45.635);
+  --color-yellow-50: oklch(0.987 0.026 102.212);
+  --color-yellow-100: oklch(0.973 0.071 103.193);
+  --color-yellow-200: oklch(0.945 0.129 101.54);
+  --color-yellow-300: oklch(0.905 0.182 98.111);
+  --color-yellow-400: oklch(0.852 0.199 91.936);
+  --color-yellow-450: oklch(0.7857 0.1456 83.94);
+  --color-yellow-500: oklch(0.795 0.184 86.047);
+  --color-yellow-600: oklch(0.681 0.162 75.834);
+  --color-yellow-700: oklch(0.554 0.135 66.442);
+  --color-yellow-800: oklch(0.476 0.114 61.907);
+  --color-yellow-900: oklch(0.421 0.095 57.708);
+  --color-yellow-950: oklch(0.286 0.066 53.813);
+  --color-lime-50: oklch(0.986 0.031 120.757);
+  --color-lime-100: oklch(0.967 0.067 122.328);
+  --color-lime-200: oklch(0.938 0.127 124.321);
+  --color-lime-300: oklch(0.897 0.196 126.665);
+  --color-lime-400: oklch(0.841 0.238 128.85);
+  --color-lime-500: oklch(0.768 0.233 130.85);
+  --color-lime-600: oklch(0.648 0.2 131.684);
+  --color-lime-700: oklch(0.532 0.157 131.589);
+  --color-lime-800: oklch(0.453 0.124 130.933);
+  --color-lime-900: oklch(0.405 0.101 131.063);
+  --color-lime-950: oklch(0.274 0.072 132.109);
+  --color-green-50: oklch(0.982 0.018 155.826);
+  --color-green-100: oklch(0.962 0.044 156.743);
+  --color-green-200: oklch(0.925 0.084 155.995);
+  --color-green-300: oklch(0.871 0.15 154.449);
+  --color-green-400: oklch(0.792 0.209 151.711);
+  --color-green-500: oklch(0.723 0.219 149.579);
+  --color-green-600: oklch(0.627 0.194 149.214);
+  --color-green-700: oklch(0.527 0.154 150.069);
+  --color-green-800: oklch(0.448 0.119 151.328);
+  --color-green-900: oklch(0.393 0.095 152.535);
+  --color-green-950: oklch(0.266 0.065 152.934);
+  --color-emerald-50: oklch(0.979 0.021 166.113);
+  --color-emerald-100: oklch(0.95 0.052 163.051);
+  --color-emerald-200: oklch(0.905 0.093 164.15);
+  --color-emerald-300: oklch(0.845 0.143 164.978);
+  --color-emerald-400: oklch(0.765 0.177 163.223);
+  --color-emerald-500: oklch(0.696 0.17 162.48);
+  --color-emerald-600: oklch(0.596 0.145 163.225);
+  --color-emerald-700: oklch(0.508 0.118 165.612);
+  --color-emerald-800: oklch(0.432 0.095 166.913);
+  --color-emerald-900: oklch(0.378 0.077 168.94);
+  --color-emerald-950: oklch(0.262 0.051 172.552);
+  --color-teal-50: oklch(0.984 0.014 180.72);
+  --color-teal-100: oklch(0.953 0.051 180.801);
+  --color-teal-200: oklch(0.91 0.096 180.426);
+  --color-teal-300: oklch(0.855 0.138 181.071);
+  --color-teal-400: oklch(0.777 0.152 181.912);
+  --color-teal-500: oklch(0.704 0.14 182.503);
+  --color-teal-600: oklch(0.6 0.118 184.704);
+  --color-teal-700: oklch(0.511 0.096 186.391);
+  --color-teal-800: oklch(0.437 0.078 188.216);
+  --color-teal-900: oklch(0.386 0.063 188.416);
+  --color-teal-950: oklch(0.277 0.046 192.524);
+  --color-cyan-50: oklch(0.984 0.019 200.873);
+  --color-cyan-100: oklch(0.956 0.045 203.388);
+  --color-cyan-200: oklch(0.917 0.08 205.041);
+  --color-cyan-300: oklch(0.865 0.127 207.078);
+  --color-cyan-400: oklch(0.789 0.154 211.53);
+  --color-cyan-500: oklch(0.715 0.143 215.221);
+  --color-cyan-600: oklch(0.609 0.126 221.723);
+  --color-cyan-700: oklch(0.52 0.105 223.128);
+  --color-cyan-800: oklch(0.45 0.085 224.283);
+  --color-cyan-900: oklch(0.398 0.07 227.392);
+  --color-cyan-950: oklch(0.302 0.056 229.695);
+  --color-sky-50: oklch(0.977 0.013 236.62);
+  --color-sky-100: oklch(0.951 0.026 236.824);
+  --color-sky-200: oklch(0.901 0.058 230.902);
+  --color-sky-300: oklch(0.828 0.111 230.318);
+  --color-sky-400: oklch(0.746 0.16 232.661);
+  --color-sky-500: oklch(0.685 0.169 237.323);
+  --color-sky-600: oklch(0.588 0.158 241.966);
+  --color-sky-700: oklch(0.5 0.134 242.749);
+  --color-sky-800: oklch(0.443 0.11 240.79);
+  --color-sky-900: oklch(0.391 0.09 240.876);
+  --color-sky-950: oklch(0.293 0.066 243.157);
+  --color-blue-50: oklch(0.97 0.014 254.604);
+  --color-blue-100: oklch(0.932 0.032 255.585);
+  --color-blue-200: oklch(0.882 0.059 254.128);
+  --color-blue-300: oklch(0.809 0.105 251.813);
+  --color-blue-400: oklch(0.707 0.165 254.624);
+  --color-blue-500: oklch(0.623 0.214 259.815);
+  --color-blue-600: oklch(0.546 0.245 262.881);
+  --color-blue-700: oklch(0.488 0.243 264.376);
+  --color-blue-800: oklch(0.424 0.199 265.638);
+  --color-blue-900: oklch(0.379 0.146 265.522);
+  --color-blue-950: oklch(0.282 0.091 267.935);
+  --color-indigo-50: oklch(0.962 0.018 272.314);
+  --color-indigo-100: oklch(0.93 0.034 272.788);
+  --color-indigo-200: oklch(0.87 0.065 274.039);
+  --color-indigo-300: oklch(0.785 0.115 274.713);
+  --color-indigo-400: oklch(0.673 0.182 276.935);
+  --color-indigo-500: oklch(0.585 0.233 277.117);
+  --color-indigo-600: oklch(0.511 0.262 276.966);
+  --color-indigo-700: oklch(0.457 0.24 277.023);
+  --color-indigo-800: oklch(0.398 0.195 277.366);
+  --color-indigo-900: oklch(0.359 0.144 278.697);
+  --color-indigo-950: oklch(0.257 0.09 281.288);
+  --color-violet-50: oklch(0.969 0.016 293.756);
+  --color-violet-100: oklch(0.943 0.029 294.588);
+  --color-violet-200: oklch(0.894 0.057 293.283);
+  --color-violet-300: oklch(0.811 0.111 293.571);
+  --color-violet-400: oklch(0.702 0.183 293.541);
+  --color-violet-500: oklch(0.606 0.25 292.717);
+  --color-violet-600: oklch(0.541 0.281 293.009);
+  --color-violet-700: oklch(0.491 0.27 292.581);
+  --color-violet-800: oklch(0.432 0.232 292.759);
+  --color-violet-900: oklch(0.38 0.189 293.745);
+  --color-violet-950: oklch(0.283 0.141 291.089);
+  --color-purple-50: oklch(0.977 0.014 308.299);
+  --color-purple-100: oklch(0.946 0.033 307.174);
+  --color-purple-200: oklch(0.902 0.063 306.703);
+  --color-purple-300: oklch(0.827 0.119 306.383);
+  --color-purple-400: oklch(0.714 0.203 305.504);
+  --color-purple-500: oklch(0.627 0.265 303.9);
+  --color-purple-600: oklch(0.558 0.288 302.321);
+  --color-purple-700: oklch(0.496 0.265 301.924);
+  --color-purple-800: oklch(0.438 0.218 303.724);
+  --color-purple-900: oklch(0.381 0.176 304.987);
+  --color-purple-950: oklch(0.291 0.149 302.717);
+  --color-fuchsia-50: oklch(0.977 0.017 320.058);
+  --color-fuchsia-100: oklch(0.952 0.037 318.852);
+  --color-fuchsia-200: oklch(0.903 0.076 319.62);
+  --color-fuchsia-300: oklch(0.833 0.145 321.434);
+  --color-fuchsia-400: oklch(0.74 0.238 322.16);
+  --color-fuchsia-500: oklch(0.667 0.295 322.15);
+  --color-fuchsia-600: oklch(0.591 0.293 322.896);
+  --color-fuchsia-700: oklch(0.518 0.253 323.949);
+  --color-fuchsia-800: oklch(0.452 0.211 324.591);
+  --color-fuchsia-900: oklch(0.401 0.17 325.612);
+  --color-fuchsia-950: oklch(0.293 0.136 325.661);
+  --color-pink-50: oklch(0.971 0.014 343.198);
+  --color-pink-100: oklch(0.948 0.028 342.258);
+  --color-pink-200: oklch(0.899 0.061 343.231);
+  --color-pink-300: oklch(0.823 0.12 346.018);
+  --color-pink-400: oklch(0.718 0.202 349.761);
+  --color-pink-500: oklch(0.656 0.241 354.308);
+  --color-pink-600: oklch(0.592 0.249 0.584);
+  --color-pink-700: oklch(0.525 0.223 3.958);
+  --color-pink-800: oklch(0.459 0.187 3.815);
+  --color-pink-900: oklch(0.408 0.153 2.432);
+  --color-pink-950: oklch(0.284 0.109 3.907);
+  --color-rose-50: oklch(0.969 0.015 12.422);
+  --color-rose-100: oklch(0.941 0.03 12.58);
+  --color-rose-200: oklch(0.892 0.058 10.001);
+  --color-rose-300: oklch(0.81 0.117 11.638);
+  --color-rose-400: oklch(0.712 0.194 13.428);
+  --color-rose-500: oklch(0.645 0.246 16.439);
+  --color-rose-600: oklch(0.586 0.253 17.585);
+  --color-rose-700: oklch(0.514 0.222 16.935);
+  --color-rose-800: oklch(0.455 0.188 13.697);
+  --color-rose-900: oklch(0.41 0.159 10.272);
+  --color-rose-950: oklch(0.271 0.105 12.094);
+  --color-slate-50: oklch(0.984 0.003 247.858);
+  --color-slate-100: oklch(0.968 0.007 247.896);
+  --color-slate-200: oklch(0.929 0.013 255.508);
+  --color-slate-300: oklch(0.869 0.022 252.894);
+  --color-slate-400: oklch(0.704 0.04 256.788);
+  --color-slate-500: oklch(0.554 0.046 257.417);
+  --color-slate-600: oklch(0.446 0.043 257.281);
+  --color-slate-700: oklch(0.372 0.044 257.287);
+  --color-slate-800: oklch(0.279 0.041 260.031);
+  --color-slate-900: oklch(0.208 0.042 265.755);
+  --color-slate-950: oklch(0.129 0.042 264.695);
+  --color-gray-50: oklch(0.985 0.002 247.839);
+  --color-gray-100: oklch(0.967 0.003 264.542);
+  --color-gray-200: oklch(0.928 0.006 264.531);
+  --color-gray-300: oklch(0.872 0.01 258.338);
+  --color-gray-400: oklch(0.707 0.022 261.325);
+  --color-gray-500: oklch(0.551 0.027 264.364);
+  --color-gray-600: oklch(0.446 0.03 256.802);
+  --color-gray-700: oklch(0.373 0.034 259.733);
+  --color-gray-800: oklch(0.278 0.033 256.848);
+  --color-gray-900: oklch(0.21 0.034 264.665);
+  --color-gray-950: oklch(0.13 0.028 261.692);
+  --color-zinc-50: oklch(0.985 0 0);
+  --color-zinc-100: oklch(0.967 0.001 286.375);
+  --color-zinc-200: oklch(0.92 0.004 286.32);
+  --color-zinc-300: oklch(0.871 0.006 286.286);
+  --color-zinc-400: oklch(0.705 0.015 286.067);
+  --color-zinc-500: oklch(0.552 0.016 285.938);
+  --color-zinc-600: oklch(0.442 0.017 285.786);
+  --color-zinc-700: oklch(0.37 0.013 285.805);
+  --color-zinc-800: oklch(0.274 0.006 286.033);
+  --color-zinc-900: oklch(0.21 0.006 285.885);
+  --color-zinc-950: oklch(0.141 0.005 285.823);
+  --color-neutral-50: oklch(0.985 0 0);
+  --color-neutral-100: oklch(0.97 0 0);
+  --color-neutral-200: oklch(0.922 0 0);
+  --color-neutral-300: oklch(0.87 0 0);
+  --color-neutral-400: oklch(0.708 0 0);
+  --color-neutral-500: oklch(0.556 0 0);
+  --color-neutral-600: oklch(0.439 0 0);
+  --color-neutral-700: oklch(0.371 0 0);
+  --color-neutral-800: oklch(0.269 0 0);
+  --color-neutral-900: oklch(0.205 0 0);
+  --color-neutral-950: oklch(0.145 0 0);
+  --color-stone-50: oklch(0.985 0.001 106.423);
+  --color-stone-100: oklch(0.97 0.001 106.424);
+  --color-stone-200: oklch(0.923 0.003 48.717);
+  --color-stone-300: oklch(0.869 0.005 56.366);
+  --color-stone-400: oklch(0.709 0.01 56.259);
+  --color-stone-500: oklch(0.553 0.013 58.071);
+  --color-stone-600: oklch(0.444 0.011 73.639);
+  --color-stone-700: oklch(0.374 0.01 67.558);
+  --color-stone-800: oklch(0.268 0.007 34.298);
+  --color-stone-900: oklch(0.216 0.006 56.043);
+  --color-stone-950: oklch(0.147 0.004 49.25);
+  --color-black: #000;
+  --color-white: #fff;
 
-  /* 教會品牌色系 */
-  --color-church-primary-50: #f0f7ff;
-  --color-church-primary-100: #e0effe;
-  --color-church-primary-200: #bae2ff;
-  --color-church-primary-300: #7cceff;
-  --color-church-primary-400: #36b6ff;
-  --color-church-primary-500: #0c9ff1;
-  --color-church-primary-600: #0081ce;
-  --color-church-primary-700: #0066a7;
-  --color-church-primary-800: #025589;
-  --color-church-primary-900: #084771;
-  --color-church-primary-950: #062c4b;
+  /* ===== 完整莫蘭迪色系 - 230款顏色 ===== */
+
+  /* ===== 暖灰系列 (Warm Gray) - 紅棕調灰色 ===== */
+  --color-morandi-taupe: oklch(0.45 0.04 15);           /* #8C736F - 陶土色 */
+  --color-morandi-terracotta: oklch(0.65 0.06 15);      /* #D4B8B4 - 赤陶色 */
+  --color-morandi-stone: oklch(0.68 0.01 240);          /* #ADAAA5 - 石頭色 */
+  --color-morandi-silver: oklch(0.72 0.005 240);        /* #B7B7BD - 銀灰色 */
+  --color-morandi-moss: oklch(0.68 0.02 125);           /* #AAB8AB - 苔蘚色 */
+  --color-morandi-charcoal: oklch(0.22 0.02 220);       /* #53565C - 木炭色 */
+  --color-morandi-fog: oklch(0.6 0.008 240);            /* #999EA2 - 霧色 */
+  --color-morandi-iron: oklch(0.48 0.01 240);           /* #93939B - 鐵灰色 */
+  --color-morandi-mist: oklch(0.8 0.008 125);           /* #CCD2CC - 薄霧色 */
+  --color-morandi-linen: oklch(0.85 0.015 45);          /* #DBD2C9 - 亞麻色 */
+  --color-morandi-rust: oklch(0.4 0.05 15);             /* #976666 - 鐵鏽色 */
+  --color-morandi-rose: oklch(0.6 0.04 15);             /* #C09D9B - 玫瑰灰 */
+  --color-morandi-ash: oklch(0.75 0.005 240);           /* #BEBEBE - 灰燼色 */
+  --color-morandi-slate: oklch(0.45 0.03 220);          /* #7A848D - 板岩色 */
+  --color-morandi-sage: oklch(0.68 0.025 125);          /* #A9B7AA - 鼠尾草色 */
+  --color-morandi-cream: oklch(0.86 0.02 45);           /* #DBD4C6 - 奶油色 */
+  --color-morandi-pebble: oklch(0.58 0.02 125);         /* #95A098 - 鵝卵石色 */
+  --color-morandi-steel: oklch(0.27 0.02 220);          /* #60656C - 鋼灰色 */
+  --color-morandi-olive: oklch(0.45 0.03 125);          /* #728A7A - 橄欖色 */
+  --color-morandi-coral: oklch(0.77 0.03 15);           /* #C3AAA6 - 珊瑚灰 */
+  --color-morandi-oat: oklch(0.82 0.04 35);             /* #D4C3AA - 燕麥色 */
+  --color-morandi-umber: oklch(0.52 0.04 25);           /* #A39183 - 烏木色 */
+  --color-morandi-copper: oklch(0.42 0.05 25);          /* #B09279 - 銅色 */
+  --color-morandi-dust: oklch(0.88 0.008 15);           /* #DDD0C8 - 塵土色 */
+  --color-morandi-blush: oklch(0.78 0.03 345);          /* #E2C6C4 - 臉紅色 */
+  --color-morandi-clay: oklch(0.75 0.04 15);            /* #D4B8B4 - 粘土色 */
+  --color-morandi-heather: oklch(0.7 0.02 285);         /* #B1ACB3 - 石楠色 */
+  --color-morandi-smoke: oklch(0.68 0.02 125);          /* #AAB8AB - 煙霧色 */
+  --color-morandi-cement: oklch(0.78 0.01 240);         /* #C4C1BC - 水泥色 */
+  --color-morandi-brick: oklch(0.62 0.04 15);           /* #C1B0A7 - 磚紅色 */
+  --color-morandi-mauve: oklch(0.65 0.02 285);          /* #A39797 - 紫紅色 */
+  --color-morandi-forest: oklch(0.27 0.03 125);         /* #4A7056 - 森林色 */
+  --color-morandi-pine: oklch(0.37 0.03 125);           /* #597A69 - 松樹色 */
+  --color-morandi-sand: oklch(0.78 0.015 35);           /* #C4BAB1 - 沙色 */
+  --color-morandi-beige: oklch(0.75 0.02 25);           /* #BFADA1 - 米色 */
+  --color-morandi-earth: oklch(0.46 0.04 25);           /* #8E6E57 - 土色 */
+  --color-morandi-bark: oklch(0.53 0.02 25);            /* #88807D - 樹皮色 */
+  --color-morandi-mocha: oklch(0.66 0.02 25);           /* #A39087 - 摩卡色 */
+  --color-morandi-jungle: oklch(0.18 0.02 125);         /* #2A483A - 叢林色 */
+  --color-morandi-marine: oklch(0.31 0.02 125);         /* #4E6E62 - 海軍色 */
+  --color-morandi-sage: oklch(0.7 0.01 125);            /* #B2B2A8 - 鼠尾草色 */
+  --color-morandi-parchment: oklch(0.88 0.008 45);      /* #DFDCD5 - 羊皮紙色 */
+  --color-morandi-moss: oklch(0.23 0.02 125);           /* #3B4338 - 苔蘚色 */
+  --color-morandi-chocolate: oklch(0.35 0.04 15);       /* #674D41 - 巧克力色 */
+  --color-morandi-cedar: oklch(0.42 0.05 25);           /* #845937 - 雪松色 */
+  --color-morandi-caramel: oklch(0.6 0.03 25);          /* #B89886 - 焦糖色 */
+  --color-morandi-hazel: oklch(0.48 0.04 25);           /* #927157 - 榛子色 */
+  --color-morandi-wine: oklch(0.22 0.03 15);            /* #492620 - 酒紅色 */
+  --color-morandi-mahogany: oklch(0.25 0.04 15);        /* #59321D - 桃花心木色 */
+  --color-morandi-cinnamon: oklch(0.53 0.05 25);        /* #8F6849 - 肉桂色 */
+  --color-morandi-biscuit: oklch(0.8 0.015 35);         /* #C5BDB2 - 餅乾色 */
+  --color-morandi-granite: oklch(0.57 0.02 25);         /* #908982 - 花崗岩色 */
+  --color-morandi-milk: oklch(0.97 0.005 125);          /* #EFF0EA - 牛奶色 */
+  --color-morandi-alabaster: oklch(0.93 0.005 240);     /* #E1E1DF - 雪花石膏色 */
+  --color-morandi-silver: oklch(0.45 0.02 125);         /* #737C75 - 銀色 */
+  --color-morandi-dove: oklch(0.55 0.03 15);            /* #AB8C83 - 鴿子色 */
+  --color-morandi-evergreen: oklch(0.12 0.01 125);      /* #161D15 - 常綠色 */
+
+  /* ===== 冷灰系列 (Cool Gray) - 藍灰調 ===== */
+  --color-morandi-periwinkle: oklch(0.57 0.03 240);     /* #8E9BAE - 琉璃色 */
+  --color-morandi-lavender: oklch(0.78 0.01 240);       /* #BFC2CB - 薰衣草色 */
+  --color-morandi-blush: oklch(0.88 0.015 345);         /* #E3D0CC - 臉紅色 */
+  --color-morandi-sky: oklch(0.75 0.015 220);           /* #BECBD3 - 天藍色 */
+  --color-morandi-cloud: oklch(0.92 0.005 240);         /* #DCDDDF - 雲色 */
+  --color-morandi-plum: oklch(0.68 0.02 285);           /* #DDCFC2 - 李子色 */
+  --color-morandi-steel: oklch(0.47 0.03 240);          /* #75809C - 鋼色 */
+  --color-morandi-lilac: oklch(0.58 0.02 285);          /* #8E9AAB - 丁香色 */
+  --color-morandi-perl: oklch(0.85 0.015 35);           /* #DDCFC2 - 珍珠色 */
+  --color-morandi-indigo: oklch(0.55 0.02 240);         /* #8D8FA4 - 靛藍色 */
+  --color-morandi-azure: oklch(0.62 0.03 220);          /* #97A5C0 - 蔚藍色 */
+  --color-morandi-porcelain: oklch(0.88 0.015 25);      /* #D6C3B4 - 瓷器色 */
+  --color-morandi-smoke: oklch(0.6 0.02 240);           /* #9297AB - 煙色 */
+  --color-morandi-pearl: oklch(0.73 0.01 240);          /* #B6BBBE - 珍珠色 */
+  --color-morandi-rose: oklch(0.82 0.02 345);           /* #D3BBB7 - 玫瑰色 */
+
+  /* ===== 暖色系列 (Warm Tones) ===== */
+  --color-morandi-amber: oklch(0.52 0.08 35);           /* #9D5A16 - 琥珀色 */
+  --color-morandi-copper: oklch(0.58 0.07 25);          /* #996430 - 銅色 */
+  --color-morandi-salmon: oklch(0.82 0.04 15);          /* #DDBCB7 - 鮭魚色 */
+  --color-morandi-coral: oklch(0.88 0.05 15);           /* #F4BAAF - 珊瑚色 */
+  --color-morandi-peach: oklch(0.9 0.04 25);            /* #F4C7B0 - 桃色 */
+  --color-morandi-terracotta: oklch(0.55 0.06 25);      /* #A87153 - 赤陶色 */
+  --color-morandi-apricot: oklch(0.58 0.06 25);         /* #BB6F32 - 杏色 */
+  --color-morandi-caramel: oklch(0.68 0.06 35);         /* #DDAB77 - 焦糖色 */
+  --color-morandi-bronze: oklch(0.58 0.05 35);          /* #BA8249 - 青銅色 */
+  --color-morandi-clay: oklch(0.72 0.04 25);            /* #CEA48D - 粘土色 */
+  --color-morandi-gold: oklch(0.72 0.07 45);            /* #EC8F3F - 金色 */
+  --color-morandi-ochre: oklch(0.65 0.06 45);           /* #D9913C - 赭石色 */
+  --color-morandi-cream: oklch(0.88 0.03 45);           /* #EDDFC4 - 奶油色 */
+  --color-morandi-vanilla: oklch(0.82 0.04 45);         /* #E7D4B5 - 香草色 */
+  --color-morandi-apricot: oklch(0.62 0.05 15);         /* #D09075 - 杏色 */
+  --color-morandi-rose: oklch(0.88 0.04 15);            /* #F3C2AF - 玫瑰色 */
+  --color-morandi-blush: oklch(0.95 0.02 15);           /* #F9ECE4 - 臉紅色 */
+  --color-morandi-lemon: oklch(0.92 0.06 65);           /* #F4E8C0 - 檸檬色 */
+  --color-morandi-mustard: oklch(0.72 0.06 55);         /* #E6C786 - 芥末色 */
+  --color-morandi-honey: oklch(0.92 0.05 45);           /* #FDE0BE - 蜂蜜色 */
+
+  /* ===== 冷色系列 (Cool Tones) ===== */
+  --color-morandi-crimson: oklch(0.42 0.06 5);          /* #B95756 - 深紅色 */
+  --color-morandi-scarlet: oklch(0.62 0.07 5);          /* #CC5F5A - 猩紅色 */
+  --color-morandi-salmon: oklch(0.88 0.08 15);          /* #FD9270 - 鮭魚色 */
+  --color-morandi-ivory: oklch(0.95 0.03 55);           /* #FAEEC7 - 象牙色 */
+  --color-morandi-mint: oklch(0.7 0.02 145);            /* #A2AFA6 - 薄荷色 */
+  --color-morandi-plum: oklch(0.52 0.03 285);           /* #8D6A6E - 李子色 */
+  --color-morandi-navy: oklch(0.18 0.02 220);           /* #2A4C65 - 海軍色 */
+  --color-morandi-steel: oklch(0.52 0.02 220);          /* #818C98 - 鋼色 */
+  --color-morandi-coral: oklch(0.68 0.07 5);            /* #E4745E - 珊瑚色 */
+  --color-morandi-tangerine: oklch(0.82 0.08 25);       /* #FEC37D - 橘色 */
+  --color-morandi-sage: oklch(0.73 0.01 125);           /* #B6B9AE - 鼠尾草色 */
+  --color-morandi-taupe: oklch(0.58 0.03 15);           /* #A1706B - 陶土色 */
+  --color-morandi-slate: oklch(0.37 0.02 220);          /* #586D80 - 板岩色 */
+  --color-morandi-ocean: oklch(0.45 0.02 220);          /* #66828E - 海洋色 */
+
+  /* ===== 自然系列 (Natural Tones) ===== */
+  --color-morandi-pearl: oklch(0.88 0.008 240);         /* #D6DCDB - 珍珠色 */
+  --color-morandi-algae: oklch(0.78 0.01 125);          /* #C6CCC0 - 海藻色 */
+  --color-morandi-sand: oklch(0.75 0.04 25);            /* #E1AA8D - 沙色 */
+  --color-morandi-snow: oklch(0.97 0.002 240);          /* #F2EEED - 雪色 */
+  --color-morandi-tea: oklch(0.68 0.02 145);            /* #A1B0AD - 茶色 */
+  --color-morandi-coral: oklch(0.72 0.04 5);            /* #C39289 - 珊瑚色 */
+  --color-morandi-mint: oklch(0.88 0.008 145);          /* #D6E1D7 - 薄荷色 */
+  --color-morandi-lilac: oklch(0.92 0.008 285);         /* #E0DFE4 - 丁香色 */
+  --color-morandi-sky: oklch(0.75 0.02 220);            /* #B3CAD8 - 天藍色 */
+  --color-morandi-beige: oklch(0.78 0.03 35);           /* #DBB89C - 米色 */
+  --color-morandi-pink: oklch(0.95 0.02 345);           /* #F2DBD5 - 粉色 */
+  --color-morandi-lavender: oklch(0.78 0.01 240);       /* #BDC4CC - 薰衣草色 */
+  --color-morandi-ivory: oklch(0.92 0.005 240);         /* #E6DEDC - 象牙色 */
+  --color-morandi-white: oklch(1 0 240);                /* #FFFFFF - 白色 */
+  --color-morandi-cream: oklch(0.95 0.01 35);           /* #F4EBE4 - 奶油色 */
+  --color-morandi-biscuit: oklch(0.88 0.02 35);         /* #EBD8C9 - 餅乾色 */
+  --color-morandi-salmon: oklch(0.9 0.02 5);            /* #EED1CC - 鮭魚色 */
+  --color-morandi-aqua: oklch(0.62 0.02 180);           /* #9DA8AF - 水色 */
+
+  /* ===== 植被系列 (Vegetation) ===== */
+  --color-morandi-olive: oklch(0.7 0.04 75);            /* #B2BA81 - 橄欖色 */
+  --color-morandi-moss: oklch(0.58 0.04 75);            /* #8F9650 - 苔蘚色 */
+  --color-morandi-forest: oklch(0.48 0.04 75);          /* #798223 - 森林色 */
+  --color-morandi-khaki: oklch(0.45 0.04 75);           /* #646D20 - 卡其色 */
+  --color-morandi-gold: oklch(0.58 0.04 65);            /* #928D3C - 金色 */
+  --color-morandi-dark: oklch(0.22 0.02 75);            /* #666218 - 深色 */
+  --color-morandi-black: oklch(0.15 0.01 75);           /* #5B5611 - 黑色 */
+  --color-morandi-onyx: oklch(0.12 0.01 75);            /* #403D10 - 瑪瑙色 */
+  --color-morandi-jet: oklch(0.11 0.01 75);             /* #3B420E - 煤玉色 */
+  --color-morandi-charcoal: oklch(0.17 0.02 65);        /* #4F5518 - 木炭色 */
+  --color-morandi-sage: oklch(0.68 0.01 125);           /* #ADB5AB - 鼠尾草色 */
+  --color-morandi-mint: oklch(0.57 0.01 125);           /* #8A9585 - 薄荷色 */
+  --color-morandi-pistachio: oklch(0.6 0.01 125);       /* #889F8B - 開心果色 */
+  --color-morandi-jade: oklch(0.55 0.02 125);           /* #7C9788 - 玉色 */
+  --color-morandi-emerald: oklch(0.48 0.02 125);        /* #678F74 - 翠綠色 */
+  --color-morandi-viridian: oklch(0.32 0.03 125);       /* #478058 - 翠綠色 */
+  --color-morandi-forest: oklch(0.08 0.01 125);         /* #0F2C18 - 森林色 */
+  --color-morandi-pine: oklch(0.12 0.01 125);           /* #17341E - 松樹色 */
+  --color-morandi-jungle: oklch(0.2 0.02 125);          /* #2B4832 - 叢林色 */
+  --color-morandi-evergreen: oklch(0.25 0.02 125);      /* #37613C - 常綠色 */
+
+  /* ===== 柔和系列 (Soft Tones) ===== */
+  --color-morandi-linen: oklch(0.94 0.008 125);         /* #EEF1EA - 亞麻色 */
+  --color-morandi-chamomile: oklch(0.75 0.03 65);       /* #C0C182 - 洋甘菊色 */
+  --color-morandi-lemon: oklch(0.8 0.03 65);            /* #CECB88 - 檸檬色 */
+  --color-morandi-cream: oklch(0.88 0.02 65);           /* #D9DFC5 - 奶油色 */
+  --color-morandi-vanilla: oklch(0.72 0.03 65);         /* #B5AF5A - 香草色 */
+  --color-morandi-sand: oklch(0.75 0.02 65);            /* #BFBC9D - 沙色 */
+  --color-morandi-champagne: oklch(0.82 0.02 65);       /* #CDDAA5 - 香檳色 */
+  --color-morandi-olive: oklch(0.65 0.03 65);           /* #A09952 - 橄欖色 */
+  --color-morandi-beige: oklch(0.78 0.01 65);           /* #C1BFAC - 米色 */
+  --color-morandi-pale: oklch(0.85 0.02 65);            /* #D6D9B9 - 蒼白色 */
+
+  /* ===== 浪漫系列 (Romantic) ===== */
+  --color-morandi-blush: oklch(0.9 0.015 345);          /* #ECE3E8 - 臉紅色 */
+  --color-morandi-ivory: oklch(0.9 0.02 45);            /* #EEDAC0 - 象牙色 */
+  --color-morandi-peach: oklch(0.92 0.025 35);          /* #EFD3AC - 桃色 */
+  --color-morandi-lilac: oklch(0.88 0.015 285);         /* #D7CDD5 - 丁香色 */
+  --color-morandi-rose: oklch(0.88 0.02 345);           /* #E4C7C3 - 玫瑰色 */
+  --color-morandi-mint: oklch(0.82 0.01 145);           /* #CFD1C4 - 薄荷色 */
+  --color-morandi-pearl: oklch(0.88 0.01 240);          /* #C9D3D5 - 珍珠色 */
+  --color-morandi-lavender: oklch(0.95 0.02 55);        /* #F3F4D5 - 薰衣草色 */
+  --color-morandi-sage: oklch(0.42 0.02 180);           /* #627676 - 鼠尾草色 */
+  --color-morandi-plum: oklch(0.78 0.02 285);           /* #C9B4C7 - 李子色 */
+  --color-morandi-terracotta: oklch(0.75 0.03 15);      /* #CFA79D - 赤陶色 */
+  --color-morandi-cream: oklch(0.88 0.02 65);           /* #DEE1CB - 奶油色 */
+
+  /* ===== 優雅系列 (Elegant) ===== */
+  --color-morandi-tea: oklch(0.62 0.02 145);            /* #93A3A0 - 茶色 */
+  --color-morandi-lilac: oklch(0.66 0.02 285);          /* #A392A2 - 丁香色 */
+  --color-morandi-apricot: oklch(0.78 0.04 25);         /* #DEA592 - 杏色 */
+  --color-morandi-sage: oklch(0.82 0.01 125);           /* #CFD1C4 - 鼠尾草色 */
+  --color-morandi-pearl: oklch(0.85 0.01 240);          /* #C9D3D5 - 珍珠色 */
+  --color-morandi-mint: oklch(0.68 0.02 145);           /* #BBBEB5 - 薄荷色 */
+  --color-morandi-milk: oklch(0.97 0.005 125);          /* #DFF7E6 - 牛奶色 */
+  --color-morandi-moss: oklch(0.68 0.02 145);           /* #A8B2AA - 苔蘚色 */
+
+  /* ===== 最終系列 (Final Collection) ===== */
+  --color-morandi-rose: oklch(0.88 0.015 345);          /* #E8D8D7 - 玫瑰色 */
+  --color-morandi-coral: oklch(0.7 0.03 5);             /* #CBA29E - 珊瑚色 */
+  --color-morandi-pearl: oklch(0.85 0.008 240);         /* #D0DCDD - 珍珠色 */
+  --color-morandi-blush: oklch(0.82 0.02 345);          /* #DAC1C2 - 臉紅色 */
+  --color-morandi-pink: oklch(0.88 0.02 345);           /* #E2CFCB - 粉色 */
+  --color-morandi-mint: oklch(0.9 0.008 145);           /* #E6F1ED - 薄荷色 */
+  --color-morandi-sage: oklch(0.82 0.01 125);           /* #D4E3DD - 鼠尾草色 */
+  --color-morandi-rose: oklch(0.92 0.015 345);          /* #EFD5DC - 玫瑰色 */
+  --color-morandi-salmon: oklch(0.95 0.02 5);           /* #F2D5CF - 鮭魚色 */
+  --color-morandi-tea: oklch(0.78 0.01 145);            /* #CADBD4 - 茶色 */
 }
 
 :root {
-  --ui-primary: var(--color-morandi-blue-600);
-  --ui-radius: 0.75rem;
+  /* 動態 Primary 顏色 - 會被 JavaScript 動態覆蓋 */
+  --ui-primary: var(--color-blue-500); /* 預設 blue-500 */
+  --ui-primary-50: var(--color-blue-50);
+  --ui-primary-100: var(--color-blue-100);
+  --ui-primary-200: var(--color-blue-200);
+  --ui-primary-300: var(--color-blue-300);
+  --ui-primary-400: var(--color-blue-400);
+  --ui-primary-500: var(--color-blue-500);
+  --ui-primary-600: var(--color-blue-600);
+  --ui-primary-700: var(--color-blue-700);
+  --ui-primary-800: var(--color-blue-800);
+  --ui-primary-900: var(--color-blue-900);
+  --ui-primary-950: var(--color-blue-950);
 
-  /* 背景色調整為溫和的莫蘭迪色 */
-  --ui-bg: #fbfcfd;
-  --ui-bg-muted: var(--color-morandi-blue-50);
-  --ui-text: var(--color-morandi-blue-800);
-  --ui-text-muted: var(--color-morandi-blue-600);
-  --ui-border: var(--color-morandi-blue-200);
+  /* 動態 Neutral 顏色 - 淺色模式 */
+  --ui-neutral: var(--color-stone-500); /* 預設 stone-500 */
+  --ui-neutral-50: var(--color-stone-50);
+  --ui-neutral-100: var(--color-stone-100);
+  --ui-neutral-200: var(--color-stone-200);
+  --ui-neutral-300: var(--color-stone-300);
+  --ui-neutral-400: var(--color-stone-400);
+  --ui-neutral-500: var(--color-stone-500);
+  --ui-neutral-600: var(--color-stone-600);
+  --ui-neutral-700: var(--color-stone-700);
+  --ui-neutral-800: var(--color-stone-800);
+  --ui-neutral-900: var(--color-stone-900);
+  --ui-neutral-950: var(--color-stone-950);
 
   /* from inspira ui */
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.141 0.005 285.823);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.141 0.005 285.823);
-  --primary: oklch(0.21 0.006 285.885);
+  --primary: oklch(70.7% .165 254.624);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.967 0.001 286.375);
   --secondary-foreground: oklch(0.21 0.006 285.885);
@@ -71,12 +515,19 @@
 }
 
 .dark {
-  --ui-primary: var(--color-morandi-blue-400);
-  --ui-bg: var(--color-morandi-blue-950);
-  --ui-bg-muted: var(--color-morandi-blue-900);
-  --ui-text: var(--color-morandi-blue-100);
-  --ui-text-muted: var(--color-morandi-blue-300);
-  --ui-border: var(--color-morandi-blue-800);
+  /* Dark mode 的 Neutral 顏色 */
+  --ui-neutral: var(--color-stone-400); /* stone-400 在暗色模式下 */
+  --ui-neutral-50: var(--color-stone-950);
+  --ui-neutral-100: var(--color-stone-900);
+  --ui-neutral-200: var(--color-stone-800);
+  --ui-neutral-300: var(--color-stone-700);
+  --ui-neutral-400: var(--color-stone-600);
+  --ui-neutral-500: var(--color-stone-500);
+  --ui-neutral-600: var(--color-stone-400);
+  --ui-neutral-700: var(--color-stone-300);
+  --ui-neutral-800: var(--color-stone-200);
+  --ui-neutral-900: var(--color-stone-100);
+  --ui-neutral-950: var(--color-stone-50);
 
   /* from inspira ui */
   --background: oklch(0.141 0.005 285.823);

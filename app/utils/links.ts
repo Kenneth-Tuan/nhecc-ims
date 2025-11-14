@@ -2,6 +2,34 @@ import type { NavigationMenuItem } from "@nuxt/ui";
 
 export const navLinks: NavigationMenuItem[] = [
   {
+    label: "首頁",
+    icon: "i-lucide-home",
+    to: "/",
+  },
+  {
+    label: "關於教會",
+    icon: "i-lucide-info",
+    children: [
+      {
+        label: "聚會時間",
+        icon: "i-lucide-house",
+        to: "",
+      },
+      {
+        label: "教會事工",
+        icon: "i-lucide-briefcase",
+        to: "",
+        children: [
+          {
+            label: "事工介紹",
+            icon: "i-lucide-briefcase",
+            to: "",
+          },
+        ],
+      },
+    ],
+  },
+  {
     label: "Guide",
     icon: "i-lucide-book-open",
     children: [

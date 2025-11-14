@@ -18,111 +18,112 @@ export const TEXTS = {
   // 主標題區塊
   hero: {
     title: "NHECC",
-    subtitle: "基督教內湖行道會 整合管理系統",
+    subtitle: "NHECC Integrated Management System",
     description:
-      "建立祝福、門徒、福音、宣教的文化，成為門徒、宣教的教會。整合教會各項事工管理，提升服事效率與品質。",
+      "Create a culture of blessing, discipleship, evangelism, and mission. Become a church of disciples and missionaries. Integrate church management to improve service efficiency and quality.",
     ctaPrimary: "開始使用",
     ctaSecondary: "了解更多",
   },
 
   // 功能模組
   features: {
-    title: "教會事工管理系統",
-    subtitle: "整合多種教會管理功能，提供一站式解決方案",
+    title: "Church Ministry Management System",
+    subtitle:
+      "Integrate multiple church management functions, providing a one-stop solution",
     items: {
       children: {
-        title: "卓越兒童發展園地",
+        title: "Children Development Garden",
         description:
-          "培養歡樂、自律、仁愛與找尋真理的孩子，在主動學習過程中發揮潛能與卓越的光芒",
+          "Raise children who are joyful, disciplined, loving, and seeking truth. Develop their potential and shine with excellence in the active learning process.",
       },
       worship: {
-        title: "敬拜服事管理",
+        title: "Worship Service Management",
         description:
-          "詩歌、歌譜管理以及敬拜服事事件的建立和完整管理系統，支援主日崇拜與特殊聚會",
+          "Song, hymn, and worship service management, including event creation and complete management system, supporting Sunday worship and special gatherings",
       },
       youth: {
-        title: "青年事工管理",
+        title: "Youth Ministry Management",
         description:
-          "青橄欖 YOF 與社青 YAM 的活動規劃、成員管理、門訓課程安排與追蹤系統",
+          "Planning, member management, training course arrangement and tracking system for YOF and YAM",
       },
       venue: {
-        title: "場地租借系統",
+        title: "Venue Rental System",
         description:
-          "文德堂與碧湖堂的場地預約、租借管理、時程安排與設備使用追蹤系統",
+          "Wende and Bihu halls' venue reservation, rental management, scheduling, and equipment usage tracking system",
       },
       ministry: {
-        title: "門徒牧養系統",
+        title: "Discipleship Ministry System",
         description:
-          "每日嗎哪靈修、門訓課程管理、牧養關懷記錄與屬靈成長追蹤系統",
+          "Daily manna meditation, discipleship course management, pastoral care records, and spiritual growth tracking system",
       },
       media: {
-        title: "媒體管理平台",
+        title: "Media Management Platform",
         description:
-          "主日信息、烈火禱告會影音內容管理，支援線上觀看與內容分享功能",
+          "Sunday message, fire prayer meeting video content management, supporting online viewing and content sharing features",
       },
       warehouse: {
-        title: "倉儲管理系統",
+        title: "Warehouse Management System",
         description:
-          "物件資訊紀錄與管理，包含資產總覽、庫存追蹤、設備維護記錄等完整倉儲管理功能",
+          "Object information recording and management, including asset overview, inventory tracking, equipment maintenance records, and complete warehouse management features",
       },
     },
   },
 
   // 統計數據
   stats: {
-    modules: "功能模組",
-    integration: "整合度",
-    availability: "全天候服務",
-    growth: "成長潛力",
+    modules: "Modules", 
+    integration: "Integration",
+    availability: "24/7 Service",
+    growth: "Growth Potential",
   },
 
   // 行動呼籲區塊
   cta: {
-    title: "立即開始使用 NHECC 整合管理系統",
-    description: "加入我們，體驗高效的教會事工管理，讓服事更有果效",
-    start: "立即開始",
-    contact: "聯絡我們",
+    title: "Start Using NHECC Integrated Management System",
+    description: "Join us, experience efficient church ministry management, and make your service more effective",
+    start: "Start Now",
+    contact: "Contact Us",
   },
 
   // 頁尾資訊
   footer: {
     description:
-      "基督教內湖行道會整合管理系統，致力於建立祝福、門徒、福音、宣教的文化",
-    quickLinks: "快速連結",
-    contact: "聯絡資訊",
+      "NHECC Integrated Management System,致力于建立祝福、门徒、福音、宣教的文化",
+    quickLinks: "Quick Links",
+    contact: "Contact Information",
     locations: {
-      wende: "文德堂",
-      bihu: "碧湖堂",
+      wende: "Wende Hall",
+      bihu: "Bihu Hall",
     },
-    copyright: "© 2024 基督教內湖行道會. 保留所有權利。",
+    copyright: "© 2024 NHECC. All rights reserved.",
   },
 
   // 關於頁面
   about: {
-    title: "關於基督教內湖行道會",
-    subtitle: "建立祝福、門徒、福音、宣教的文化",
+    title: "About NHECC",
+    subtitle: "Create a culture of blessing, discipleship, evangelism, and mission",
     vision: {
-      title: "教會異象",
-      content: "成為門徒、宣教的教會，建立祝福、門徒、福音、宣教的文化",
+      title: "Church Vision",
+      content: "Become a church of disciples and missionaries, create a culture of blessing, discipleship, evangelism, and mission",
     },
     mission: {
-      title: "教會使命",
+      title: "Church Mission",
       content:
-        "透過整合管理系統，提升教會各項事工的效率與品質，讓每個弟兄姊妹都能在主裡發揮恩賜",
+        "Through integrated management system, improve the efficiency and quality of church ministries, so that every brother and sister can发挥恩赐 in the Lord",
     },
     values: {
-      title: "核心價值",
-      blessing: "祝福 - 成為他人的祝福",
-      discipleship: "門徒 - 培育門徒生命",
-      evangelism: "福音 - 廣傳福音信息",
-      mission: "宣教 - 參與大使命",
+      title: "Core Values",
+      blessing: "Blessing - Become a blessing to others",
+      discipleship: "Discipleship - Develop discipleship",
+      evangelism: "Evangelism - Spread the gospel information",
+      mission: "Mission - Participate in the great commission",
     },
   },
 
   // 聯絡資訊
   contact: {
-    title: "聯絡我們",
-    subtitle: "歡迎與我們聯繫，一同參與神國事工",
+    title: "Contact Us",
+    subtitle: "Welcome to contact us, join us in the work of the神國事工",
     info: {
       email: "neihuecc@gmail.com",
       wendePhone: "(02)2657-9428",

@@ -10,7 +10,7 @@ useHead({
     { key: 'theme-color', name: 'theme-color', content: color }
   ],
   link: [
-    { rel: 'icon', href: '/favicon.ico' }
+    { rel: 'icon', href: '/NHECC_ICON-01.png' }
   ],
   htmlAttrs: {
     lang: 'en'
@@ -18,9 +18,9 @@ useHead({
 })
 
 useSeoMeta({
-  titleTemplate: '%s - Nuxt Portfolio Template',
-  ogImage: 'https://ui.nuxt.com/assets/templates/nuxt/portfolio-light.png',
-  twitterImage: 'https://ui.nuxt.com/assets/templates/nuxt/portfolio-light.png',
+  titleTemplate: 'NHECC',
+  ogImage: '/NHECC_ICON-01.png',
+  twitterImage: '/NHECC_ICON-01.png',
   twitterCard: 'summary_large_image'
 })
 
