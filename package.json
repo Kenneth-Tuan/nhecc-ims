@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@nuxt/image": "^2.0.0",
-    "@nuxt/ui": "^4.1.0",
+    "@nuxt/ui": "^4.2.1",
     "@tailwindcss/vite": "^4.1.17",
     "@vueuse/core": "^14.0.0",
     "dayjs": "^1.11.19",

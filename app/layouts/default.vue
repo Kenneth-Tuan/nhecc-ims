@@ -4,13 +4,13 @@
   <AppHeader :links="navLinks" />
 
   <UPage>
-    <template #left>
-      <NavigationMenu />
-    </template>
-
     <UPageBody>
       <UMain>
-        <slot />
+        <UDashboardGroup>
+          <UDashboardSidebar />
+
+          <slot />
+        </UDashboardGroup>
       </UMain>
     </UPageBody>
 

@@ -1,3 +1,11 @@
+<script setup lang="ts">
+import { TEXTS } from "~/constants/texts";
+
+definePageMeta({
+  layout: "dashboard",
+});
+</script>
+
 <template>
   <div
     class="min-h-screen bg-gradient-to-br from-morandi-blue-50 to-church-primary-50 dark:from-morandi-blue-950 dark:to-morandi-blue-900"
@@ -316,7 +324,3 @@
     </section>
   </div>
 </template>
-
-<script setup lang="ts">
-import { TEXTS } from "~/constants/texts";
-</script>
