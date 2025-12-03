@@ -1,57 +1,37 @@
 <script setup lang="ts">
-const colorMode = useColorMode()
+const colorMode = useColorMode();
 
-const color = computed(() => colorMode.value === 'dark' ? '#020618' : 'white')
+const color = computed(() =>
+  colorMode.value === "dark" ? "#020618" : "white"
+);
 
 useHead({
   meta: [
-    { charset: 'utf-8' },
-    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-    { key: 'theme-color', name: 'theme-color', content: color }
+    { charset: "utf-8" },
+    { name: "viewport", content: "width=device-width, initial-scale=1" },
+    { key: "theme-color", name: "theme-color", content: color },
   ],
-  link: [
-    { rel: 'icon', href: '/NHECC_ICON-01.png' }
-  ],
+  link: [{ rel: "icon", href: "/NHECC_ICON-01.png" }],
   htmlAttrs: {
-    lang: 'en'
-  }
-})
+    lang: "en",
+  },
+});
 
 useSeoMeta({
-  titleTemplate: 'NHECC',
-  ogImage: '/NHECC_ICON-01.png',
-  twitterImage: '/NHECC_ICON-01.png',
-  twitterCard: 'summary_large_image'
-})
-
-const [{ data: navigation }, { data: files }] = await Promise.all([
-  useAsyncData('navigation', () => {
-    return Promise.all([
-      queryCollectionNavigation('blog')
-    ])
-  }, {
-    transform: data => data.flat()
-  }),
-  useLazyAsyncData('search', () => {
-    return Promise.all([
-      queryCollectionSearchSections('blog')
-    ])
-  }, {
-    server: false,
-    transform: data => data.flat()
-  })
-])
+  titleTemplate: "NHECC",
+  ogImage: "/NHECC_ICON-01.png",
+  twitterImage: "/NHECC_ICON-01.png",
+  twitterCard: "summary_large_image",
+});
 </script>
 
 <template>
   <UApp>
     <NuxtLayout>
-      <UMain class="relative">
-        <NuxtPage />
-      </UMain>
+      <NuxtPage />
     </NuxtLayout>
 
-    <ClientOnly>
+    <!-- <ClientOnly>
       <LazyUContentSearch
         :files="files"
         :navigation="navigation"
@@ -59,6 +39,6 @@ const [{ data: navigation }, { data: files }] = await Promise.all([
         :links="navLinks"
         :fuse="{ resultLimit: 42 }"
       />
-    </ClientOnly>
+    </ClientOnly> -->
   </UApp>
 </template>

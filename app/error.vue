@@ -1,58 +1,36 @@
 <script setup lang="ts">
-import type { NuxtError } from '#app'
+import type { NuxtError } from "#app";
+
+definePageMeta({
+  layout: "default",
+});
 
 defineProps({
   error: {
     type: Object as PropType<NuxtError>,
-    required: true
-  }
-})
+    required: true,
+  },
+});
 
 useHead({
   htmlAttrs: {
-    lang: 'en'
-  }
-})
+    lang: "en",
+  },
+});
 
 useSeoMeta({
-  title: 'Page not found',
-  description: 'We are sorry but this page could not be found.'
-})
-
-const [{ data: navigation }, { data: files }] = await Promise.all([
-  useAsyncData('navigation', () => {
-    return Promise.all([
-      queryCollectionNavigation('blog')
-    ])
-  }, {
-    transform: data => data.flat()
-  }),
-  useLazyAsyncData('search', () => {
-    return Promise.all([
-      queryCollectionSearchSections('blog')
-    ])
-  }, {
-    server: false,
-    transform: data => data.flat()
-  })
-])
+  title: "Page not found",
+  description: "We are sorry but this page could not be found.",
+});
 </script>
 
 <template>
-  <div>
-    <AppHeader :links="navLinks" />
+  <UApp>
+    <NuxtLayout>
+      <UError :error="error" />
+    </NuxtLayout>
 
-    <UMain>
-      <UContainer>
-        <UPage>
-          <UError :error="error" />
-        </UPage>
-      </UContainer>
-    </UMain>
-
-    <AppFooter />
-
-    <ClientOnly>
+    <!-- <ClientOnly>
       <LazyUContentSearch
         :files="files"
         shortcut="meta_k"
@@ -60,8 +38,8 @@ const [{ data: navigation }, { data: files }] = await Promise.all([
         :links="navLinks"
         :fuse="{ resultLimit: 42 }"
       />
-    </ClientOnly>
+    </ClientOnly> -->
 
     <UToaster />
-  </div>
+  </UApp>
 </template>

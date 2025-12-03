@@ -1,4 +1,4 @@
-# NHECC 管理平台架構
+# NHECC 整合系統架構
 
 > 經討論，以下功能暫時都放在相同網域之下；未來如有需要，再用不同子網域進行區分。
 
@@ -20,6 +20,8 @@
 4. **系統操作軌跡 (Audit Logs)**
    - 記錄使用者操作行為（新增/修改/刪除）
    - 敏感資料存取紀錄
+
+<div style="page-break-after: always;"></div>
 
 ## 裝備/牧養系統 (Tranning & shepherding system)
 
@@ -66,6 +68,8 @@
      - 小組服事安排表
      - 收支紀錄
 
+<div style="page-break-after: always;"></div>
+
 ## 資源管理系統 (Resource Management System)
 
 ### 概述
@@ -96,6 +100,7 @@
 ### 詳細功能
 
 1. **場地管理**
+
    - 場地事件行事曆（租借/維護）
    - 場地租借申請條件設定
      - 申請人角色設定
@@ -107,6 +112,8 @@
    - 場地租借之一次性使用 QRCode
    - 復原場地之檢核功能
    - 報表匯出（使用頻率…）
+   <div style="page-break-after: always;"></div>
+
 2. **倉儲管理**
    - 設備管理（莊園/文德/碧湖）
      - 設備狀態儀表板
@@ -127,6 +134,8 @@
    - 收成紀錄與統計
 
 > REMARK：由於 NHECC 和 彩虹全人關懷協會 兩個官方網站屬於不同性質的機構，後續可能會有不同的管理人員以及網站 SEO 的緣故，決定將 彩虹全人關懷協會的官網前後網域獨立出來，但功能和介面可以共用。
+
+<div style="page-break-after: always;"></div>
 
 ## 服事管理系統 (Service System)
 
@@ -170,6 +179,8 @@
    - 專案進度儀表板/行事曆
    - 報表匯出
 
+<div style="page-break-after: always;"></div>
+
 ## 人資系統 (HR System)
 
 ### 概述
@@ -201,7 +212,6 @@
 2. **考勤管理**
 
    - GPS/Wifi 打卡功能 (Mobile App/Web)
-     - 支援外勤打卡與定位檢核
    - 補打卡申請與審核流程
    - 排班與輪班管理
    - 異常出勤通知與報表
@@ -217,8 +227,10 @@
 4. **薪資結算**
    - 薪資結構設定 (本薪、津貼、獎金、勞健保扣除額)
    - 考勤資料自動串接計薪
-   - 薪資單自動生成與發送 (PDF/Email 需加密)
+   - 薪資單自動生成與發送 (加密 PDF/Email)
    - 薪資報表匯出 (供財務對帳)
+
+<div style="page-break-after: always;"></div>
 
 ## 彩虹全人關懷協會官網
 
@@ -252,6 +264,8 @@
 > REMARK：參考 NHECC 官網；  
 > NHECC 和 彩虹全人關懷協會 兩個官方網站由於屬於不同性質的機構，後續可能會有不同的管理人員以及網站 SEO 的緣故，決定將 彩虹全人關懷協會的官網前後網域獨立出來，但功能和介面可以共用。
 
+<div style="page-break-after: always;"></div>
+
 ## 額外功能
 
 ### 概述
@@ -269,4 +283,3 @@
 - **Line Message API 與系統功能整合**
 - **個人化 Calendar**
 - **系統通知功能（Line 訊息、Email、SMS）**
-

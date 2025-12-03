@@ -14,6 +14,7 @@
     "@nuxt/ui": "^4.1.0",
     "@tailwindcss/vite": "^4.1.17",
     "@vueuse/core": "^14.0.0",
+    "dayjs": "^1.11.19",
     "motion-v": "^1.7.4",
     "nuxt": "^4.2.0",
     "tailwindcss": "^4.1.17",

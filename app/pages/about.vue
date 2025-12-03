@@ -1,3 +1,13 @@
+<script setup>
+import { TEXTS } from "~/constants/texts";
+
+// SEO Meta
+useHead({
+  title: TEXTS.about.title + " - NHECC IMS",
+  meta: [{ name: "description", content: TEXTS.about.subtitle }],
+});
+</script>
+
 <template>
   <div class="min-h-screen bg-morandi-blue-50 dark:bg-morandi-blue-950">
     <!-- Page Header -->
@@ -204,12 +214,4 @@
   </div>
 </template>
 
-<script setup>
-import { TEXTS } from "~/constants/texts";
 
-// SEO Meta
-useHead({
-  title: TEXTS.about.title + " - NHECC IMS",
-  meta: [{ name: "description", content: TEXTS.about.subtitle }],
-});
-</script>

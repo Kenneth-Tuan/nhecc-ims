@@ -1,56 +1,44 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from "@nuxt/ui";
+const { isCollapsed, toggle } = useSidebar();
 
-defineProps<{
-  links: NavigationMenuItem[];
-}>();
+const menuActionIcon = computed(() => {
+  return isCollapsed.value
+    ? "material-symbols:arrow-menu-open"
+    : "material-symbols:menu-open";
+});
 
-const active = ref("0");
+const loginActionIcon = computed(() => {
+  return true ? "material-symbols:login" : "material-symbols:logout";
+});
 
-defineShortcuts({
-  1: () => {
-    active.value = "0";
-  },
-  2: () => {
-    active.value = "1";
-  },
-  3: () => {
-    active.value = "2";
-  },
+const loginActionLabel = computed(() => {
+  return true ? "登入" : "登出";
 });
 </script>
 
 <template>
-  <div
-    class="fixed top-2 sm:top-4 mx-auto left-1/2 transform -translate-x-1/2 z-10"
-  >
-    <UNavigationMenu
-      v-model="active"
-      :items="links"
-      variant="link"
-      color="neutral"
-      highlight
-      highlight-color="neutral"
-      content-orientation="vertical"
-      :class="[
-        'bg-muted/80 backdrop-blur-sm shadow-xl shadow-neutral-950/5',
-        'w-max rounded-full px-2 sm:px-4',
-        'data-[orientation=horizontal]:border-b border-default'
-      ]"
-      :ui="{
-        link: 'p-2',
-        linkLeadingIcon: '',
-      }"
-    >
-      <template #list-leading>
-        <NuxtLink to="/">
-          <img src="/NHECC_ICON-01.png" alt="NHECC" class="w-10 h-10" />
-        </NuxtLink>
-      </template>
+  <UHeader :ui="{}">
+    <template #left>
+      <!-- <UButton
+        :icon="menuActionIcon"
+        size="md"
+        color="primary"
+        variant="link"
+        @click="toggle"
+      /> -->
 
-      <template #list-trailing>
-        <ColorModeButton />
-      </template>
-    </UNavigationMenu>
-  </div>
+      <NuxtLink to="/" class="flex items-center gap-2 w-fit text-nowrap">
+        <img src="/NHECC_ICON-01.png" alt="NHECC" class="w-10 h-10" />
+        <h1 class="text-2xl font-bold">NHECC Integrated Management System</h1>
+      </NuxtLink>
+    </template>
+
+    <template #right>
+      <ColorModeButton />
+
+      <UTooltip :text="loginActionLabel" :kbds="['meta', 'G']">
+        <UButton :icon="loginActionIcon" color="neutral" variant="ghost" />
+      </UTooltip>
+    </template>
+  </UHeader>
 </template>
