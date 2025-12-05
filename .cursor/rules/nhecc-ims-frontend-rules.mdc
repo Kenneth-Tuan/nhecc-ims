@@ -2,15 +2,51 @@
 alwaysApply: true
 ---
 
-## 頁面設計基本
+## 核心設計原則 (Design Principles)
 
-1. 使用 Nuxt ui
-2. 響應式網頁設計（RWD）
-3. Mobile First Design
+本系統目標使用者涵蓋 15-75 歲，需落實 **包容性設計 (Inclusive Design)**。
+核心原則：**極簡 (Minimalist)**、**大字體 (Large Fonts)**、**防呆 (Foolproof)**。
+目標是讓 75 歲的長輩也能順利操作，同時滿足年輕族群的效率需求。
+
+## UI/UX 與組件規範 (UI/UX Guidelines)
+
+### 1. 導覽與佈局 (Navigation & Hierarchy)
+- **Responsive Navigation Strategy**:
+    - **Mobile (< 768px)**: 採用底部 **Tab Bar (標籤列)**。
+        - **數量限制**: 最多 **4-5 個** 項目。若功能過多，最後一個位置設為「更多」，展開次要選單。
+        - **禁止漢堡選單**: 避免將主要導覽藏在頂部的漢堡選單，長輩難以觸及且易忽略。
+    - **Desktop/Tablet (≥ 768px)**: 採用側邊欄 **Sidebar** (如現有的 `DashboardSidebar`)。
+- **Flat Hierarchy**: 保持層級扁平，避免超過 **3 層** 的深層選單，防止長輩迷失。
+- **Explicit Labels**: 圖示 (Icon) 對長輩可能不直觀，重要功能**務必搭配文字** (例如：🏠 圖示旁要寫「首頁」)。
+- **Layout**: 優先開發手機版面 (`<div class="md:hidden">`)，確保 90% 手機操作場景流暢。
+
+### 2. 字體與閱讀體驗 (Typography)
+- **Base Font Size**: 預設字體 **18px** 起跳 (一般為 16px)，採 +2px 策略。
+- **Contrast**: 色彩對比需符合 **WCAG AA** 標準。
+
+### 3. 組件互動 (Components & Interaction)
+- **Touch Targets**: 按鈕與可點擊區域至少 **48x48 px** (避免長輩手抖按不到)。Nuxt UI 組件建議使用 `size="xl"` 或自定義加大。
+- **Login Flow**: 優先採用 **手機號碼 + OTP** 或 **Line 第三方登入**。避免使用傳統「帳號/密碼/確認密碼」註冊表單。
+- **Feedback**: 操作反饋要明顯且即時。
+
+### 4. 容錯性設計 (Error Prevention & Recovery)
+- **Confirmation**: 任何刪除或重大變更，**必須**有明顯的確認彈窗 (Modal/Dialog)，避免誤觸。
+- **Undo Actions**: 盡可能提供「復原 (Undo)」機制，降低操作焦慮。
+
+### 5. 無障礙開發 (Accessibility / A11y)
+- **Aria-labels**: 對於無文字的 Icon 按鈕 (如箭頭、關閉)，**必須**加上 `aria-label` (例如 `aria-label="回到上一頁"`)，支援螢幕報讀軟體。
+
+---
+
+## 頁面設計基本 (Technical Basics)
+
+1. 使用 Nuxt UI
+2. 響應式網頁設計 (RWD)
+3. Mobile First Design (由小寫到大)
 
 ## Mobile First 的 CSS 斷點策略 (Breakpoints)
 
-Mobile First 的精隨在於「**由小寫到大**」，使用 `min-width` 而非 `max-width`。以下是目前主流框架（如 Tailwind CSS, Bootstrap 5）的斷點邏輯供您參考：
+Mobile First 的精隨在於「**由小寫到大**」，使用 `min-width` 而非 `max-width`。
 
 | 斷點名稱           | 螢幕寬度    | 適用裝置          | 開發邏輯                                    |
 | :----------------- | :---------- | :---------------- | :------------------------------------------ |
@@ -21,8 +57,8 @@ Mobile First 的精隨在於「**由小寫到大**」，使用 `min-width` 而�
 
 > **注意**：Tailwind 預設 `sm: 640px`，這意味著 **640px 以下都被視為手機**。有些開發者會自定義一個更小的斷點（如 `xs: 480px`）來針對超大手機做微調，但通常非必要。
 
-## 實務建議
+## 實務建議 (Best Practices)
 
-1.  **不要只看寬度，要看「安全區域」**：現代手機（如 iPhone）有「瀏海」和「動態島」，且底部有 Home Indicator（那條橫線）。設計時要預留 `padding-bottom` (約 20-34px) 避免內容被擋住。
-2.  **使用相對單位**：盡量使用 `%`, `rem`, `vw` 來設定寬度與間距，避免寫死 `width: 375px`，這樣才能在 320px 到 430px 之間都能完美伸縮。
-3.  **Chrome DevTools 測試**：開發時，請務必使用 Chrome 的 "Device Mode"，並將寬度手動拉到 **320px** 檢查極限狀況。如果 320px 沒問題，其他尺寸通常都沒問題。
+1.  **安全區域 (Safe Area)**：考慮現代手機的瀏海與 Home Indicator，設計時預留 `padding-bottom` (約 20-34px) 避免內容被擋住。
+2.  **相對單位 (Relative Units)**：盡量使用 `%`, `rem`, `vw` 來設定寬度與間距，避免寫死 `width: 375px`，確保在 320px 到 430px 間伸縮自如。
+3.  **極限測試**：開發時務必使用 Chrome "Device Mode"，將寬度拉到 **320px** 檢查。如果 320px 沒問題，其他尺寸通常都沒問題。

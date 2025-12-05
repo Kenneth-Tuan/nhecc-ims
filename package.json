@@ -2,6 +2,7 @@
   "name": "nhecc-ims",
   "type": "module",
   "private": true,
+  "version": "0.1.0",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -10,6 +11,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@line/liff": "^2.27.3",
     "@nuxt/image": "^2.0.0",
     "@nuxt/ui": "^4.2.1",
     "@tailwindcss/vite": "^4.1.17",
@@ -20,7 +22,8 @@
     "tailwindcss": "^4.1.17",
     "typescript": "^5.9.3",
     "vue": "^3.5.22",
-    "vue-router": "^4.6.3"
+    "vue-router": "^4.6.3",
+    "zod": "^4.1.13"
   },
   "devDependencies": {
     "class-variance-authority": "^0.7.1",

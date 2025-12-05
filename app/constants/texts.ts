@@ -17,72 +17,72 @@ export const TEXTS = {
 
   // 主標題區塊
   hero: {
-    title: "NHECC",
-    subtitle: "NHECC Integrated Management System",
+    title: "內湖行道會",
+    subtitle: "整合管理系統",
     description:
-      "Create a culture of blessing, discipleship, evangelism, and mission. Become a church of disciples and missionaries. Integrate church management to improve service efficiency and quality.",
-    ctaPrimary: "開始使用",
+      "建立祝福、門徒、福音、宣教的文化。成為門徒與宣教士的教會。整合教會管理，提升事工效率與品質。",
+    ctaPrimary: "立即開始",
     ctaSecondary: "了解更多",
   },
 
   // 功能模組
   features: {
-    title: "Church Ministry Management System",
+    title: "教會事工管理系統",
     subtitle:
-      "Integrate multiple church management functions, providing a one-stop solution",
+      "整合多項教會管理功能，提供一站式解決方案",
     items: {
       children: {
-        title: "Children Development Garden",
+        title: "卓越兒童發展園地",
         description:
-          "Raise children who are joyful, disciplined, loving, and seeking truth. Develop their potential and shine with excellence in the active learning process.",
+          "養育喜樂、紀律、愛人、求真理的兒童。在主動學習過程中，發展潛能，活出卓越。",
       },
       worship: {
-        title: "Worship Service Management",
+        title: "敬拜服事管理",
         description:
-          "Song, hymn, and worship service management, including event creation and complete management system, supporting Sunday worship and special gatherings",
+          "詩歌、聖詩與敬拜服事管理，包含活動建立與完整管理系統，支援主日崇拜與特別聚會",
       },
       youth: {
-        title: "Youth Ministry Management",
+        title: "青年事工管理",
         description:
-          "Planning, member management, training course arrangement and tracking system for YOF and YAM",
+          "YOF 與 YAM 的活動規劃、成員管理、培訓課程安排與追蹤系統",
       },
       venue: {
-        title: "Venue Rental System",
+        title: "場地租借系統",
         description:
-          "Wende and Bihu halls' venue reservation, rental management, scheduling, and equipment usage tracking system",
+          "文德與碧湖會堂的場地預約、租借管理、排程安排與設備使用追蹤系統",
       },
       ministry: {
-        title: "Discipleship Ministry System",
+        title: "門徒牧養系統",
         description:
-          "Daily manna meditation, discipleship course management, pastoral care records, and spiritual growth tracking system",
+          "每日嗎哪靈修、門徒課程管理、牧養關懷紀錄與靈命成長追蹤系統",
       },
       media: {
-        title: "Media Management Platform",
+        title: "媒體管理平台",
         description:
-          "Sunday message, fire prayer meeting video content management, supporting online viewing and content sharing features",
+          "主日信息、烈火禱告會影片內容管理，支援線上觀看與內容分享功能",
       },
       warehouse: {
-        title: "Warehouse Management System",
+        title: "倉儲管理系統",
         description:
-          "Object information recording and management, including asset overview, inventory tracking, equipment maintenance records, and complete warehouse management features",
+          "物品資料登錄與管理，包含資產總覽、庫存追蹤、設備維護紀錄與完整倉儲管理功能",
       },
     },
   },
 
   // 統計數據
   stats: {
-    modules: "Modules", 
-    integration: "Integration",
-    availability: "24/7 Service",
-    growth: "Growth Potential",
+    modules: "核心模組",
+    integration: "系統整合",
+    availability: "全天候服務",
+    growth: "成長潛力",
   },
 
   // 行動呼籲區塊
   cta: {
-    title: "Start Using NHECC Integrated Management System",
-    description: "Join us, experience efficient church ministry management, and make your service more effective",
-    start: "Start Now",
-    contact: "Contact Us",
+    title: "開始使用整合管理系統",
+    description: "加入我們，體驗高效的教會事工管理，讓服事更加得力",
+    start: "立即開始",
+    contact: "聯絡我們",
   },
 
   // 頁尾資訊
