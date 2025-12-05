@@ -1,0 +1,125 @@
+import type { NavigationMenuItem } from "@nuxt/ui";
+
+export const navLinks: NavigationMenuItem[] = [
+  {
+    label: "首頁",
+    icon: "i-lucide-home",
+    to: "/",
+  },
+  {
+    label: "關於教會",
+    icon: "i-lucide-info",
+    children: [
+      {
+        label: "聚會時間",
+        icon: "i-lucide-house",
+        to: "",
+      },
+      {
+        label: "教會事工",
+        icon: "i-lucide-briefcase",
+        to: "",
+        children: [
+          {
+            label: "事工介紹",
+            icon: "i-lucide-briefcase",
+            to: "",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Guide",
+    icon: "i-lucide-book-open",
+    children: [
+      {
+        label: "Introduction",
+        description: "Fully styled and customizable components for Nuxt.",
+        icon: "i-lucide-house",
+      },
+      {
+        label: "Installation",
+        description:
+          "Learn how to install and configure Nuxt UI in your application.",
+        icon: "i-lucide-cloud-download",
+      },
+      {
+        label: "Icons",
+        icon: "i-lucide-smile",
+        description:
+          "You have nothing to do, @nuxt/icon will handle it automatically.",
+      },
+      {
+        label: "Colors",
+        icon: "i-lucide-swatch-book",
+        description:
+          "Choose a primary and a neutral color from your Tailwind CSS theme.",
+      },
+      {
+        label: "Theme",
+        icon: "i-lucide-cog",
+        description:
+          "You can customize components by using the `class` / `ui` props or in your app.config.ts.",
+      },
+    ],
+  },
+  {
+    label: "Composables",
+    icon: "i-lucide-database",
+    children: [
+      {
+        label: "defineShortcuts",
+        icon: "i-lucide-file-text",
+        description: "Define shortcuts for your application.",
+      },
+      {
+        label: "useOverlay",
+        icon: "i-lucide-file-text",
+        description: "Display a modal/slideover within your application.",
+      },
+      {
+        label: "useToast",
+        icon: "i-lucide-file-text",
+        description: "Display a toast within your application.",
+      },
+    ],
+  },
+  {
+    label: "Components",
+    icon: "i-lucide-box",
+    children: [
+      {
+        label: "Link",
+        icon: "i-lucide-file-text",
+        description: "Use NuxtLink with superpowers.",
+      },
+      {
+        label: "Modal",
+        icon: "i-lucide-file-text",
+        description: "Display a modal within your application.",
+      },
+      {
+        label: "NavigationMenu",
+        icon: "i-lucide-file-text",
+        description: "Display a list of links.",
+      },
+      {
+        label: "Pagination",
+        icon: "i-lucide-file-text",
+        description: "Display a list of pages.",
+      },
+      {
+        label: "Popover",
+        icon: "i-lucide-file-text",
+        description:
+          "Display a non-modal dialog that floats around a trigger element.",
+      },
+      {
+        label: "Progress",
+        icon: "i-lucide-file-text",
+        description: "Show a horizontal bar to indicate task progression.",
+      },
+    ],
+  },
+];
