@@ -26,15 +26,14 @@ useSeoMeta({
 </script>
 
 <template>
-  <ClientOnly>
-    <UApp>
-      <NuxtLayout>
-        <!-- <UButton @click="getUserProfile()">Get User Profile</UButton> -->
+  <UApp>
+    <NuxtLayout>
+      <!-- <UButton @click="getUserProfile()">Get User Profile</UButton> -->
 
-        <NuxtPage />
-      </NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
 
-      <!-- <ClientOnly>
+    <!-- <ClientOnly>
       <LazyUContentSearch
         :files="files"
         :navigation="navigation"
@@ -43,6 +42,5 @@ useSeoMeta({
         :fuse="{ resultLimit: 42 }"
       />
     </ClientOnly> -->
-    </UApp>
-  </ClientOnly>
+  </UApp>
 </template>
