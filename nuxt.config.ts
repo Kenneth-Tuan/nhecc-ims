@@ -1,5 +1,5 @@
 import tailwindcss from "@tailwindcss/vite";
-import pkg from './package.json'
+import pkg from "./package.json";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -29,5 +29,9 @@ export default defineNuxtConfig({
       NUXT_LINE_CHANNEL_ID: process.env.NUXT_LINE_CHANNEL_ID,
       VERSION: pkg.version || "0.1.0",
     },
+  },
+  routeRules: {
+    // 強制 /login 頁面只在 Client 端渲染 (SPA 模式)
+    "/login": { ssr: false },
   },
 });
