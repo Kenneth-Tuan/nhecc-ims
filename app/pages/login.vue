@@ -60,11 +60,11 @@
 //   console.log("Submitted", payload);
 // }
 
-const { login } = useLIFF();
+// const { login } = useLIFF();
 
-onMounted(async () => {
-  await login();
-});
+// onMounted(async () => {
+//   await login();
+// });
 </script>
 
 <template>
