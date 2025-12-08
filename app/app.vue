@@ -23,18 +23,13 @@ useSeoMeta({
   twitterImage: "/NHECC_ICON-01.png",
   twitterCard: "summary_large_image",
 });
-
-const { login } = useLIFF();
-
-onMounted(async () => {
-  await login();
-});
 </script>
 
 <template>
   <UApp>
     <NuxtLayout>
       <!-- <UButton @click="getUserProfile()">Get User Profile</UButton> -->
+
       <NuxtPage />
     </NuxtLayout>
 

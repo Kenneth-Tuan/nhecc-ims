@@ -1,7 +1,19 @@
-import liff from "@line/liff";
+// 移除頂層的靜態 import，避免 Server 端執行時崩潰
+// import liff from "@line/liff"; 
 
 export const useLIFF = () => {
+  // Helper: 統一的動態載入函式
+  const loadLiff = async () => {
+    if (import.meta.server) return null;
+    const liffModule = await import("@line/liff");
+    return liffModule.default; // @line/liff 是 default export
+  };
+
   async function init() {
+    if (import.meta.server) return;
+    const liff = await loadLiff();
+    if (!liff) return;
+
     const runtimeConfig = useRuntimeConfig();
     const liffId = runtimeConfig.public.NUXT_LIFF_ID;
 
@@ -26,17 +38,25 @@ export const useLIFF = () => {
     return res;
   }
 
-  function getIDToken() {
-    return liff.getIDToken();
+  async function getIDToken() {
+    if (import.meta.server) return null;
+    const liff = await loadLiff();
+    return liff?.getIDToken() || null;
   }
 
-  function getAccessToken() {
-    return liff.getAccessToken();
+  async function getAccessToken() {
+    if (import.meta.server) return null;
+    const liff = await loadLiff();
+    return liff?.getAccessToken() || null;
   }
 
   async function getUserProfile() {
-    const idToken = getIDToken();
-    const accessToken = getAccessToken();
+    if (import.meta.server) return;
+    
+    // 注意：這裡變成 async 了，因為要等 loadLiff
+    const idToken = await getIDToken();
+    const accessToken = await getAccessToken();
+    
     if (!idToken || !accessToken) {
       throw new Error("ID token or access token is not available");
     }
@@ -58,6 +78,10 @@ export const useLIFF = () => {
   }
 
   async function login() {
+    if (import.meta.server) return;
+    const liff = await loadLiff();
+    if (!liff) return;
+
     const runtimeConfig = useRuntimeConfig();
     const liffId = runtimeConfig.public.NUXT_LIFF_ID;
 
@@ -103,14 +127,20 @@ export const useLIFF = () => {
       });
   }
 
-  function logout() {
-    if (liff.isLoggedIn()) {
+  async function logout() {
+    if (import.meta.server) return;
+    const liff = await loadLiff();
+    if (liff?.isLoggedIn()) {
       liff.logout();
     }
   }
 
   return {
+    init, // 記得要把 init 也導出 (如果原本有)
     login,
     logout,
+    getIDToken,
+    getAccessToken,
+    getUserProfile
   };
 };
