@@ -74,6 +74,7 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} run generate
         env:
           NUXT_LIFF_ID: ${{ secrets.NUXT_LIFF_ID }}
+          NUXT_LINE_CHANNEL_ID: ${{ secrets.NUXT_LINE_CHANNEL_ID }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
