@@ -4,9 +4,13 @@ import { TEXTS } from "~/constants/texts";
 definePageMeta({
   layout: "dashboard",
 });
+
+const { getUserProfile, externalLogin } = useLIFF();
 </script>
 
 <template>
+  <UButton @click="getUserProfile()">Get User Profile</UButton>
+  <UButton @click="externalLogin()">External Login</UButton>
   <div
     class="min-h-screen bg-gradient-to-br from-morandi-blue-50 to-church-primary-50 dark:from-morandi-blue-950 dark:to-morandi-blue-900"
   >

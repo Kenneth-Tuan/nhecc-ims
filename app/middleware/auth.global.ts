@@ -8,13 +8,13 @@ export default defineNuxtRouteMiddleware((to) => {
     return to.name === prefix;
   });
 
-  if (!isProtected) return; // 如果不是保護路徑，直接放行
+  // if (!isProtected) return; // 如果不是保護路徑，直接放行
 
-  // 3. 執行驗證邏輯
-  const token = useCookie("auth_token");
-  if (!token.value) {
-    return navigateTo({
-      name: ROUTER_NAME.LOGIN,
-    });
-  }
+  // // 3. 執行驗證邏輯
+  // const token = useCookie("auth_token");
+  // if (!token.value) {
+  //   return navigateTo({
+  //     name: ROUTER_NAME.LOGIN,
+  //   });
+  // }
 });

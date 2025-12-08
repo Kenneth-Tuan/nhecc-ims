@@ -24,9 +24,11 @@ export default defineNuxtConfig({
     https: true,
   },
   runtimeConfig: {
+    // Private keys are only available on the server
+    lineChannelId: process.env.NUXT_LINE_CHANNEL_ID,
+
     public: {
-      NUXT_LIFF_ID: process.env.NUXT_LIFF_ID,
-      NUXT_LINE_CHANNEL_ID: process.env.NUXT_LINE_CHANNEL_ID,
+      liffId: process.env.NUXT_LIFF_ID,
       VERSION: pkg.version || "0.1.0",
     },
   },

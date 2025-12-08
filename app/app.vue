@@ -26,7 +26,11 @@ useSeoMeta({
 </script>
 
 <template>
-  <UApp>
+  <UApp
+    :toaster="{
+      position: 'top-right',
+    }"
+  >
     <NuxtLayout>
       <!-- <UButton @click="getUserProfile()">Get User Profile</UButton> -->
 
