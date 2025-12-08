@@ -2,6 +2,7 @@ import liff from "@line/liff";
 
 export const useLIFF = () => {
   async function init() {
+    if (import.meta.server) return;
     const runtimeConfig = useRuntimeConfig();
     const liffId = runtimeConfig.public.NUXT_LIFF_ID;
 
@@ -27,14 +28,17 @@ export const useLIFF = () => {
   }
 
   function getIDToken() {
+    if (import.meta.server) return null;
     return liff.getIDToken();
   }
 
   function getAccessToken() {
+    if (import.meta.server) return null;
     return liff.getAccessToken();
   }
 
   async function getUserProfile() {
+    if (import.meta.server) return;
     const idToken = getIDToken();
     const accessToken = getAccessToken();
     if (!idToken || !accessToken) {
@@ -58,6 +62,7 @@ export const useLIFF = () => {
   }
 
   async function login() {
+    if (import.meta.server) return;
     const runtimeConfig = useRuntimeConfig();
     const liffId = runtimeConfig.public.NUXT_LIFF_ID;
 
@@ -104,6 +109,7 @@ export const useLIFF = () => {
   }
 
   function logout() {
+    if (import.meta.server) return;
     if (liff.isLoggedIn()) {
       liff.logout();
     }
