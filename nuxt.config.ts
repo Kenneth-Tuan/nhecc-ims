@@ -18,19 +18,6 @@ export default defineNuxtConfig({
   modules: ["@nuxt/image", "@nuxt/ui", "motion-v/nuxt"],
   vite: {
     plugins: [tailwindcss()],
-    optimizeDeps: {
-      include: ["@line/liff"],
-    },
-    build: {
-      rollupOptions: {
-        external: (id) => {
-          if (id === "@line/liff" && process.env.NITRO_PRESET === "static") {
-            return true;
-          }
-          return false;
-        },
-      },
-    },
   },
   devServer: {
     port: 3000,
