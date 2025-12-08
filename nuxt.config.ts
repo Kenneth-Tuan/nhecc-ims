@@ -15,11 +15,7 @@ export default defineNuxtConfig({
   ui: {
     colorMode: true,
   },
-  modules: [
-    "@nuxt/image",
-    "@nuxt/ui",
-    // "motion-v/nuxt"
-  ],
+  modules: ["@nuxt/image", "@nuxt/ui", "motion-v/nuxt"],
   vite: {
     plugins: [tailwindcss()],
   },
@@ -36,6 +32,6 @@ export default defineNuxtConfig({
   },
   routeRules: {
     // 強制 /login 頁面只在 Client 端渲染 (SPA 模式)
-    // "/login": { ssr: false },
+    "/login": { ssr: false },
   },
 });
