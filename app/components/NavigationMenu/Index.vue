@@ -6,125 +6,46 @@ const { isCollapsed } = useSidebar();
 const items = ref<NavigationMenuItem[][]>([
   [
     {
-      label: "Guide",
-      icon: "i-lucide-book-open",
-      children: [
-        {
-          label: "Introduction",
-          description: "Fully styled and customizable components for Nuxt.",
-          icon: "i-lucide-house",
-        },
-        {
-          label: "Installation",
-          description:
-            "Learn how to install and configure Nuxt UI in your application.",
-          icon: "i-lucide-cloud-download",
-        },
-        {
-          label: "Icons",
-          icon: "i-lucide-smile",
-          description:
-            "You have nothing to do, @nuxt/icon will handle it automatically.",
-        },
-        {
-          label: "Colors",
-          icon: "i-lucide-swatch-book",
-          description:
-            "Choose a primary and a neutral color from your Tailwind CSS theme.",
-        },
-        {
-          label: "Theme",
-          icon: "i-lucide-cog",
-          description:
-            "You can customize components by using the `class` / `ui` props or in your app.config.ts.",
-        },
-      ],
-    },
-    {
-      label: "Composables",
-      icon: "i-lucide-database",
-      children: [
-        {
-          label: "defineShortcuts",
-          icon: "i-lucide-file-text",
-          description: "Define shortcuts for your application.",
-          to: "/docs/composables/define-shortcuts",
-        },
-        {
-          label: "useOverlay",
-          icon: "i-lucide-file-text",
-          description: "Display a modal/slideover within your application.",
-          to: "/docs/composables/use-overlay",
-        },
-        {
-          label: "useToast",
-          icon: "i-lucide-file-text",
-          description: "Display a toast within your application.",
-          to: "/docs/composables/use-toast",
-        },
-      ],
-    },
-    {
-      label: "Components",
-      icon: "i-lucide-box",
-      to: "/docs/components",
+      label: "首頁",
+      icon: "i-lucide-home",
+      to: "/",
       active: true,
-      defaultOpen: true,
-      children: [
-        {
-          label: "Link",
-          icon: "i-lucide-file-text",
-          description: "Use NuxtLink with superpowers.",
-          to: "/docs/components/link",
-        },
-        {
-          label: "Modal",
-          icon: "i-lucide-file-text",
-          description: "Display a modal within your application.",
-          to: "/docs/components/modal",
-        },
-        {
-          label: "NavigationMenu",
-          icon: "i-lucide-file-text",
-          description: "Display a list of links.",
-          to: "/docs/components/navigation-menu",
-        },
-        {
-          label: "Pagination",
-          icon: "i-lucide-file-text",
-          description: "Display a list of pages.",
-          to: "/docs/components/pagination",
-        },
-        {
-          label: "Popover",
-          icon: "i-lucide-file-text",
-          description:
-            "Display a non-modal dialog that floats around a trigger element.",
-          to: "/docs/components/popover",
-        },
-        {
-          label: "Progress",
-          icon: "i-lucide-file-text",
-          description: "Show a horizontal bar to indicate task progression.",
-          to: "/docs/components/progress",
-        },
-      ],
+    },
+    {
+      label: "裝備",
+      icon: "i-lucide-shield-check",
+      active: false,
+    },
+    {
+      label: "牧養",
+      icon: "i-lucide-book-open",
+      active: false,
+    },
+    {
+      label: "我的",
+      icon: "i-lucide-box",
+      active: false,
+    },
+    {
+      label: "更多",
+      icon: "i-lucide-ellipsis",
+      active: false,
     },
   ],
-//   [
-//     {
-//       label: "GitHub",
-//       icon: "i-simple-icons-github",
-//       badge: "3.8k",
-//       to: "https://github.com/nuxt/ui",
-//       target: "_blank",
-//     },
-//     {
-//       label: "Help",
-//       icon: "i-lucide-circle-help",
-//       disabled: true,
-//     },
-//   ],
+  //   [
+  //     {
+  //       label: "GitHub",
+  //       icon: "i-simple-icons-github",
+  //       badge: "3.8k",
+  //       to: "https://github.com/nuxt/ui",
+  //       target: "_blank",
+  //     },
+  //     {
+  //       label: "Help",
+  //       icon: "i-lucide-circle-help",
+  //       disabled: true,
+  //     },
+  //   ],
 ]);
 </script>
 
@@ -133,10 +54,13 @@ const items = ref<NavigationMenuItem[][]>([
     :collapsed="isCollapsed"
     highlight
     highlight-color="primary"
-    orientation="vertical"
+    orientation="horizontal"
     color="neutral"
     variant="link"
     :items="items"
     class="w-full h-full"
+    :ui="{
+      link: 'flex flex-col'
+    }"
   />
 </template>

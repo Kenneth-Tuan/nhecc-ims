@@ -32,22 +32,14 @@ const items: NavigationMenuItem[][] = [
     },
   ],
 ];
-
-const loginActionIcon = computed(() => {
-  return true ? "material-symbols:login" : "material-symbols:logout";
-});
-
-const loginActionLabel = computed(() => {
-  return true ? "登入" : "登出";
-});
 </script>
 
 <template>
-  <UDashboardNavbar>
+  <UDashboardNavbar :toggle="false">
     <template #leading>
-      <!-- <NuxtLink to="/" class="flex items-center gap-2 w-fit text-nowrap">
+      <NuxtLink to="/" class="flex items-center gap-2 w-fit text-nowrap">
         <img src="/NHECC_ICON-01.png" alt="NHECC" class="w-10 h-10" />
-      </NuxtLink> -->
+      </NuxtLink>
     </template>
 
     <template #trailing>
@@ -57,8 +49,12 @@ const loginActionLabel = computed(() => {
     <template #right>
       <ColorModeButton />
 
-      <UTooltip :text="loginActionLabel" :kbds="['meta', 'G']">
-        <UButton :icon="loginActionIcon" color="neutral" variant="ghost" />
+      <UTooltip text="登出" :kbds="['meta', 'G']">
+        <UButton
+          icon="material-symbols:logout"
+          color="neutral"
+          variant="ghost"
+        />
       </UTooltip>
     </template>
   </UDashboardNavbar>

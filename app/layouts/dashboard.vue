@@ -39,14 +39,22 @@ const items: NavigationMenuItem[][] = [
     <DashboardSidebar />
     <UDashboardPanel>
       <template #header>
-        <DashboardNavbar />
-        <!-- <UDashboardToolbar>
+        <div class="hidden md:block w-full">
+          <DashboardNavbar />
+          <!-- <UDashboardToolbar>
           <UNavigationMenu :items="items" highlight class="flex-1" />
         </UDashboardToolbar> -->
+        </div>
       </template>
 
       <template #body>
         <slot />
+      </template>
+
+      <template #footer>
+        <div class="block md:hidden w-full">
+          <NavigationMenu />
+        </div>
       </template>
     </UDashboardPanel>
   </UDashboardGroup>
