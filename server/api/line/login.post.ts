@@ -43,11 +43,13 @@ export default defineEventHandler(async (event) => {
     });
 
     // 再用 /v2/profile 拿 user profile
+    // userId: string;
+    // displayName: string;
+    // statusMessage: string;
+    // pictureUrl: string;
     const profile = await $fetch("https://api.line.me/v2/profile", {
       headers: { Authorization: `Bearer ${body.accessToken}` },
     });
-
-    console.log("Profile: ", profile);
 
     // profile.userId / displayName / pictureUrl ...
     // 在這裡做登入 / 註冊

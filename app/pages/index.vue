@@ -4,13 +4,9 @@ import { TEXTS } from "~/constants/texts";
 definePageMeta({
   layout: "dashboard",
 });
-
-const { getUserProfile, externalLogin } = useLIFF();
 </script>
 
 <template>
-  <UButton @click="getUserProfile()">Get User Profile</UButton>
-  <UButton @click="externalLogin()">External Login</UButton>
   <div
     class="min-h-screen bg-gradient-to-br from-morandi-blue-50 to-church-primary-50 dark:from-morandi-blue-950 dark:to-morandi-blue-900"
   >
@@ -76,12 +72,16 @@ const { getUserProfile, externalLogin } = useLIFF();
           </p>
         </div>
 
-        <div class="mt-20 grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
+        <div
+          class="mt-20 grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3"
+        >
           <!-- 卓越兒童發展園地 -->
           <div
             class="group relative rounded-3xl bg-white p-8 shadow-lg transition-all hover:-translate-y-2 hover:shadow-xl dark:bg-morandi-blue-800 border border-morandi-blue-100 dark:border-morandi-blue-700"
           >
-            <div class="mb-8 inline-block rounded-2xl bg-church-primary-100 p-4 dark:bg-church-primary-900/30">
+            <div
+              class="mb-8 inline-block rounded-2xl bg-church-primary-100 p-4 dark:bg-church-primary-900/30"
+            >
               <UIcon
                 name="i-heroicons-sparkles"
                 class="h-10 w-10 text-church-primary-600 dark:text-church-primary-400"
@@ -104,7 +104,9 @@ const { getUserProfile, externalLogin } = useLIFF();
           <div
             class="group relative rounded-3xl bg-white p-8 shadow-lg transition-all hover:-translate-y-2 hover:shadow-xl dark:bg-morandi-blue-800 border border-morandi-blue-100 dark:border-morandi-blue-700"
           >
-            <div class="mb-8 inline-block rounded-2xl bg-morandi-blue-100 p-4 dark:bg-morandi-blue-900/30">
+            <div
+              class="mb-8 inline-block rounded-2xl bg-morandi-blue-100 p-4 dark:bg-morandi-blue-900/30"
+            >
               <UIcon
                 name="i-heroicons-musical-note"
                 class="h-10 w-10 text-morandi-blue-600 dark:text-morandi-blue-400"
@@ -127,7 +129,9 @@ const { getUserProfile, externalLogin } = useLIFF();
           <div
             class="group relative rounded-3xl bg-white p-8 shadow-lg transition-all hover:-translate-y-2 hover:shadow-xl dark:bg-morandi-blue-800 border border-morandi-blue-100 dark:border-morandi-blue-700"
           >
-            <div class="mb-8 inline-block rounded-2xl bg-church-primary-100 p-4 dark:bg-church-primary-900/30">
+            <div
+              class="mb-8 inline-block rounded-2xl bg-church-primary-100 p-4 dark:bg-church-primary-900/30"
+            >
               <UIcon
                 name="i-heroicons-user-group"
                 class="h-10 w-10 text-church-primary-600 dark:text-church-primary-400"
@@ -150,7 +154,9 @@ const { getUserProfile, externalLogin } = useLIFF();
           <div
             class="group relative rounded-3xl bg-white p-8 shadow-lg transition-all hover:-translate-y-2 hover:shadow-xl dark:bg-morandi-blue-800 border border-morandi-blue-100 dark:border-morandi-blue-700"
           >
-            <div class="mb-8 inline-block rounded-2xl bg-morandi-blue-100 p-4 dark:bg-morandi-blue-900/30">
+            <div
+              class="mb-8 inline-block rounded-2xl bg-morandi-blue-100 p-4 dark:bg-morandi-blue-900/30"
+            >
               <UIcon
                 name="i-heroicons-building-office"
                 class="h-10 w-10 text-morandi-blue-600 dark:text-morandi-blue-400"
@@ -173,7 +179,9 @@ const { getUserProfile, externalLogin } = useLIFF();
           <div
             class="group relative rounded-3xl bg-white p-8 shadow-lg transition-all hover:-translate-y-2 hover:shadow-xl dark:bg-morandi-blue-800 border border-morandi-blue-100 dark:border-morandi-blue-700"
           >
-            <div class="mb-8 inline-block rounded-2xl bg-church-primary-100 p-4 dark:bg-church-primary-900/30">
+            <div
+              class="mb-8 inline-block rounded-2xl bg-church-primary-100 p-4 dark:bg-church-primary-900/30"
+            >
               <UIcon
                 name="i-heroicons-book-open"
                 class="h-10 w-10 text-church-primary-600 dark:text-church-primary-400"
@@ -196,7 +204,9 @@ const { getUserProfile, externalLogin } = useLIFF();
           <div
             class="group relative rounded-3xl bg-white p-8 shadow-lg transition-all hover:-translate-y-2 hover:shadow-xl dark:bg-morandi-blue-800 border border-morandi-blue-100 dark:border-morandi-blue-700"
           >
-            <div class="mb-8 inline-block rounded-2xl bg-morandi-blue-100 p-4 dark:bg-morandi-blue-900/30">
+            <div
+              class="mb-8 inline-block rounded-2xl bg-morandi-blue-100 p-4 dark:bg-morandi-blue-900/30"
+            >
               <UIcon
                 name="i-heroicons-video-camera"
                 class="h-10 w-10 text-morandi-blue-600 dark:text-morandi-blue-400"
@@ -283,10 +293,14 @@ const { getUserProfile, externalLogin } = useLIFF();
           <h2 class="text-4xl font-bold tracking-tight text-white sm:text-5xl">
             {{ TEXTS.cta.title }}
           </h2>
-          <p class="mx-auto mt-8 max-w-2xl text-xl leading-8 text-church-primary-100">
+          <p
+            class="mx-auto mt-8 max-w-2xl text-xl leading-8 text-church-primary-100"
+          >
             {{ TEXTS.cta.description }}
           </p>
-          <div class="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-x-8">
+          <div
+            class="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-x-8"
+          >
             <UButton
               variant="solid"
               color="white"

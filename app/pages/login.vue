@@ -7,6 +7,7 @@ definePageMeta({
 });
 
 const toast = useToast();
+const { $externalAuth } = useNuxtApp();
 
 const fields: AuthFormField[] = [
   {
@@ -32,17 +33,13 @@ const fields: AuthFormField[] = [
 
 const providers = [
   {
-    label: "Google",
-    icon: "i-simple-icons-google",
+    label: "LINE",
+    icon: "i-simple-icons-line",
+    color: "success",
+    variant: "ghost",
     onClick: () => {
-      toast.add({ title: "Google", description: "Login with Google" });
-    },
-  },
-  {
-    label: "GitHub",
-    icon: "i-simple-icons-github",
-    onClick: () => {
-      toast.add({ title: "GitHub", description: "Login with GitHub" });
+      toast.add({ title: "LINE", description: "Login with LINE" });
+      $externalAuth();
     },
   },
 ];
@@ -59,12 +56,6 @@ type Schema = z.output<typeof schema>;
 function onSubmit(payload: FormSubmitEvent<Schema>) {
   console.log("Submitted", payload);
 }
-
-const { login } = useLIFF();
-
-onMounted(async () => {
-  await login();
-});
 </script>
 
 <template>
@@ -89,17 +80,17 @@ onMounted(async () => {
             >
           </template>
           <template #validation>
-            <UAlert
+            <!-- <UAlert
               color="error"
               icon="i-lucide-info"
               title="Error signing in"
-            />
+            /> -->
           </template>
           <template #footer>
-            By signing in, you agree to our
+            <!-- By signing in, you agree to our
             <ULink to="#" class="text-primary font-medium"
               >Terms of Service</ULink
-            >.
+            >. -->
           </template>
         </UAuthForm>
       </UPageCard>
