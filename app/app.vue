@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { zh_tw} from '@nuxt/ui/locale'
 const colorMode = useColorMode();
 
 const color = computed(() =>
@@ -27,6 +28,7 @@ useSeoMeta({
 
 <template>
   <UApp
+    :locale="zh_tw"
     :toaster="{
       position: 'top-right',
     }"

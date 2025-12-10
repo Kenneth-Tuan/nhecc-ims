@@ -64,9 +64,9 @@ const items = ref<NavigationMenuItem[][]>([
     :items="items"
     class="w-full h-full"
     :ui="{
-      link: 'flex flex-col',
-      root: 'w-full flex items-center justify-center',
-      list: 'w-full'
+      link: 'flex flex-col justify-center items-center',
+      root: 'w-full flex items-center justify-center [&>div]:w-full',
+      list: 'w-full justify-between',
     }"
   />
 
@@ -83,6 +83,7 @@ const items = ref<NavigationMenuItem[][]>([
     <template #footer>
       <div class="flex justify-between items-center">
         <UUser
+          to="/"
           name="Kenneth Tuan"
           description="Software Engineer"
           :avatar="{
