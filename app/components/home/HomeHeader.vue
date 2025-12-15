@@ -1,19 +1,36 @@
 <script setup lang="ts">
 // Mock user data - in real app this comes from auth store
 // Shared state for demo purposes to sync with QuickActions
+// Changed roles to be an array to support multiple roles
 const user = useState("demo-user", () => ({
   name: "王大明",
-  role: "student" as "student" | "teacher",
+  roles: ["student"] as ("student" | "teacher")[],
 }));
 
-const roleLabel = computed(() =>
-  user.value.role === "student" ? "學員" : "老師"
-);
+const roleLabel = computed(() => {
+  const roles = [];
+  if (user.value.roles.includes("student")) roles.push("學員");
+  if (user.value.roles.includes("teacher")) roles.push("老師");
+  return roles.join(" / ");
+});
 
 const handleSwitchIdentity = () => {
-  // Simple toggle for demo
-  user.value.role = user.value.role === "student" ? "teacher" : "student";
-  user.value.name = user.value.role === "student" ? "王大明" : "李牧師";
+  // Cycle through states: Student -> Teacher -> Both -> Student
+  const currentRoles = user.value.roles;
+
+  if (currentRoles.length === 1 && currentRoles[0] === "student") {
+    // Switch to Teacher
+    user.value.roles = ["teacher"];
+    user.value.name = "李牧師";
+  } else if (currentRoles.length === 1 && currentRoles[0] === "teacher") {
+    // Switch to Both
+    user.value.roles = ["student", "teacher"];
+    user.value.name = "陳區長 (身兼)";
+  } else {
+    // Back to Student
+    user.value.roles = ["student"];
+    user.value.name = "王大明";
+  }
 };
 </script>
 

@@ -1,13 +1,13 @@
 <script setup lang="ts">
 interface User {
   name: string;
-  role: "student" | "teacher"; // Simplified role type for demo
+  roles: ("student" | "teacher")[];
 }
 
 // Shared state for demo purposes to sync with Header
 const user = useState("demo-user", () => ({
   name: "王大明",
-  role: "student" as "student" | "teacher",
+  roles: ["student"] as ("student" | "teacher")[],
 }));
 
 // Define action types
@@ -21,7 +21,7 @@ const allActions = [
     to: "/roll-call",
     color: "primary" as const,
     variant: "solid" as const,
-    roles: ["teacher"],
+    requiredRoles: ["teacher"],
   },
   {
     id: "check-in",
@@ -30,7 +30,7 @@ const allActions = [
     to: "/check-in",
     color: "primary" as const,
     variant: "solid" as const,
-    roles: ["student"],
+    requiredRoles: ["student"],
   },
   {
     id: "leave",
@@ -39,7 +39,7 @@ const allActions = [
     to: "/leave",
     color: "error" as const,
     variant: "soft" as const,
-    roles: ["student", "teacher"],
+    requiredRoles: ["student", "teacher"],
   },
   {
     id: "search",
@@ -48,7 +48,7 @@ const allActions = [
     to: "/courses",
     color: "neutral" as const,
     variant: "outline" as const,
-    roles: ["student", "teacher"],
+    requiredRoles: ["student", "teacher"],
   },
   {
     id: "my-courses",
@@ -56,13 +56,19 @@ const allActions = [
     icon: "i-lucide-book-open",
     to: "/my-courses",
     color: "neutral" as const,
-    variant: "outline" as const,
-    roles: ["student", "teacher"],
+    variant: "subtle" as const,
+    requiredRoles: ["student", "teacher"],
   },
 ];
 
+// Computed: Check if user has ANY of the required roles for an action
 const displayedActions = computed(() => {
-  return allActions.filter((action) => action.roles.includes(user.value.role));
+  return allActions.filter((action) => {
+    // If the action requires specific roles, check if the user has at least one of them
+    return action.requiredRoles.some((role) =>
+      user.value.roles.includes(role as "student" | "teacher")
+    );
+  });
 });
 </script>
 
