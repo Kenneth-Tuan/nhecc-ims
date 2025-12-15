@@ -9,6 +9,9 @@ export default defineNuxtPlugin({
     const liffId = runtimeConfig.public.liffId;
     const isLoggedIn_dev = useCookie<boolean>("isLoggedIn_dev");
 
+    // 新增：全域 Loading 狀態
+    const isAuthLoading = useState("isAuthLoading", () => true);
+
     async function init() {
       if (!liffId) {
         toast.add({
@@ -30,12 +33,19 @@ export default defineNuxtPlugin({
 
             if (isLoggedIn) {
               await login();
+              // 登入成功，直接導向首頁
+              if (isLoggedIn_dev.value) {
+                await navigateTo({ name: ROUTER_NAME.HOME });
+              }
             } else {
               const isInClient = liff.isInClient();
               if (isInClient) throw new Error("User is not logged in");
             }
           } catch (error) {
             throw new Error((error as Error).message);
+          } finally {
+            // 關鍵：無論成功失敗，結束 Loading
+            isAuthLoading.value = false;
           }
         })
         .catch((err) => {
@@ -98,12 +108,23 @@ export default defineNuxtPlugin({
         });
 
         isLoggedIn_dev.value = Boolean(isLoggedInSuccess);
+        // const router = useRouter()
+        // router.push({
+        //   name: ROUTER_NAME.HOME,
+        // });
       } catch (error) {
         throw new Error((error as Error).message);
       }
     }
 
-    if (!isLoggedIn_dev.value) await init();
+    // 立即執行 init，但不等待它結束才 return plugin (避免阻塞 Nuxt 啟動)
+    // 但因為我們有了 isAuthLoading，可以在 UI 層控制
+    if (!isLoggedIn_dev.value) {
+      // 不要 await，讓它在背景跑，我們用 state 控制 UI
+      init();
+    } else {
+      isAuthLoading.value = false; // 已登入就不需要 loading
+    }
 
     return {
       provide: {

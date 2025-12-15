@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { zh_tw} from '@nuxt/ui/locale'
+import { zh_tw } from "@nuxt/ui/locale";
 const colorMode = useColorMode();
 
 const color = computed(() =>
@@ -24,6 +24,9 @@ useSeoMeta({
   twitterImage: "/NHECC_ICON-01.png",
   twitterCard: "summary_large_image",
 });
+
+// 取得全域 loading 狀態
+const isAuthLoading = useState("isAuthLoading", () => true);
 </script>
 
 <template>
@@ -33,11 +36,24 @@ useSeoMeta({
       position: 'top-right',
     }"
   >
-    <NuxtLayout>
-      <!-- <UButton @click="getUserProfile()">Get User Profile</UButton> -->
+    <!-- 全域 Loading 遮罩 -->
+    <div
+      v-if="isAuthLoading"
+      class="fixed inset-0 z-[9999] flex items-center justify-center bg-white dark:bg-gray-900"
+    >
+      <!-- 這裡可以放您的 Logo 或 Spinner -->
+      <UIcon
+        name="i-lucide-loader-2"
+        class="w-10 h-10 animate-spin text-primary"
+      />
+    </div>
 
-      <NuxtPage />
-    </NuxtLayout>
+    <!-- 只有當 loading 結束後，才渲染路由內容 -->
+    <div v-else>
+      <NuxtLayout>
+        <NuxtPage />
+      </NuxtLayout>
+    </div>
 
     <!-- <ClientOnly>
       <LazyUContentSearch

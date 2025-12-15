@@ -1,5 +1,6 @@
 export default defineNuxtRouteMiddleware((to) => {
   const isLoggedIn_dev = useCookie("isLoggedIn_dev");
+  console.log("test auth global", isLoggedIn_dev.value, to.name);
   if (isLoggedIn_dev.value && to.name === ROUTER_NAME.LOGIN) {
     return navigateTo({
       name: ROUTER_NAME.HOME,
