@@ -1,37 +1,39 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from "@nuxt/ui";
 
-const items: NavigationMenuItem[][] = [
+const { getIcon } = useIconStyle();
+
+const items = computed<NavigationMenuItem[][]>(() => [
   [
     {
       label: "General",
-      icon: "i-lucide-user",
+      icon: getIcon("user"),
       active: true,
     },
     {
       label: "Members",
-      icon: "i-lucide-users",
+      icon: getIcon("users"),
     },
     {
       label: "Notifications",
-      icon: "i-lucide-bell",
+      icon: getIcon("bell"),
     },
   ],
   [
     {
       label: "Documentation",
-      icon: "i-lucide-book-open",
+      icon: getIcon("book-open"),
       to: "https://ui.nuxt.com/docs",
       target: "_blank",
     },
     {
       label: "Help & Feedback",
-      icon: "i-lucide-help-circle",
+      icon: getIcon("help-circle"),
       to: "https://github.com/nuxt/ui/issues",
       target: "_blank",
     },
   ],
-];
+]);
 </script>
 
 <template>
@@ -47,6 +49,8 @@ const items: NavigationMenuItem[][] = [
     </template>
 
     <template #right>
+      <IconStyleButton />
+      <BorderStyleButton />
       <ColorModeButton />
 
       <UTooltip text="登出" :kbds="['meta', 'G']">

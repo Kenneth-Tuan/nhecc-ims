@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { getIcon } = useIconStyle();
 interface User {
   name: string;
   roles: ("student" | "teacher")[];
@@ -13,11 +14,11 @@ const user = useState("demo-user", () => ({
 // Define action types
 type ActionType = "check-in" | "roll-call" | "leave" | "search" | "my-courses";
 
-const allActions = [
+const allActions = computed(() => [
   {
     id: "roll-call",
     label: "上課點名", // Teacher only (scan others)
-    icon: "i-lucide-qr-code",
+    icon: getIcon("qr-code"),
     to: "/roll-call",
     color: "primary" as const,
     variant: "solid" as const,
@@ -26,7 +27,7 @@ const allActions = [
   {
     id: "check-in",
     label: "上課簽到", // Student only (show QR code or scan class code)
-    icon: "i-lucide-scan-line",
+    icon: getIcon("scan-qrcode"),
     to: "/check-in",
     color: "primary" as const,
     variant: "solid" as const,
@@ -35,7 +36,7 @@ const allActions = [
   {
     id: "leave",
     label: "我要請假",
-    icon: "i-lucide-calendar-x",
+    icon: getIcon("calendar-x"),
     to: "/leave",
     color: "error" as const,
     variant: "soft" as const,
@@ -44,7 +45,7 @@ const allActions = [
   {
     id: "search",
     label: "找課程",
-    icon: "i-lucide-search",
+    icon: getIcon("search"),
     to: "/courses",
     color: "neutral" as const,
     variant: "outline" as const,
@@ -53,17 +54,17 @@ const allActions = [
   {
     id: "my-courses",
     label: "我的課程",
-    icon: "i-lucide-book-open",
+    icon: getIcon("book-open"),
     to: "/my-courses",
     color: "neutral" as const,
     variant: "subtle" as const,
     requiredRoles: ["student", "teacher"],
   },
-];
+]);
 
 // Computed: Check if user has ANY of the required roles for an action
 const displayedActions = computed(() => {
-  return allActions.filter((action) => {
+  return allActions.value.filter((action) => {
     // If the action requires specific roles, check if the user has at least one of them
     return action.requiredRoles.some((role) =>
       user.value.roles.includes(role as "student" | "teacher")

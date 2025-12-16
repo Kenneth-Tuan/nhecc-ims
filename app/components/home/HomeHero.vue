@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import dayjs from 'dayjs'
 
+const { getIcon } = useIconStyle();
 // Mock next class data
 const nextClass = ref({
   id: 1,
@@ -63,12 +64,12 @@ const statusColor = computed(() => {
         
         <div class="space-y-3">
           <div class="flex items-center gap-3 text-xl">
-            <UIcon name="i-lucide-clock" class="w-6 h-6 text-primary" />
+            <UIcon :name="getIcon('clock')" class="w-6 h-6 text-primary" />
             <span class="font-medium">{{ timeDisplay }}</span>
           </div>
           
           <div class="flex items-center gap-3 text-xl">
-            <UIcon name="i-lucide-map-pin" class="w-6 h-6 text-primary" />
+            <UIcon :name="getIcon('map-pin')" class="w-6 h-6 text-primary" />
             <span>{{ nextClass.location }}</span>
           </div>
         </div>

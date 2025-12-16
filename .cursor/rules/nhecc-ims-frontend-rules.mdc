@@ -62,3 +62,6 @@ Mobile First 的精隨在於「**由小寫到大**」，使用 `min-width` 而�
 1.  **安全區域 (Safe Area)**：考慮現代手機的瀏海與 Home Indicator，設計時預留 `padding-bottom` (約 20-34px) 避免內容被擋住。
 2.  **相對單位 (Relative Units)**：盡量使用 `%`, `rem`, `vw` 來設定寬度與間距，避免寫死 `width: 375px`，確保在 320px 到 430px 間伸縮自如。
 3.  **極限測試**：開發時務必使用 Chrome "Device Mode"，將寬度拉到 **320px** 檢查。如果 320px 沒問題，其他尺寸通常都沒問題。
+
+
+Always use Nuxt UI components. Prefer Tailwind utility classes over custom CSS. 

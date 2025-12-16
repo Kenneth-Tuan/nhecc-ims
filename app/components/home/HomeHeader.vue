@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { getIcon } = useIconStyle();
 // Mock user data - in real app this comes from auth store
 // Shared state for demo purposes to sync with QuickActions
 // Changed roles to be an array to support multiple roles
@@ -47,7 +48,7 @@ const handleSwitchIdentity = () => {
     </div>
 
     <UButton
-      icon="i-lucide-users"
+      :icon="getIcon('users')"
       size="lg"
       color="neutral"
       variant="ghost"

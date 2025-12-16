@@ -460,22 +460,42 @@
   --color-morandi-rose: oklch(0.92 0.015 345);          /* #EFD5DC - 玫瑰色 */
   --color-morandi-salmon: oklch(0.95 0.02 5);           /* #F2D5CF - 鮭魚色 */
   --color-morandi-tea: oklch(0.78 0.01 145);            /* #CADBD4 - 茶色 */
+
+  /* ===== NHECC CIS Brand Colors ===== */
+  /* Cross Red (Primary) */
+  --color-nhecc-red-50: oklch(0.98 0.01 20);
+  --color-nhecc-red-100: oklch(0.95 0.03 20);
+  --color-nhecc-red-200: oklch(0.90 0.06 20);
+  --color-nhecc-red-300: oklch(0.82 0.10 20);
+  --color-nhecc-red-400: oklch(0.74 0.16 20);
+  --color-nhecc-red-500: oklch(0.65 0.22 25); /* #FF6B6B approx */
+  --color-nhecc-red-600: oklch(0.58 0.22 25);
+  --color-nhecc-red-700: oklch(0.50 0.20 25);
+  --color-nhecc-red-800: oklch(0.42 0.17 25);
+  --color-nhecc-red-900: oklch(0.36 0.14 25);
+  --color-nhecc-red-950: oklch(0.25 0.10 25);
+
+  /* Secondary Colors */
+  --color-nhecc-teal: oklch(0.75 0.15 180);   /* #4ECDC4 */
+  --color-nhecc-purple: oklch(0.70 0.15 280); /* #A78BFA */
+  --color-nhecc-yellow: oklch(0.85 0.18 85);  /* #FBBF24 */
+  --color-nhecc-green: oklch(0.78 0.18 150);  /* #34D399 */
 }
 
 :root {
-  /* 動態 Primary 顏色 - 會被 JavaScript 動態覆蓋 */
-  --ui-primary: var(--color-blue-500); /* 預設 blue-500 */
-  --ui-primary-50: var(--color-blue-50);
-  --ui-primary-100: var(--color-blue-100);
-  --ui-primary-200: var(--color-blue-200);
-  --ui-primary-300: var(--color-blue-300);
-  --ui-primary-400: var(--color-blue-400);
-  --ui-primary-500: var(--color-blue-500);
-  --ui-primary-600: var(--color-blue-600);
-  --ui-primary-700: var(--color-blue-700);
-  --ui-primary-800: var(--color-blue-800);
-  --ui-primary-900: var(--color-blue-900);
-  --ui-primary-950: var(--color-blue-950);
+  /* 動態 Primary 顏色 - 使用 NHECC Red */
+  --ui-primary: var(--color-nhecc-red-500);
+  --ui-primary-50: var(--color-nhecc-red-50);
+  --ui-primary-100: var(--color-nhecc-red-100);
+  --ui-primary-200: var(--color-nhecc-red-200);
+  --ui-primary-300: var(--color-nhecc-red-300);
+  --ui-primary-400: var(--color-nhecc-red-400);
+  --ui-primary-500: var(--color-nhecc-red-500);
+  --ui-primary-600: var(--color-nhecc-red-600);
+  --ui-primary-700: var(--color-nhecc-red-700);
+  --ui-primary-800: var(--color-nhecc-red-800);
+  --ui-primary-900: var(--color-nhecc-red-900);
+  --ui-primary-950: var(--color-nhecc-red-950);
 
   /* 動態 Neutral 顏色 - 淺色模式 */
   --ui-neutral: var(--color-stone-500); /* 預設 stone-500 */
