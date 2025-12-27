@@ -1,0 +1,14 @@
+# LINE LIFF Configuration
+NUXT_LIFF_ID=
+NUXT_LINE_CHANNEL_ID=
+
+# Appwrite Configuration (if applicable based on source code analysis)
+# APPWRITE_ENDPOINT=
+# APPWRITE_PROJECT_ID=
+
+# Nuxt Configuration
+# NUXT_HOST=0.0.0.0
+# NUXT_PORT=3000
+
+
+
