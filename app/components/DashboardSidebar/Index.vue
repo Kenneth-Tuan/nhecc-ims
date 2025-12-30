@@ -4,45 +4,40 @@ import type { NavigationMenuItem } from "@nuxt/ui";
 const items: NavigationMenuItem[][] = [
   [
     {
-      label: "Home",
+      label: "首頁",
       icon: "i-lucide-house",
-      active: true,
+      to: "/",
     },
     {
-      label: "Inbox",
-      icon: "i-lucide-inbox",
-      badge: "4",
-    },
-    {
-      label: "Contacts",
+      label: "會友管理",
       icon: "i-lucide-users",
+      to: "/members",
     },
     {
-      label: "Settings",
+      label: "系統設定",
       icon: "i-lucide-settings",
-      defaultOpen: true,
       children: [
         {
-          label: "General",
+          label: "一般設定",
         },
         {
-          label: "Members",
+          label: "角色設定",
         },
         {
-          label: "Notifications",
+          label: "通知設定",
         },
       ],
     },
   ],
   [
     {
-      label: "Feedback",
+      label: "意見回饋",
       icon: "i-lucide-message-circle",
       to: "https://github.com/nuxt-ui-templates/dashboard",
       target: "_blank",
     },
     {
-      label: "Help & Support",
+      label: "幫助與支援",
       icon: "i-lucide-info",
       to: "https://github.com/nuxt/ui",
       target: "_blank",
@@ -60,7 +55,9 @@ const items: NavigationMenuItem[][] = [
     <template #header="{ collapsed }">
       <UDashboardSidebarCollapse color="primary" variant="ghost" />
 
-      <p v-if="!collapsed" class="text-sm font-bold">NHECC Integrated Management System</p>
+      <p v-if="!collapsed" class="text-sm font-bold">
+        NHECC Integrated Management System
+      </p>
     </template>
 
     <template #default="{ collapsed }">

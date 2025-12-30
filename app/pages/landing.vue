@@ -8,8 +8,6 @@ const toggleDarkMode = () => {
   colorMode.preference = colorMode.value === "dark" ? "light" : "dark";
 };
 
-const isDarkMode = computed(() => colorMode.value === "dark");
-
 // User data
 const user = ref({
   name: "Sister Mary",
@@ -20,7 +18,9 @@ const user = ref({
 
 // Daily verse data
 const dailyVerse = ref({
-  text: '"For I know the plans I have for you..."',
+  // text: '"For I know the plans I have for you..."',
+  text: '"For I know the plans..."', // Shortened for mobile fit if needed
+  fullText: '"For I know the plans I have for you..."',
   reference: "Jeremiah 29:11",
   image:
     "https://lh3.googleusercontent.com/aida-public/AB6AXuCtWYuEGHg-pfa4iHRwLpv5-2GgwyhQ7uhj5JuyCkPo99G6sUm-Ls1HT5OWKuGwY-xXNkVLaIjFG3yUYNByd_AAs9hP1-0fzM3OIK5h52kFOecWxhwCdcsxh7h-c5maH85-C50Y4zfB0I3nAsbJD7cFQnc1jjN79oKp2WRMMpAy3A3k_G5PUt6bgNgp00lrkgy2R9wwQFYlum0sNsYSG54gaZIRRsNB1WWYb_9KVowkvxMk7QX7tngF-gVymJUTsYMu1WVW6Q0rBKQ",
@@ -117,6 +117,11 @@ const getIconName = (icon: string) => {
     forum: "i-lucide-message-circle",
     person: "i-lucide-user",
     add: "i-lucide-plus",
+    clock: "i-lucide-clock",
+    "calendar-days": "i-lucide-calendar-days",
+    plus: "i-lucide-plus",
+    "message-circle": "i-lucide-message-circle",
+    user: "i-lucide-user",
   };
   return iconMap[icon] || `i-lucide-${icon}`;
 };
@@ -124,142 +129,89 @@ const getIconName = (icon: string) => {
 // Methods
 const handleActionClick = (action: any) => {
   console.log("Action clicked:", action.id);
-  // Handle navigation to different sections
-  switch (action.id) {
-    case "give":
-      // Navigate to giving/donation page
-      navigateTo({ id: "give" });
-      break;
-    case "events":
-      // Navigate to events page
-      navigateTo({ id: "events" });
-      break;
-    case "bible":
-      // Navigate to bible study page
-      navigateTo({ id: "bible" });
-      break;
-    case "groups":
-      // Navigate to groups page
-      navigateTo({ id: "groups" });
-      break;
-  }
+  navigateTo({ id: action.id });
 };
 
 const toggleTask = (task: any) => {
+  // Logic handled by v-model mostly, but we can log
   console.log("Task toggled:", task.id, task.completed);
-  // Handle task completion logic
-  task.completed = !task.completed;
 };
 
 const seeAllNews = () => {
-  console.log("See all news clicked");
-  // Navigate to news page
   navigateTo({ id: "news" });
 };
 
 const navigateTo = (navItem: any) => {
   console.log("Navigate to:", navItem.id);
 
-  // Update active state for bottom navigation
   if (navItem.id !== "add") {
     bottomNav.value.forEach((item) => {
       item.active = item.id === navItem.id;
     });
   }
 
-  // Handle navigation logic
   const router = useRouter();
-  switch (navItem.id) {
-    case "home":
-      // Already on home
-      break;
-    case "calendar":
-      // Navigate to calendar/events page
-      router.push("/events");
-      break;
-    case "add":
-      // Show add menu or navigate to add page
-      console.log("Show add menu");
-      break;
-    case "forum":
-      // Navigate to forum/community page
-      router.push("/forum");
-      break;
-    case "profile":
-      // Navigate to profile page
-      router.push("/profile");
-      break;
-    case "give":
-      router.push("/give");
-      break;
-    case "events":
-      router.push("/events");
-      break;
-    case "bible":
-      router.push("/bible");
-      break;
-    case "groups":
-      router.push("/groups");
-      break;
-    case "news":
-      router.push("/news");
-      break;
-  }
+  // Simple router match for demo
+  router.push(`/${navItem.id === "home" ? "" : navItem.id}`);
 };
 
 // Page meta
 definePageMeta({
   title: "NHECC Church Dashboard",
-  layout: "default",
+  layout: "dashboard",
 });
 </script>
 
 <template>
   <div
-    class="min-h-screen bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 font-display antialiased pb-32 transition-colors duration-300"
+    class="min-h-screen bg-background text-foreground font-display antialiased pb-32 transition-colors duration-300"
   >
     <!-- Header -->
     <header class="px-6 pt-12 pb-6 flex items-center justify-between">
       <div class="flex items-center gap-4">
         <div class="relative">
+          <UAvatar
+            :src="user.avatar"
+            :alt="user.name"
+            size="2xl"
+            class="ring-2 ring-background shadow-soft-sm"
+            imgClass="object-cover"
+          />
           <div
-            class="bg-center bg-no-repeat bg-cover rounded-full size-14 shadow-soft-sm ring-2 ring-white dark:ring-surface-dark"
-            :style="{ backgroundImage: `url(${user.avatar})` }"
-          ></div>
-          <div
-            class="absolute bottom-0 right-0 size-3.5 bg-green-500 border-2 border-white dark:border-background-dark rounded-full"
+            class="absolute bottom-0 right-0 size-3.5 bg-green-500 border-2 border-background rounded-full"
           ></div>
         </div>
         <div class="flex flex-col">
           <h2
-            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide"
+            class="text-sm font-semibold text-muted-foreground uppercase tracking-wide"
           >
             {{ user.title }}
           </h2>
-          <h1
-            class="text-2xl font-bold text-gray-900 dark:text-white leading-tight"
-          >
+          <h1 class="text-2xl font-bold leading-tight">
             {{ user.name }}
           </h1>
         </div>
       </div>
-      <button
-        class="relative p-3 rounded-full bg-white dark:bg-surface-dark shadow-soft-sm hover:bg-gray-50 dark:hover:bg-surface-highlight transition-colors"
+
+      <UButton
+        icon="i-lucide-bell"
+        color="gray"
+        variant="ghost"
+        class="rounded-full shadow-soft-sm bg-card dark:bg-card hover:bg-muted dark:hover:bg-muted p-3"
+        :ui="{ rounded: 'rounded-full' }"
       >
-        <UIcon
-          name="i-lucide-bell"
-          class="text-gray-700 dark:text-white text-3xl"
-        />
-        <span
-          class="absolute top-2.5 right-2.5 size-2.5 bg-red-500 rounded-full border-2 border-white dark:border-surface-dark"
-        ></span>
-      </button>
+        <!-- <template #trailing>
+          <span
+            class="absolute top-2.5 right-2.5 size-2.5 bg-red-500 rounded-full border-2 border-card"
+          ></span>
+        </template> -->
+      </UButton>
     </header>
 
     <!-- Hero Section -->
     <section class="px-5 mt-2">
       <div
-        class="relative w-full overflow-hidden rounded-2xl shadow-soft dark:shadow-soft-dark group"
+        class="relative w-full overflow-hidden rounded-2xl shadow-soft dark:shadow-soft-dark group border border-border"
       >
         <div
           class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10"
@@ -277,7 +229,7 @@ definePageMeta({
             >
           </div>
           <p class="text-white text-2xl font-bold leading-snug mb-1">
-            {{ dailyVerse.text }}
+            {{ dailyVerse.fullText }}
           </p>
           <p class="text-primary text-base font-semibold mt-2">
             {{ dailyVerse.reference }}
@@ -296,7 +248,7 @@ definePageMeta({
           @click="handleActionClick(action)"
         >
           <div
-            class="size-16 rounded-2xl bg-white dark:bg-surface-dark flex items-center justify-center shadow-soft-sm dark:shadow-none group-active:scale-95 transition-all border border-gray-100 dark:border-white/5"
+            class="size-16 rounded-2xl bg-card flex items-center justify-center shadow-soft-sm dark:shadow-none group-active:scale-95 transition-all border border-border"
           >
             <UIcon
               :name="getIconName(action.icon)"
@@ -304,10 +256,9 @@ definePageMeta({
               :class="{ 'fill-current': action.filled }"
             />
           </div>
-          <span
-            class="text-xs font-semibold text-gray-700 dark:text-gray-300"
-            >{{ action.label }}</span
-          >
+          <span class="text-xs font-semibold text-muted-foreground">{{
+            action.label
+          }}</span>
         </button>
       </div>
     </section>
@@ -315,71 +266,78 @@ definePageMeta({
     <!-- Today's Focus -->
     <section class="px-5 mt-10">
       <div class="flex items-center justify-between mb-5 px-1">
-        <h2
-          class="text-2xl font-bold text-gray-900 dark:text-white tracking-tight"
-        >
-          Today's Focus
-        </h2>
-        <span
-          class="px-3 py-1 rounded-full bg-white dark:bg-surface-dark text-xs font-bold text-gray-500 dark:text-gray-400 border border-gray-100 dark:border-white/5"
+        <h2 class="text-2xl font-bold tracking-tight">Today's Focus</h2>
+        <UBadge
+          color="white"
+          variant="solid"
+          class="font-bold text-muted-foreground shadow-sm border border-border"
         >
           {{ pendingTasksCount }} Pending
-        </span>
+        </UBadge>
       </div>
       <div class="flex flex-col gap-4">
-        <label
+        <div
           v-for="task in todaysTasks"
           :key="task.id"
-          class="relative flex items-center gap-4 p-5 rounded-2xl bg-white dark:bg-surface-dark shadow-soft dark:shadow-soft-dark border border-gray-100 dark:border-white/5 cursor-pointer group active:scale-[0.98] transition-all"
+          class="relative flex items-center gap-4 p-5 rounded-2xl bg-card shadow-soft dark:shadow-soft-dark border border-border cursor-pointer group active:scale-[0.98] transition-all"
+          @click="task.completed = !task.completed"
         >
-          <div class="relative flex items-center">
-            <input
-              v-model="task.completed"
-              class="peer size-6 rounded border-2 border-gray-300 dark:border-gray-600 text-primary focus:ring-offset-0 focus:ring-0 cursor-pointer checked:bg-primary checked:border-primary transition-colors bg-transparent"
-              type="checkbox"
-              @change="toggleTask(task)"
-            />
+          <div class="relative flex items-center" @click.stop>
+            <UCheckbox v-model="task.completed" color="primary" />
           </div>
           <div class="flex-1">
             <p
-              class="text-lg font-bold text-gray-900 dark:text-white peer-checked:line-through peer-checked:text-gray-400"
+              class="text-lg font-bold transition-all duration-300"
+              :class="
+                task.completed
+                  ? 'text-muted-foreground line-through'
+                  : 'text-foreground'
+              "
             >
               {{ task.title }}
             </p>
             <div class="flex items-center gap-2 mt-1">
               <UIcon
                 :name="getIconName(task.icon)"
-                class="text-gray-400 text-sm"
+                class="text-muted-foreground text-sm"
               />
-              <p class="text-sm text-gray-500 dark:text-gray-400">
-                {{ task.time }} • {{ task.location }}
+              <p class="text-sm text-muted-foreground">
+                <span v-if="task.time">{{ task.time }} • </span
+                >{{ task.location }}
               </p>
             </div>
           </div>
           <div
             v-if="task.priority"
-            class="px-3 py-1 bg-primary/20 dark:bg-primary/10 rounded-full border border-primary/20"
+            class="px-3 py-1 bg-primary/20 rounded-full border border-primary/20"
           >
-            <p class="text-xs font-bold text-primary dark:text-primary">
-              Priority
-            </p>
+            <p class="text-xs font-bold text-primary">Priority</p>
           </div>
-        </label>
+          <div
+            v-else
+            class="size-8 rounded-full bg-muted/50 flex items-center justify-center"
+          >
+            <UIcon
+              name="i-lucide-chevron-right"
+              class="text-muted-foreground text-xl"
+            />
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- Church News -->
     <section class="mt-10 mb-6">
       <div class="flex items-center justify-between px-6 mb-5">
-        <h2 class="text-xl font-bold text-gray-900 dark:text-white">
-          Church News
-        </h2>
-        <a
-          class="text-primary text-sm font-bold hover:text-yellow-400 transition-colors"
-          href="#"
-          @click.prevent="seeAllNews"
-          >See All</a
-        >
+        <h2 class="text-xl font-bold">Church News</h2>
+        <UButton
+          variant="link"
+          color="primary"
+          :padded="false"
+          label="See All"
+          class="font-bold hover:text-yellow-400"
+          @click="seeAllNews"
+        />
       </div>
       <div
         class="flex overflow-x-auto gap-4 px-5 pb-6 no-scrollbar snap-x snap-mandatory"
@@ -387,7 +345,7 @@ definePageMeta({
         <div
           v-for="news in churchNews"
           :key="news.id"
-          class="snap-start shrink-0 w-72 rounded-2xl bg-white dark:bg-surface-dark shadow-soft dark:shadow-soft-dark overflow-hidden flex flex-col relative border border-gray-100 dark:border-white/5"
+          class="snap-start shrink-0 w-72 rounded-2xl bg-card shadow-soft dark:shadow-soft-dark overflow-hidden flex flex-col relative border border-border"
         >
           <div
             class="h-32 bg-cover bg-center"
@@ -399,60 +357,13 @@ definePageMeta({
             >
               {{ news.category }}
             </p>
-            <h3 class="font-bold text-gray-900 dark:text-white text-lg">
+            <h3 class="font-bold text-lg">
               {{ news.title }}
             </h3>
           </div>
         </div>
       </div>
     </section>
-
-    <!-- Bottom Navigation -->
-    <div class="fixed bottom-8 inset-x-6 z-50">
-      <nav
-        class="bg-white/90 dark:bg-surface-dark/90 h-18 py-2 rounded-full shadow-[0_10px_40px_rgb(0,0,0,0.2)] flex items-center justify-around px-2 border border-white/50 dark:border-white/10 backdrop-blur-xl"
-      >
-        <button
-          v-for="navItem in bottomNav"
-          :key="navItem.id"
-          class="flex flex-col items-center justify-center w-14 h-14 rounded-full transition-colors"
-          :class="
-            navItem.active
-              ? 'text-primary'
-              : 'text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300'
-          "
-          @click="navigateTo(navItem)"
-        >
-          <UIcon
-            :name="getIconName(navItem.icon)"
-            class="text-3xl"
-            :class="{ 'fill-current': navItem.active }"
-          />
-        </button>
-        <!-- Add Button -->
-        <button
-          class="flex items-center justify-center w-14 h-14 -mt-10 bg-primary rounded-full shadow-lg shadow-primary/30 text-white transform transition-transform active:scale-95 ring-[6px] ring-background-light dark:ring-background-dark"
-        >
-          <UIcon name="i-lucide-plus" class="text-3xl" />
-        </button>
-      </nav>
-    </div>
-
-    <!-- Dark Mode Toggle -->
-    <div class="fixed top-4 right-4 z-50">
-      <button
-        @click="toggleDarkMode"
-        class="w-12 h-12 rounded-full bg-white dark:bg-surface-dark shadow-soft-sm dark:shadow-none border border-gray-100 dark:border-white/5 flex items-center justify-center transition-all hover:scale-105"
-        :aria-label="`Switch to ${
-          colorMode.value === 'dark' ? 'light' : 'dark'
-        } mode`"
-      >
-        <UIcon
-          :name="colorMode.value === 'dark' ? 'i-lucide-sun' : 'i-lucide-moon'"
-          class="text-2xl text-gray-700 dark:text-white"
-        />
-      </button>
-    </div>
   </div>
 </template>
 

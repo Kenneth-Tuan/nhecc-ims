@@ -6,4 +6,5 @@ export const ROUTER_NAME = {
   RESET_PASSWORD: "reset-password",
   VERIFY_EMAIL: "verify-email",
   VERIFY_OTP: "verify-otp",
+  MEMBERS: "members",
 } as const;
