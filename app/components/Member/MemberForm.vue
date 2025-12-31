@@ -22,7 +22,11 @@ interface Emits {
 }
 
 const props = defineProps<Props>();
-const emit = defineEmits<Emits>();
+// const emit = defineEmits<Emits>();
+const emit = defineEmits<{
+  (e: "submit", data: MemberFormData): void;
+  (e: "cancel"): void;
+}>();
 
 // Determine if we're in edit mode
 const isEditMode = computed(() => !!props.member);

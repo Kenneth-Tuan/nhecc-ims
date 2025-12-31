@@ -218,7 +218,12 @@ const handlePageChange = async (page: number) => {
           :members="members"
           :loading="isSubmitting"
           @submit="handleFormSubmit"
-          @cancel="isFormModalOpen = false"
+          @cancel="
+            () => {
+              console.log('cancel');
+              isFormModalOpen = false;
+            }
+          "
         />
       </template>
     </UModal>
