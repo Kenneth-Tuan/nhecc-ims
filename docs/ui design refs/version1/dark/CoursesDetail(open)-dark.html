@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html class="" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+      name="viewport"
+    />
+    <title>NHECC Course Detail</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#e57f4f",
+              "background-light": "#f8f6f6",
+              "background-dark": "#211611",
+              "card-dark": "#2f2a1b",
+            },
+            fontFamily: { display: "Inter" },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            boxShadow: {
+              soft: "0 10px 40px -10px rgba(0,0,0,0.08)",
+              "soft-sm": "0 4px 20px -5px rgba(0,0,0,0.05)",
+              glow: "0 0 20px -5px rgba(250, 198, 56, 0.3)",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        min-height: 100vh;
+        background-color: #231e0f;
+      }
+    </style>
+    <style>
+      body {
+        min-height: max(884px, 100dvh);
+      }
+    </style>
+    <style>
+      body {
+        min-height: max(884px, 100dvh);
+      }
+    </style>
+    <style>
+      body {
+        min-height: max(884px, 100dvh);
+      }
+    </style>
+  </head>
+  <body class="bg-background-dark text-gray-100 font-display antialiased pb-32">
+    <nav
+      class="fixed top-0 inset-x-0 z-50 px-4 pt-12 pb-4 flex justify-between items-center pointer-events-none"
+    >
+      <button
+        class="pointer-events-auto size-10 rounded-full bg-black/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-black/40 transition-colors"
+      >
+        <span class="material-symbols-outlined">arrow_back</span>
+      </button>
+      <div class="flex gap-3 pointer-events-auto">
+        <button
+          class="size-10 rounded-full bg-black/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-black/40 transition-colors"
+        >
+          <span class="material-symbols-outlined">bookmark_border</span>
+        </button>
+        <button
+          class="size-10 rounded-full bg-black/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-black/40 transition-colors"
+        >
+          <span class="material-symbols-outlined">share</span>
+        </button>
+      </div>
+    </nav>
+    <div class="relative w-full aspect-video">
+      <div
+        class="absolute inset-0 bg-cover bg-center"
+        style="
+          background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCtWYuEGHg-pfa4iHRwLpv5-2GgwyhQ7uhj5JuyCkPo99G6sUm-Ls1HT5OWKuGwY-xXNkVLaIjFG3yUYNByd_AAs9hP1-0fzM3OIK5h52kFOecWxhwCdcsxh7h-c5maH85-C50Y4zfB0I3nAsbJD7cFQnc1jjN79oKp2WRMMpAy3A3k_G5PUt6bgNgp00lrkgy2R9wwQFYlum0sNsYSG54gaZIRRsNB1WWYb_9KVowkvxMk7QX7tngF-gVymJUTsYMu1WVW6Q0rBKQ');
+        "
+      ></div>
+      <div
+        class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-background-dark/90"
+      ></div>
+      <div class="absolute inset-0 flex items-center justify-center">
+        <button
+          class="size-16 rounded-full bg-primary/90 text-background-dark shadow-glow flex items-center justify-center hover:scale-105 transition-transform active:scale-95"
+        >
+          <span class="material-symbols-outlined text-4xl ml-1 fill-1"
+            >play_arrow</span
+          >
+        </button>
+      </div>
+    </div>
+    <main class="relative z-10 -mt-10 px-5">
+      <div
+        class="bg-card-dark rounded-2xl p-5 shadow-xl border border-white/5 backdrop-blur-sm relative mb-6"
+      >
+        <div class="flex justify-between items-start mb-3">
+          <span
+            class="bg-primary/20 text-primary text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide"
+            >Biblical Studies</span
+          >
+          <div class="flex items-center gap-1 bg-black/20 px-2 py-1 rounded-lg">
+            <span class="material-symbols-outlined text-primary text-sm fill-1"
+              >star</span
+            >
+            <span class="text-xs font-bold">4.8</span>
+            <span class="text-xs text-gray-400">(124)</span>
+          </div>
+        </div>
+        <h1 class="text-2xl font-bold text-white mb-4 leading-tight">
+          Foundations of Faith: The Gospel of John
+        </h1>
+        <div class="flex items-center gap-3 pt-3 border-t border-white/5">
+          <div
+            class="size-10 rounded-full bg-cover bg-center ring-2 ring-white/10"
+            style="
+              background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCoMKD60XagGJV6T0Qs7HwOrNF9ZeseqPpTHwZ-7oE63FruhWVjtGSpxONG_lShUuhxQTUZCwNCPaZidU53J3j5UqoeM_OY3KfBjjFCJ81f5hBTXR8YMeCVSshwMfV4g46wWqh-PQmT2el6jq_gJf4kpKf-opV23QlNlk4etzpJBaCYfOmvvnj-dmVe5Pd1VowhcvvXNI0UMTs_dvLp8_hOkLJKV9IZwWOSQ9rMz9j8HXUxSAHUFxuCU9ENmetCvFYWSEEvUO3ThDw');
+            "
+          ></div>
+          <div class="flex-1">
+            <p
+              class="text-xs text-gray-400 uppercase tracking-wide font-medium"
+            >
+              Instructor
+            </p>
+            <p class="text-sm font-semibold text-white">Sister Mary Thompson</p>
+          </div>
+          <button class="text-primary hover:text-white transition-colors">
+            <span class="material-symbols-outlined">info</span>
+          </button>
+        </div>
+      </div>
+      <div class="flex items-center gap-8 border-b border-white/10 mb-6 px-1">
+        <button
+          class="pb-3 border-b-2 border-primary text-primary font-bold text-sm"
+        >
+          About
+        </button>
+        <button
+          class="pb-3 border-b-2 border-transparent text-gray-400 font-medium text-sm hover:text-gray-200"
+        >
+          Lessons
+        </button>
+        <button
+          class="pb-3 border-b-2 border-transparent text-gray-400 font-medium text-sm hover:text-gray-200"
+        >
+          Discussions
+        </button>
+      </div>
+      <div class="space-y-8 animate-fade-in">
+        <section>
+          <h3 class="text-lg font-bold text-white mb-2">Description</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            Dive deep into the spiritual meaning behind the Gospel of John. This
+            course is designed for members who wish to strengthen their
+            understanding of Jesus' ministry and His divine nature. Suitable for
+            all ages.
+          </p>
+          <button
+            class="mt-2 text-primary text-sm font-semibold flex items-center gap-1"
+          >
+            Read more
+            <span class="material-symbols-outlined text-base">expand_more</span>
+          </button>
+        </section>
+        <section class="grid grid-cols-2 gap-3">
+          <div class="bg-white/5 rounded-xl p-4 flex flex-col gap-2">
+            <span class="material-symbols-outlined text-primary">schedule</span>
+            <div>
+              <p class="text-xs text-gray-400">Duration</p>
+              <p class="text-sm font-bold text-white">4 Weeks</p>
+            </div>
+          </div>
+          <div class="bg-white/5 rounded-xl p-4 flex flex-col gap-2">
+            <span class="material-symbols-outlined text-primary">school</span>
+            <div>
+              <p class="text-xs text-gray-400">Level</p>
+              <p class="text-sm font-bold text-white">Beginner</p>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-white">Curriculum Preview</h3>
+            <span class="text-xs text-gray-500">12 Lessons</span>
+          </div>
+          <div class="space-y-3">
+            <div
+              class="flex items-center gap-4 p-3 bg-white/5 rounded-xl border border-white/5 hover:bg-white/10 transition-colors cursor-pointer"
+            >
+              <div
+                class="size-10 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0"
+              >
+                <span class="material-symbols-outlined text-xl fill-1"
+                  >play_circle</span
+                >
+              </div>
+              <div class="flex-1">
+                <p class="text-sm font-bold text-white">
+                  01. Introduction to John
+                </p>
+                <p class="text-xs text-gray-400">10 mins • Video</p>
+              </div>
+              <span class="material-symbols-outlined text-green-500 text-xl"
+                >check_circle</span
+              >
+            </div>
+            <div
+              class="flex items-center gap-4 p-3 bg-white/5 rounded-xl border border-white/5 hover:bg-white/10 transition-colors cursor-pointer"
+            >
+              <div
+                class="size-10 rounded-full bg-gray-700/50 text-gray-400 flex items-center justify-center shrink-0"
+              >
+                <span class="material-symbols-outlined text-xl">lock</span>
+              </div>
+              <div class="flex-1 opacity-60">
+                <p class="text-sm font-bold text-white">
+                  02. The Word Made Flesh
+                </p>
+                <p class="text-xs text-gray-400">25 mins • Reading</p>
+              </div>
+            </div>
+            <div
+              class="flex items-center gap-4 p-3 bg-white/5 rounded-xl border border-white/5 hover:bg-white/10 transition-colors cursor-pointer"
+            >
+              <div
+                class="size-10 rounded-full bg-gray-700/50 text-gray-400 flex items-center justify-center shrink-0"
+              >
+                <span class="material-symbols-outlined text-xl">lock</span>
+              </div>
+              <div class="flex-1 opacity-60">
+                <p class="text-sm font-bold text-white">
+                  03. The First Miracle
+                </p>
+                <p class="text-xs text-gray-400">15 mins • Video</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <div
+      class="fixed bottom-0 inset-x-0 bg-[#231e0f]/95 backdrop-blur-lg border-t border-white/10 p-5 pb-8 z-40"
+    >
+      <div class="flex items-center gap-4">
+        <div class="flex flex-col">
+          <span class="text-xs text-gray-400 font-medium">Total Cost</span>
+          <div class="flex items-baseline gap-1">
+            <span class="text-xl font-bold text-white">Free</span>
+            <span class="text-xs text-green-500 font-medium">for Members</span>
+          </div>
+        </div>
+        <button
+          class="flex-1 bg-primary text-background-dark font-bold text-lg h-14 rounded-xl shadow-glow active:scale-[0.98] transition-transform flex items-center justify-center gap-2"
+        >
+          <span>Start Learning</span>
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

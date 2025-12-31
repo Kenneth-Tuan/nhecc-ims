@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Leave Request Form</title>
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <!-- Material Symbols -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Theme Configuration -->
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#e57f4f",
+              "background-light": "#f8f6f6",
+              "background-dark": "#211611",
+              "surface-light": "#ffffff",
+              "surface-dark": "#2a1515",
+              "input-light": "#f3f4f6",
+              "input-dark": "#3a2020",
+            },
+            fontFamily: { display: "Inter" },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            boxShadow: { soft: "0 10px 40px -10px rgba(0,0,0,0.08)" },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Custom styles for native-like feel */
+      body {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      /* Hide scrollbar for clean UI */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      /* Material Icon Alignment */
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+        vertical-align: middle;
+      }
+
+      /* Custom Date Picker Indicator Styling for consistent red theme */
+      ::-webkit-calendar-picker-indicator {
+        filter: invert(18%) sepia(91%) saturate(5835%) hue-rotate(356deg)
+          brightness(96%) contrast(96%);
+        cursor: pointer;
+        opacity: 0.6;
+      }
+      ::-webkit-calendar-picker-indicator:hover {
+        opacity: 1;
+      }
+    </style>
+    <style>
+      body {
+        min-height: max(884px, 100dvh);
+      }
+    </style>
+    <style>
+      body {
+        min-height: max(884px, 100dvh);
+      }
+    </style>
+    <style>
+      body {
+        min-height: max(884px, 100dvh);
+      }
+    </style>
+  </head>
+  <body
+    class="bg-gray-800/50 backdrop-blur-sm flex items-end justify-center min-h-screen font-display antialiased p-0 sm:p-4 overflow-hidden"
+  >
+    <!-- Bottom Sheet Container -->
+    <!-- Simulating the modal appearing from bottom -->
+    <div
+      class="w-full max-w-md bg-background-light dark:bg-background-dark rounded-t-[32px] sm:rounded-[32px] shadow-soft flex flex-col max-h-[90vh] transition-transform transform translate-y-0 relative overflow-hidden group/design-root"
+    >
+      <!-- Drag Handle Area -->
+      <div
+        class="w-full flex justify-center pt-5 pb-2 shrink-0 bg-background-light dark:bg-background-dark cursor-grab active:cursor-grabbing z-10"
+      >
+        <div class="h-1.5 w-12 rounded-full bg-gray-300 dark:bg-gray-600"></div>
+      </div>
+      <!-- Header -->
+      <div
+        class="px-6 pb-2 flex items-center justify-between shrink-0 bg-background-light dark:bg-background-dark"
+      >
+        <h2
+          class="text-gray-900 dark:text-white text-2xl font-bold tracking-tight"
+        >
+          New Leave Request
+        </h2>
+        <button
+          aria-label="Close modal"
+          class="flex items-center justify-center w-10 h-10 rounded-full bg-transparent hover:bg-gray-100 dark:hover:bg-white/10 text-gray-500 dark:text-gray-400 transition-colors"
+        >
+          <span class="material-symbols-outlined text-3xl">close</span>
+        </button>
+      </div>
+      <!-- Scrollable Form Content -->
+      <div class="flex-1 overflow-y-auto no-scrollbar px-6 pb-8 pt-2">
+        <form class="flex flex-col gap-6" onsubmit="event.preventDefault();">
+          <!-- Leave Type Field -->
+          <div class="flex flex-col gap-2">
+            <label
+              class="text-gray-900 dark:text-gray-100 text-base font-semibold pl-1"
+              for="leave-type"
+              >Leave Type</label
+            >
+            <div class="relative group">
+              <select
+                class="w-full h-[52px] bg-input-light dark:bg-input-dark border-2 border-transparent text-gray-900 dark:text-white text-lg rounded-xl px-4 pr-12 appearance-none focus:outline-none focus:border-primary focus:ring-0 transition-all placeholder-gray-500 cursor-pointer"
+                id="leave-type"
+                name="leave-type"
+              >
+                <option disabled="" selected="" value="">
+                  Select a reason...
+                </option>
+                <option value="sick">Sick Leave</option>
+                <option value="personal">Personal Leave</option>
+                <option value="ministry">Ministry Work</option>
+                <option value="vacation">Annual Vacation</option>
+              </select>
+              <div
+                class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-primary"
+              >
+                <span class="material-symbols-outlined">expand_more</span>
+              </div>
+            </div>
+          </div>
+          <!-- Date Selection Row -->
+          <div class="grid grid-cols-2 gap-4">
+            <!-- Start Date -->
+            <div class="flex flex-col gap-2">
+              <label
+                class="text-gray-900 dark:text-gray-100 text-base font-semibold pl-1"
+                for="start-date"
+                >Start Date</label
+              >
+              <div class="relative">
+                <input
+                  class="w-full h-[52px] bg-input-light dark:bg-input-dark border-2 border-transparent text-gray-900 dark:text-white text-lg rounded-xl px-4 focus:outline-none focus:border-primary focus:ring-0 transition-all placeholder-gray-500"
+                  id="start-date"
+                  placeholder="Select"
+                  type="date"
+                />
+              </div>
+            </div>
+            <!-- End Date -->
+            <div class="flex flex-col gap-2">
+              <label
+                class="text-gray-900 dark:text-gray-100 text-base font-semibold pl-1"
+                for="end-date"
+                >End Date</label
+              >
+              <div class="relative">
+                <input
+                  class="w-full h-[52px] bg-input-light dark:bg-input-dark border-2 border-transparent text-gray-900 dark:text-white text-lg rounded-xl px-4 focus:outline-none focus:border-primary focus:ring-0 transition-all placeholder-gray-500"
+                  id="end-date"
+                  placeholder="Select"
+                  type="date"
+                />
+              </div>
+            </div>
+          </div>
+          <!-- Reason Field -->
+          <div class="flex flex-col gap-2">
+            <label
+              class="text-gray-900 dark:text-gray-100 text-base font-semibold pl-1"
+              for="reason"
+              >Reason
+              <span class="text-gray-400 font-normal text-sm ml-1"
+                >(Optional)</span
+              ></label
+            >
+            <textarea
+              class="w-full bg-input-light dark:bg-input-dark border-2 border-transparent text-gray-900 dark:text-white text-lg rounded-xl p-4 resize-none focus:outline-none focus:border-primary focus:ring-0 transition-all placeholder-gray-400 dark:placeholder-gray-500"
+              id="reason"
+              placeholder="Please describe briefly..."
+              rows="4"
+            ></textarea>
+          </div>
+          <!-- Spacer to push button down if content is short, but allow scroll if long -->
+          <div class="h-4"></div>
+          <!-- Submit Button -->
+          <button
+            class="w-full h-[56px] bg-primary hover:bg-red-700 active:scale-[0.98] transition-all text-white text-lg font-bold rounded-full shadow-lg shadow-red-500/20 flex items-center justify-center gap-2 mt-auto"
+            type="submit"
+          >
+            <span>Submit Request</span>
+            <span class="material-symbols-outlined text-[20px]">send</span>
+          </button>
+          <!-- Bottom padding for safe area on mobile -->
+          <div class="h-2"></div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+
+<html class="" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+      name="viewport"
+    />
+    <title>NHECC Course List</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#e57f4f",
+              secondary: "#E8B025",
+              "background-light": "#f8f6f6",
+              "surface-white": "#ffffff",
+              "text-main": "#1F2937",
+              "text-body": "#4B5563",
+              "text-muted": "#9CA3AF",
+              "background-dark": "#211611",
+            },
+            fontFamily: { display: "Inter" },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            boxShadow: {
+              soft: "0 10px 40px -10px rgba(0,0,0,0.08)",
+              "soft-sm": "0 4px 20px -5px rgba(0,0,0,0.05)",
+              card: "0 2px 12px -2px rgba(0,0,0,0.03), 0 1px 4px -1px rgba(0,0,0,0.02)",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      body {
+        -webkit-tap-highlight-color: transparent;
+      }
+    </style>
+    <style>
+      body {
+        min-height: max(884px, 100dvh);
+      }
+    </style>
+    <style>
+      body {
+        min-height: max(884px, 100dvh);
+      }
+    </style>
+    <style>
+      body {
+        min-height: max(884px, 100dvh);
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background-light text-text-main font-display antialiased min-h-screen pb-24"
+  >
+    <header
+      class="sticky top-0 z-30 bg-background-light/95 backdrop-blur-md px-5 pt-12 pb-2"
+    >
+      <div class="flex justify-between items-center mb-5">
+        <div>
+          <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">
+            Courses
+          </h1>
+          <p class="text-sm text-gray-500 font-medium mt-0.5">
+            Continue your spiritual growth
+          </p>
+        </div>
+        <button
+          class="size-10 flex items-center justify-center rounded-full bg-white shadow-soft-sm text-gray-600 hover:text-primary transition-colors active:scale-95"
+        >
+          <span class="material-symbols-outlined">notifications</span>
+        </button>
+      </div>
+      <div class="relative mb-6 shadow-sm group">
+        <span
+          class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 material-symbols-outlined group-focus-within:text-primary transition-colors"
+          >search</span
+        >
+        <input
+          class="w-full pl-12 pr-4 py-3.5 bg-white border-none rounded-2xl text-base text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-primary/50 shadow-soft-sm transition-shadow"
+          placeholder="Search topics, scripture..."
+          type="text"
+        />
+      </div>
+      <div class="flex gap-3 overflow-x-auto no-scrollbar pb-2 -mx-5 px-5">
+        <button
+          class="px-6 py-2.5 rounded-full bg-primary text-gray-900 text-sm font-bold shadow-sm whitespace-nowrap active:scale-95 transition-transform"
+        >
+          All Courses
+        </button>
+        <button
+          class="px-6 py-2.5 rounded-full bg-white text-gray-600 text-sm font-semibold shadow-soft-sm border border-gray-100 whitespace-nowrap active:scale-95 transition-transform"
+        >
+          In Progress
+        </button>
+        <button
+          class="px-6 py-2.5 rounded-full bg-white text-gray-600 text-sm font-semibold shadow-soft-sm border border-gray-100 whitespace-nowrap active:scale-95 transition-transform"
+        >
+          Biblical Studies
+        </button>
+        <button
+          class="px-6 py-2.5 rounded-full bg-white text-gray-600 text-sm font-semibold shadow-soft-sm border border-gray-100 whitespace-nowrap active:scale-95 transition-transform"
+        >
+          Leadership
+        </button>
+      </div>
+    </header>
+    <main class="px-5 space-y-4 mt-2">
+      <div
+        class="group bg-white rounded-2xl p-3.5 shadow-card active:scale-[0.99] transition-transform duration-200 cursor-pointer"
+      >
+        <div class="flex gap-4 h-full">
+          <div
+            class="relative w-28 h-32 flex-shrink-0 rounded-xl overflow-hidden bg-gray-100 shadow-inner"
+          >
+            <div
+              class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCtWYuEGHg-pfa4iHRwLpv5-2GgwyhQ7uhj5JuyCkPo99G6sUm-Ls1HT5OWKuGwY-xXNkVLaIjFG3yUYNByd_AAs9hP1-0fzM3OIK5h52kFOecWxhwCdcsxh7h-c5maH85-C50Y4zfB0I3nAsbJD7cFQnc1jjN79oKp2WRMMpAy3A3k_G5PUt6bgNgp00lrkgy2R9wwQFYlum0sNsYSG54gaZIRRsNB1WWYb_9KVowkvxMk7QX7tngF-gVymJUTsYMu1WVW6Q0rBKQ');
+              "
+            ></div>
+            <div class="absolute inset-0 bg-black/5"></div>
+          </div>
+          <div class="flex flex-col flex-1 justify-between py-0.5">
+            <div>
+              <div class="flex justify-between items-start mb-1.5">
+                <span
+                  class="text-[10px] font-bold text-amber-700 tracking-wider uppercase bg-amber-50 px-2 py-1 rounded-md"
+                  >Biblical Studies</span
+                >
+                <span
+                  class="material-symbols-outlined text-primary text-xl fill-1"
+                  >bookmark</span
+                >
+              </div>
+              <h3
+                class="font-bold text-gray-900 text-lg leading-tight mb-1 line-clamp-2"
+              >
+                Understanding the Old Testament
+              </h3>
+              <p class="text-xs text-gray-500 font-medium">Dr. Sarah Johnson</p>
+            </div>
+            <div class="mt-3">
+              <div class="flex justify-between items-end mb-1.5">
+                <span class="text-[10px] font-bold text-gray-400"
+                  >35% COMPLETED</span
+                >
+              </div>
+              <div class="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+                <div class="h-full bg-primary rounded-full w-[35%]"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="group bg-white rounded-2xl p-3.5 shadow-card active:scale-[0.99] transition-transform duration-200 cursor-pointer"
+      >
+        <div class="flex gap-4 h-full">
+          <div
+            class="relative w-28 h-32 flex-shrink-0 rounded-xl overflow-hidden bg-gray-100 shadow-inner"
+          >
+            <div
+              class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuANUuDfOyY8m-D6X0WfbCnXRJ3dCe5S3rpd2_nh0yEOII2D0cBjpuygwGoc1GolMfqEbBlHW7KSbVPAVsL0Yjwrh_-bPMjzBMLbtINgBvsOurhAqta4HSZQEUTFc_8zSHEE5LuCOJRq7XKe_F3FQFxY9CUkMIt5_YrvGKx5y35Om1ej463r0as0PeViVYWz-cZBu2n39AngvcYAoNVwhQiWVH8PwNQs_3XRZ4Bth7eBKVMKmfY0FwDYybeUNYMeH0R34Kv4dtFAvMs');
+              "
+            ></div>
+          </div>
+          <div class="flex flex-col flex-1 justify-between py-0.5">
+            <div>
+              <div class="flex justify-between items-start mb-1.5">
+                <span
+                  class="text-[10px] font-bold text-blue-700 tracking-wider uppercase bg-blue-50 px-2 py-1 rounded-md"
+                  >Leadership</span
+                >
+                <span
+                  class="material-symbols-outlined text-gray-300 text-xl hover:text-primary transition-colors"
+                  >bookmark_border</span
+                >
+              </div>
+              <h3
+                class="font-bold text-gray-900 text-lg leading-tight mb-1 line-clamp-2"
+              >
+                Effective Church Leadership 101
+              </h3>
+              <p class="text-xs text-gray-500 font-medium">Rev. Mark Davis</p>
+            </div>
+            <div
+              class="mt-auto flex items-center gap-3 text-xs text-gray-500 font-medium pt-2"
+            >
+              <span
+                class="flex items-center gap-1 bg-gray-50 px-2 py-1 rounded-lg border border-gray-100"
+              >
+                <span class="material-symbols-outlined text-sm text-gray-400"
+                  >schedule</span
+                >
+                4h 30m
+              </span>
+              <span
+                class="flex items-center gap-1 bg-gray-50 px-2 py-1 rounded-lg border border-gray-100"
+              >
+                <span class="material-symbols-outlined text-sm text-gray-400"
+                  >play_lesson</span
+                >
+                12
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="group bg-white rounded-2xl p-3.5 shadow-card active:scale-[0.99] transition-transform duration-200 cursor-pointer"
+      >
+        <div class="flex gap-4 h-full">
+          <div
+            class="relative w-28 h-32 flex-shrink-0 rounded-xl overflow-hidden bg-gray-100 shadow-inner"
+          >
+            <div
+              class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBgkm8ZlwVbk8GjK4l5_v1RyrkmBedZlLA4cUMEsC7PZZGa889AAh9IAr_TeiqHzQjoz2IkssQM0ua0y1oHCwOMw44HfFevK1fGlxYcrjfcp_6ewLoKW5Mq1wBE4Y-h2KITQea-TCZ10YD16CqMaBHilZkxSV5Y5TZm1C9ZoOA1JaL50x8M2JLsJ7_B2Sf9yQ5wmTCp0oew8Id1cT3vWAEbph-0v5IuHnerwbWZ0DMPG8rNfeqOE3rfw1PrVgt7tUDVjQOn_wBdtnM');
+              "
+            ></div>
+          </div>
+          <div class="flex flex-col flex-1 justify-between py-0.5">
+            <div>
+              <div class="flex justify-between items-start mb-1.5">
+                <span
+                  class="text-[10px] font-bold text-emerald-700 tracking-wider uppercase bg-emerald-50 px-2 py-1 rounded-md"
+                  >Life Groups</span
+                >
+                <span
+                  class="material-symbols-outlined text-gray-300 text-xl hover:text-primary transition-colors"
+                  >bookmark_border</span
+                >
+              </div>
+              <h3
+                class="font-bold text-gray-900 text-lg leading-tight mb-1 line-clamp-2"
+              >
+                Building Community in Faith
+              </h3>
+              <p class="text-xs text-gray-500 font-medium">
+                Pastor John &amp; Mary
+              </p>
+            </div>
+            <div
+              class="mt-auto flex items-center gap-3 text-xs text-gray-500 font-medium pt-2"
+            >
+              <span
+                class="flex items-center gap-1 bg-gray-50 px-2 py-1 rounded-lg border border-gray-100"
+              >
+                <span class="material-symbols-outlined text-sm text-gray-400"
+                  >calendar_today</span
+                >
+                8 Wks
+              </span>
+              <span
+                class="flex items-center gap-1 bg-gray-50 px-2 py-1 rounded-lg border border-gray-100"
+              >
+                <span class="material-symbols-outlined text-sm text-gray-400"
+                  >group</span
+                >
+                Live
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="group bg-white rounded-2xl p-3.5 shadow-card active:scale-[0.99] transition-transform duration-200 cursor-pointer"
+      >
+        <div class="flex gap-4 h-full">
+          <div
+            class="relative w-28 h-32 flex-shrink-0 rounded-xl overflow-hidden bg-gray-100 shadow-inner"
+          >
+            <div
+              class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDP8NUisb6RhPS9WUgZnOOWAg3AWEMwM-EObbZDArTm83reIBF3pfEuwrXgSpMqbPmfCIidBedUbxeR3Q8t_FZvMw-Lv0gbTUwmo4qHchkE1hmt2JYHoL4Q2rTFUkiezONvqQVceBZQstVchkY_2WQx5iiClj7VKVlN3Utc-cAbrsbuWwPpi90PUMUUsAeTetS5uhomUXB1qEUyPpbnRQEhRKPQkKzjuv-Wgc3IkYmjVwtRgvtVKvZnnRpD7rvzwUdBozWPJ9EmXLg');
+              "
+            ></div>
+          </div>
+          <div class="flex flex-col flex-1 justify-between py-0.5">
+            <div>
+              <div class="flex justify-between items-start mb-1.5">
+                <span
+                  class="text-[10px] font-bold text-purple-700 tracking-wider uppercase bg-purple-50 px-2 py-1 rounded-md"
+                  >Worship</span
+                >
+                <span
+                  class="material-symbols-outlined text-gray-300 text-xl hover:text-primary transition-colors"
+                  >bookmark_border</span
+                >
+              </div>
+              <h3
+                class="font-bold text-gray-900 text-lg leading-tight mb-1 line-clamp-2"
+              >
+                The Heart of Worship
+              </h3>
+              <p class="text-xs text-gray-500 font-medium">
+                Music Ministry Team
+              </p>
+            </div>
+            <div
+              class="mt-auto flex items-center gap-3 text-xs text-gray-500 font-medium pt-2"
+            >
+              <span
+                class="flex items-center gap-1 bg-gray-50 px-2 py-1 rounded-lg border border-gray-100"
+              >
+                <span class="material-symbols-outlined text-sm text-gray-400"
+                  >schedule</span
+                >
+                2h 15m
+              </span>
+              <span
+                class="flex items-center gap-1 bg-gray-50 px-2 py-1 rounded-lg border border-gray-100"
+              >
+                <span class="material-symbols-outlined text-sm text-gray-400"
+                  >play_lesson</span
+                >
+                5
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <nav
+      class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-6 py-2 pb-6 z-40 shadow-[0_-5px_20px_-5px_rgba(0,0,0,0.05)]"
+    >
+      <div class="flex justify-between items-center max-w-md mx-auto">
+        <button
+          class="flex flex-col items-center gap-1 p-2 text-gray-400 hover:text-gray-600 transition-colors w-16 group"
+        >
+          <span
+            class="material-symbols-outlined text-[26px] group-hover:scale-110 transition-transform"
+            >home</span
+          >
+          <span class="text-[10px] font-medium">Home</span>
+        </button>
+        <button
+          class="flex flex-col items-center gap-1 p-2 text-primary transition-colors w-16 group relative"
+        >
+          <span
+            class="absolute -top-3 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full"
+          ></span>
+          <span
+            class="material-symbols-outlined text-[26px] fill-1 group-hover:scale-110 transition-transform"
+            >school</span
+          >
+          <span class="text-[10px] font-bold text-gray-900">Courses</span>
+        </button>
+        <button
+          class="flex flex-col items-center gap-1 p-2 text-gray-400 hover:text-gray-600 transition-colors w-16 group"
+        >
+          <span
+            class="material-symbols-outlined text-[26px] group-hover:scale-110 transition-transform"
+            >event</span
+          >
+          <span class="text-[10px] font-medium">Events</span>
+        </button>
+        <button
+          class="flex flex-col items-center gap-1 p-2 text-gray-400 hover:text-gray-600 transition-colors w-16 group"
+        >
+          <div
+            class="size-6 rounded-full overflow-hidden bg-gray-200 group-hover:scale-110 transition-transform"
+          >
+            <div
+              class="w-full h-full bg-cover bg-center"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCoMKD60XagGJV6T0Qs7HwOrNF9ZeseqPpTHwZ-7oE63FruhWVjtGSpxONG_lShUuhxQTUZCwNCPaZidU53J3j5UqoeM_OY3KfBjjFCJ81f5hBTXR8YMeCVSshwMfV4g46wWqh-PQmT2el6jq_gJf4kpKf-opV23QlNlk4etzpJBaCYfOmvvnj-dmVe5Pd1VowhcvvXNI0UMTs_dvLp8_hOkLJKV9IZwWOSQ9rMz9j8HXUxSAHUFxuCU9ENmetCvFYWSEEvUO3ThDw');
+              "
+            ></div>
+          </div>
+          <span class="text-[10px] font-medium">Profile</span>
+        </button>
+      </div>
+    </nav>
+  </body>
+</html>

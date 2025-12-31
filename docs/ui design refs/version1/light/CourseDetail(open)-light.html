@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Course Detail</title>
+    <!-- Material Symbols -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <!-- Tailwind CSS with Plugins -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Theme Configuration -->
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#e57f4f",
+              "background-light": "#f8f6f6",
+              "background-dark": "#211611",
+            },
+            fontFamily: { display: "Inter" },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            boxShadow: {
+              soft: "0 8px 30px rgba(0,0,0,0.06)",
+              upward: "0 -4px 20px rgba(0,0,0,0.05)",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: "Inter", "Noto Sans", sans-serif;
+        -webkit-tap-highlight-color: transparent;
+      }
+      /* Hide scrollbar for cleaner mobile look while allowing scroll */
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+    <style>
+      body {
+        min-height: max(884px, 100dvh);
+      }
+    </style>
+    <style>
+      body {
+        min-height: max(884px, 100dvh);
+      }
+    </style>
+    <style>
+      body {
+        min-height: max(884px, 100dvh);
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark text-[#1b0d0d] dark:text-[#fcf8f8] font-display antialiased selection:bg-primary/20"
+  >
+    <!-- Main Mobile Container -->
+    <div
+      class="relative flex flex-col min-h-screen w-full mx-auto max-w-md bg-background-light dark:bg-background-dark shadow-2xl overflow-x-hidden"
+    >
+      <!-- Top Navigation Bar (Absolute Overlay) -->
+      <div
+        class="absolute top-0 left-0 w-full z-50 px-4 pt-12 pb-4 flex justify-between items-center pointer-events-none"
+      >
+        <!-- Back Button -->
+        <button
+          aria-label="Go back"
+          class="pointer-events-auto flex items-center justify-center w-10 h-10 rounded-full bg-white/90 dark:bg-black/50 backdrop-blur-md shadow-sm text-[#1b0d0d] dark:text-white hover:bg-white transition-colors"
+        >
+          <span class="material-symbols-outlined text-[24px]">arrow_back</span>
+        </button>
+        <!-- Share Button -->
+        <button
+          aria-label="Share course"
+          class="pointer-events-auto flex items-center justify-center w-10 h-10 rounded-full bg-white/90 dark:bg-black/50 backdrop-blur-md shadow-sm text-[#1b0d0d] dark:text-white hover:bg-white transition-colors"
+        >
+          <span class="material-symbols-outlined text-[24px]">ios_share</span>
+        </button>
+      </div>
+      <!-- Hero Image Section -->
+      <!-- 16:9 Aspect Ratio Container -->
+      <div class="relative w-full aspect-video shrink-0 bg-gray-200">
+        <div
+          class="absolute inset-0 bg-cover bg-center"
+          data-alt="Group of diverse people studying bible around a wooden table in a warm room"
+          style="
+            background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBQzQfZ8fIAcMbhd_PwF-ukMt1Uv55taUg-bVjNrLXXiR-rywFFpX07nuAvxuXFBJblDgoTYgFaaQrwyPUEPy-ieH8glSxID72OwWjHgrcUPsn3m-7KeeCPwDr5FHkGgrKHMq38h1kwwKr8iK95va9M1yoLzp9-VxVZQ9ETrz5Qy4ELVSX3-X5jPey7g3dkpDpJ9L86qUwscU6xU3kGlMjB3__ajMQm6Y8NhMy2Y54ul8zYLQoRiVMgxd97wNE-4h8u9IunM_oetCI');
+          "
+        >
+          <!-- Gradient overlay for depth -->
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"
+          ></div>
+        </div>
+      </div>
+      <!-- Floating Info Card (Overlapping Hero) -->
+      <div class="relative px-4 -mt-16 z-20 mb-6">
+        <div
+          class="bg-white dark:bg-[#2c1a1a] rounded-xl shadow-soft p-6 flex flex-col gap-4"
+        >
+          <!-- Course Title & Label -->
+          <div>
+            <span
+              class="inline-flex items-center px-3 py-1 mb-2 text-xs font-bold tracking-wide uppercase text-primary bg-primary/10 rounded-full"
+            >
+              Bible Study
+            </span>
+            <h1
+              class="text-2xl font-bold leading-tight text-[#1b0d0d] dark:text-white tracking-tight"
+            >
+              The Gospel of John: In-Depth Study
+            </h1>
+          </div>
+          <!-- Divider -->
+          <div class="h-px w-full bg-gray-100 dark:bg-white/10"></div>
+          <!-- Meta Info Grid - Large Icons for Elderly Accessibility -->
+          <div class="flex flex-col gap-4">
+            <!-- Date/Time -->
+            <div class="flex items-start gap-4">
+              <div
+                class="flex items-center justify-center w-10 h-10 rounded-full bg-red-50 dark:bg-white/5 shrink-0 text-primary"
+              >
+                <span class="material-symbols-outlined text-[24px]"
+                  >calendar_month</span
+                >
+              </div>
+              <div class="flex flex-col justify-center min-h-[40px]">
+                <span
+                  class="text-base font-bold text-[#1b0d0d] dark:text-white leading-none mb-1"
+                  >Sundays, 10:00 AM</span
+                >
+                <span class="text-sm text-gray-500 dark:text-gray-400"
+                  >Starting Oct 15</span
+                >
+              </div>
+            </div>
+            <!-- Location -->
+            <div class="flex items-start gap-4">
+              <div
+                class="flex items-center justify-center w-10 h-10 rounded-full bg-red-50 dark:bg-white/5 shrink-0 text-primary"
+              >
+                <span class="material-symbols-outlined text-[24px]"
+                  >location_on</span
+                >
+              </div>
+              <div class="flex flex-col justify-center min-h-[40px]">
+                <span
+                  class="text-base font-bold text-[#1b0d0d] dark:text-white leading-none mb-1"
+                  >Room 302, Main Hall</span
+                >
+                <span class="text-sm text-gray-500 dark:text-gray-400"
+                  >NHECC Building A</span
+                >
+              </div>
+            </div>
+            <!-- Instructor -->
+            <div class="flex items-start gap-4">
+              <div
+                class="flex items-center justify-center w-10 h-10 rounded-full bg-red-50 dark:bg-white/5 shrink-0 text-primary"
+              >
+                <span class="material-symbols-outlined text-[24px]"
+                  >person</span
+                >
+              </div>
+              <div class="flex flex-col justify-center min-h-[40px]">
+                <span
+                  class="text-base font-bold text-[#1b0d0d] dark:text-white leading-none mb-1"
+                  >Rev. Chang</span
+                >
+                <span class="text-sm text-gray-500 dark:text-gray-400"
+                  >Senior Pastor</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Sticky Tabs -->
+      <!-- Using sticky positioning to keep tabs accessible while scrolling content -->
+      <div
+        class="sticky top-0 z-30 bg-background-light dark:bg-background-dark shadow-sm"
+      >
+        <div
+          class="flex items-center justify-between px-4 border-b border-[#e7cfcf] dark:border-white/10"
+        >
+          <a
+            class="flex-1 relative py-4 text-center group cursor-pointer focus:outline-none"
+            href="#"
+          >
+            <p
+              class="text-base font-bold text-[#1b0d0d] dark:text-white leading-normal tracking-[0.015em]"
+            >
+              簡介
+            </p>
+            <!-- Active Indicator -->
+            <span
+              class="absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-[3px] bg-primary rounded-t-full"
+            ></span>
+          </a>
+          <a
+            class="flex-1 relative py-4 text-center group cursor-pointer focus:outline-none"
+            href="#"
+          >
+            <p
+              class="text-base font-medium text-[#9a4c4c] dark:text-gray-400 group-hover:text-[#1b0d0d] dark:group-hover:text-white leading-normal tracking-[0.015em] transition-colors"
+            >
+              大綱
+            </p>
+            <span
+              class="absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-[3px] bg-transparent rounded-t-full"
+            ></span>
+          </a>
+          <a
+            class="flex-1 relative py-4 text-center group cursor-pointer focus:outline-none"
+            href="#"
+          >
+            <p
+              class="text-base font-medium text-[#9a4c4c] dark:text-gray-400 group-hover:text-[#1b0d0d] dark:group-hover:text-white leading-normal tracking-[0.015em] transition-colors"
+            >
+              講師
+            </p>
+            <span
+              class="absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-[3px] bg-transparent rounded-t-full"
+            ></span>
+          </a>
+        </div>
+      </div>
+      <!-- Scrollable Content Area -->
+      <div class="flex-1 px-5 py-6 pb-36">
+        <!-- Large padding bottom to clear floating button -->
+        <!-- Introduction Section -->
+        <div class="space-y-8">
+          <div class="space-y-4">
+            <h2 class="text-xl font-bold text-[#1b0d0d] dark:text-white">
+              About this Course
+            </h2>
+            <p
+              class="text-[17px] leading-[1.6] text-gray-700 dark:text-gray-300"
+            >
+              This course explores the spiritual depth of John's Gospel,
+              focusing on the seven "I AM" statements of Jesus. We will dive
+              deep into the theological significance and practical application
+              of these truths in our daily lives.
+            </p>
+            <p
+              class="text-[17px] leading-[1.6] text-gray-700 dark:text-gray-300"
+            >
+              Whether you are new to the Bible or have been studying for years,
+              this class offers a welcoming environment for questions and
+              discussion.
+            </p>
+          </div>
+          <!-- Soft Card for Target Audience -->
+          <div
+            class="bg-white dark:bg-[#2c1a1a] p-5 rounded-xl shadow-sm border border-gray-100 dark:border-white/5"
+          >
+            <h3
+              class="text-lg font-bold text-[#1b0d0d] dark:text-white mb-4 flex items-center gap-2"
+            >
+              <span class="material-symbols-outlined text-primary">target</span>
+              Target Audience
+            </h3>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <span
+                  class="w-1.5 h-1.5 mt-2.5 rounded-full bg-primary shrink-0"
+                ></span>
+                <span
+                  class="text-[17px] text-gray-700 dark:text-gray-300 leading-normal"
+                  >New believers seeking foundation</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <span
+                  class="w-1.5 h-1.5 mt-2.5 rounded-full bg-primary shrink-0"
+                ></span>
+                <span
+                  class="text-[17px] text-gray-700 dark:text-gray-300 leading-normal"
+                  >Small group leaders</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <span
+                  class="w-1.5 h-1.5 mt-2.5 rounded-full bg-primary shrink-0"
+                ></span>
+                <span
+                  class="text-[17px] text-gray-700 dark:text-gray-300 leading-normal"
+                  >Anyone hungry for the Word</span
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="space-y-4">
+            <h3 class="text-lg font-bold text-[#1b0d0d] dark:text-white">
+              Requirements
+            </h3>
+            <p
+              class="text-[17px] leading-[1.6] text-gray-700 dark:text-gray-300"
+            >
+              Please bring your own Bible and a notebook. Study materials will
+              be provided digitally via the church app.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Fixed Bottom Action Bar -->
+      <div class="fixed bottom-0 left-0 right-0 z-40 w-full max-w-md mx-auto">
+        <!-- Gradient fade above the bar for smoothness -->
+        <div
+          class="absolute -top-12 left-0 w-full h-12 bg-gradient-to-t from-background-light dark:from-background-dark to-transparent pointer-events-none"
+        ></div>
+        <div
+          class="bg-white dark:bg-[#2c1a1a] px-5 py-4 pb-8 border-t border-gray-100 dark:border-white/5 shadow-upward rounded-t-2xl"
+        >
+          <div class="flex items-center justify-between gap-5">
+            <!-- Price/Info Section -->
+            <div class="flex flex-col shrink-0">
+              <span class="text-xs text-gray-500 dark:text-gray-400 font-medium"
+                >Registration closes soon</span
+              >
+              <div class="flex items-baseline gap-1 mt-0.5">
+                <span class="text-xl font-bold text-primary">Free</span>
+              </div>
+            </div>
+            <!-- Primary Action Button -->
+            <button
+              class="flex-1 bg-primary hover:bg-red-700 active:scale-95 transition-all text-white font-bold text-lg h-14 rounded-full shadow-lg shadow-red-500/30 flex items-center justify-center gap-2"
+            >
+              <span>立即報名</span>
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
